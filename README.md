@@ -83,7 +83,7 @@ RadioFAF is part of the [FAF ecosystem](https://faf.one):
 
 | Layer | Terms |
 |---|---|
-| **Code** — this repository | **MIT** — fork it, ship it, change it, sell it |
+| **Code** — this repository | **MIT** — fork it, ship it, change it, show it, share it, sell it |
 | **Brand** — *RadioFAF*, 69.0 FM, voice palette | **Reserved** — use your own name + colours in forks |
 | **Content** — episodes, scripts, audio, personas | **All rights reserved** — study and quote freely; republication requires permission |
 
