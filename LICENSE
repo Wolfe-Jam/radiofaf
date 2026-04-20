@@ -1,0 +1,73 @@
+## RadioFAF License
+
+This project ships three layers. Each has its own terms.
+
+---
+
+### 1. Code — MIT License
+
+The source code in this repository (HTML, JavaScript, Edge functions, build config, workflows) is licensed MIT. Fork it, ship it, change it, sell it.
+
+```
+MIT License
+
+Copyright (c) 2026 James Wolfe (wolfejam)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+---
+
+### 2. Brand — Reserved
+
+The following are reserved for the RadioFAF project and may not be used in derivative products without written permission:
+
+- The **RadioFAF** name
+- The **69.0 FM** frequency framing
+- The voice-character colour palette (`--leo #00D4D4`, `--sal #d97706`, `--ara #4285f4`, `--rex #10a37f`, `--eve #7c3aed`)
+- The RadioFAF logo, icon, and visual identity
+
+Ship your fork under your own name and colours.
+
+---
+
+### 3. Content — All Rights Reserved
+
+Episode content is separately copyrighted and **not** covered by the MIT license above. This includes:
+
+- All episode audio (`ep1.html` → `ep11.html` and successors)
+- Episode scripts, titles, transcripts
+- Character personas and voice performances
+- The `audio/` directory and its contents
+
+You may study, link to, and quote (fair use) RadioFAF content, but republication, remixing, or commercial use requires written permission.
+
+---
+
+### Summary table
+
+| Layer | Rights |
+|---|---|
+| **Code** | MIT — full freedom |
+| **Brand** | Reserved — use your own name + colours in forks |
+| **Content** | All rights reserved — episodes are ours |
+
+---
+
+🏎️ *Broadcast once. Every voice listens.*
