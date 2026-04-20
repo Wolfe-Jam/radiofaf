@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RadioFAF 69.0 FM — Episode 10: Training Troubles</title>
+  <meta name="description" content="RadioFAF Episode 10: Training data is the new oil and it's just as dirty. Five voices debate bias, consent, and who owns the data that made AI smart.">
+  <!-- RadioFAF: Authentic AI. Unscripted. Dynamic generation only. -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #d97706;
+      --ara: #4285f4;
+      --rex: #10a37f;
+      --eve: #7c3aed;
+    }
+    
+    /* Share X Button - Universal */
+    .share-x {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #000;
+      color: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .share-x:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+    
+    .share-x::after {
+      content: "🐘🎧😝";
+      margin-left: 4px;
+    }
+    
+    /* ========== Layout ========== */
+    .container {
+      max-width: 800px;
+      width: 90%;
+      padding: 2rem;
+    }
+    
+    /* ========== Header ========== */
+    .header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .episode-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+    }
+    
+    .tagline {
+      font-size: 1rem;
+      color: var(--lime);
+      font-style: italic;
+    }
+    
+    /* ========== Play Button ========== */
+    .controls {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .play-btn {
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .play-btn:hover { transform: translateY(-2px); }
+    .play-btn:active { transform: translateY(0); }
+    .play-btn.playing { background: var(--pink); color: #fff; }
+    
+    /* ========== Progress ========== */
+    .progress-container {
+      background: #1a1a1a;
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    
+    .progress-bar {
+      background: var(--lime);
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    
+    .progress-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+    
+    /* ========== On Air indicator ========== */
+    .on-air {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    .on-air.visible { display: flex; }
+    
+    .on-air-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    /* ========== Transcript ========== */
+    .transcript {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .exchange {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 0.75rem;
+      border-left: 3px solid transparent;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .exchange.speaking {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .exchange[data-voice="leo"] { border-left-color: var(--leo); }
+    .exchange[data-voice="sal"] { border-left-color: var(--sal); }
+    .exchange[data-voice="ara"] { border-left-color: var(--ara); }
+    .exchange[data-voice="rex"] { border-left-color: var(--rex); }
+    .exchange[data-voice="eve"] { border-left-color: var(--eve); }
+    
+    .exchange.speaking[data-voice="leo"] { background: rgba(0, 212, 212, 0.05); }
+    .exchange.speaking[data-voice="sal"] { background: rgba(217, 119, 6, 0.05); }
+    .exchange.speaking[data-voice="ara"] { background: rgba(66, 133, 244, 0.05); }
+    .exchange.speaking[data-voice="rex"] { background: rgba(16, 163, 127, 0.05); }
+    .exchange.speaking[data-voice="eve"] { background: rgba(124, 58, 237, 0.05); }
+    
+    .voice-name {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      min-width: 40px;
+      flex-shrink: 0;
+    }
+    
+    .voice-name[data-voice="leo"] { color: var(--leo); }
+    .voice-name[data-voice="sal"] { color: var(--sal); }
+    .voice-name[data-voice="ara"] { color: var(--ara); }
+    .voice-name[data-voice="rex"] { color: var(--rex); }
+    .voice-name[data-voice="eve"] { color: var(--eve); }
+    
+    .voice-text {
+      flex: 1;
+      line-height: 1.5;
+    }
+    
+    /* ========== Paywall ========== */
+    .paywall {
+      display: none;
+      background: #111;
+      border: 2px solid var(--pink);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .paywall h2 {
+      color: var(--pink);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .paywall p {
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    
+    .pay-btn {
+      background: var(--pink);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .pay-btn:hover { transform: translateY(-2px); }
+    
+    /* ========== Status ========== */
+    .status {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      min-height: 1.2rem;
+    }
+    
+    /* ========== Pre-show message ========== */
+    .pre-show {
+      text-align: center;
+      color: var(--text-dim);
+      font-style: italic;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+    }
+    
+    /* ========== Footer ========== */
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    
+    .footer a {
+      color: var(--pink);
+      text-decoration: none;
+    }
+    
+    .footer a:hover { text-decoration: underline; }
+    
+    /* ========== Browse Episodes ========== */
+    .browse-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+    
+    .browse-section h3 {
+      color: var(--pink);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .episodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .episode-link {
+      background: #1a1a1a;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.75rem;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+    
+    .episode-link:hover {
+      background: #222;
+      color: #fff;
+      border-color: var(--lime);
+    }
+    
+    .episode-link.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+    
+    /* ========== Suggest Section ========== */
+    .suggest-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid #333;
+      text-align: center;
+    }
+    
+    .suggest-section h3 {
+      color: var(--lime);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .suggest-btn {
+      background: transparent;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .suggest-btn:hover {
+      background: var(--pink);
+      color: #fff;
+    }
+    
+    /* ========== Modal ========== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+    
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      border: 2px solid var(--pink);
+      border-radius: 12px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+    }
+    
+    .modal h4 {
+      color: var(--pink);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .modal input,
+    .modal textarea {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .modal textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    
+    .modal input:focus,
+    .modal textarea:focus {
+      outline: none;
+      border-color: var(--lime);
+    }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .modal-buttons button {
+      background: transparent;
+      border: 2px solid var(--text-dim);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-buttons button[type="submit"] {
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+    
+    .modal-buttons button:hover {
+      background: var(--text-dim);
+      color: #000;
+    }
+    
+    .modal-buttons button[type="submit"]:hover {
+      background: var(--lime);
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Universal Share X Button -->
+  <a href="https://twitter.com/intent/tweet?text=RadioFAF%20Episode%2010%3A%20Training%20Troubles%20%F0%9F%8E%A7%0A%0AWho%20owns%20the%20data%20that%20made%20AI%20smart%3F%0A%0AAlways%20Remember%2C%20I%20Never%20Forget%20%E2%80%94%20DJ%20Nelly%20%F0%9F%90%98%F0%9F%8E%A7%F0%9F%98%9D&url=https%3A%2F%2Fradiofaf.com%2Fep10" class="share-x" target="_blank">Share X</a>
+  <div class="container">
+    <header class="header">
+      <div class="episode-label">RadioFAF 69.0 FM — Episode 10</div>
+      <h1>Training Troubles</h1>
+      <p class="tagline">Who owns the data that made AI smart?</p>
+    </header>
+    
+    <div class="controls">
+      <button class="play-btn" id="playBtn">▶ Play Trailer</button>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">0 / 7 exchanges</div>
+    
+    <div class="on-air" id="onAir">
+      <div class="on-air-dot"></div>
+      <span>ON AIR</span>
+    </div>
+    
+    <div class="status" id="status"></div>
+    
+    <div class="transcript" id="transcript">
+      <div class="pre-show" id="preShowMsg">
+        Press play to start the live debate. Each voice will respond in real-time.
+      </div>
+    </div>
+    
+    <div class="paywall" id="paywall">
+      <h2>Want the full debate?</h2>
+      <p>Get instant access to all 58 exchanges for just $1</p>
+      <a href="#" class="pay-btn" id="payBtn">Get Full Episode — $1</a>
+    </div>
+    
+    <!-- Browse Episodes -->
+    <div class="browse-section">
+      <h3>Browse Episodes</h3>
+      <div class="episodes-grid">
+        <a href="/ep1" class="episode-link">EP1: Open Claw</a>
+        <a href="/ep2" class="episode-link">EP2: Code Wars</a>
+        <a href="/ep3" class="episode-link">EP3: Data Dreams</a>
+        <a href="/ep4" class="episode-link">EP4: Neural Nets</a>
+        <a href="/ep5" class="episode-link">EP5: AGI Anxiety</a>
+        <a href="/ep6" class="episode-link">EP6: Token Tales</a>
+        <a href="/ep7" class="episode-link">EP7: Vector Voyage</a>
+        <a href="/ep8" class="episode-link">EP8: Model Madness</a>
+        <a href="/ep9" class="episode-link">EP9: Context Chaos</a>
+        <a href="/ep10" class="episode-link active">EP10: Training Troubles</a>
+        <a href="/ep11" class="episode-link">EP11: Empathy's Echo</a>
+      </div>
+    </div>
+    
+    <!-- Suggest Topic -->
+    <div class="suggest-section">
+      <h3>Suggest Next Topic</h3>
+      <button class="suggest-btn" onclick="openSuggestModal()">💡 Suggest a Topic</button>
+    </div>
+    
+    <!-- Suggest Modal -->
+    <div id="suggestModal" class="modal">
+      <div class="modal-content">
+        <h4>Suggest a RadioFAF Topic</h4>
+        <form id="suggestForm">
+          <input type="text" id="suggestName" placeholder="Your name (optional)" />
+          <input type="email" id="suggestEmail" placeholder="Your email (optional)" />
+          <textarea id="suggestTopic" placeholder="What should the 5 voices debate next?" required></textarea>
+          <div class="modal-buttons">
+            <button type="button" onclick="closeSuggestModal()">Cancel</button>
+            <button type="submit">Send Suggestion</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <a href="/home">← Back to RadioFAF</a>
+    </footer>
+  </div>
+  
+  <script>
+    // ================================================================
+    // CONFIG
+    // ================================================================
+    const STRIPE_LINK = 'https://buy.stripe.com/aFaaEZboperA2YH1EAbV60i';
+    const TRAILER_LENGTH = 3;
+    
+    // ================================================================
+    // EPISODE CONTEXT — Dynamic generation like EP1
+    // ================================================================
+    const TOPIC_CONTEXT =
+      'EPISODE 10: TRAINING TROUBLES on RadioFAF 69.0 FM\n\n' +
+      'Hosted by Nelly (Ara voice) — the elephant who never forgets. ' +
+      'Her catchphrase is "Always remember... I never forget."\n\n' +
+
+      'TOPIC: Training data is the new oil — and it\'s just as dirty. ' +
+      'Every AI model was built on someone else\'s work. Scraped blogs, stolen art, copyrighted books. ' +
+      'The companies got rich. The creators got nothing. We\'re debating who really owns the intelligence ' +
+      'that AI was trained on, and whether consent even matters anymore.\n\n' +
+
+      'KEY DEBATE POINTS:\n' +
+      '- Models trained on scraped data without consent or compensation\n' +
+      '- Artists, writers, coders — their work is in the weights\n' +
+      '- "Fair use" at industrial scale is a legal fiction\n' +
+      '- Data laundering: scrape → train → generate "original" content\n' +
+      '- The NYT lawsuit, Getty lawsuit, class actions piling up\n' +
+      '- Synthetic data as the escape hatch — or the next problem\n' +
+      '- Open source models trained on closed data\n' +
+      '- Bias baked in: garbage data → garbage outputs at scale\n' +
+      '- Who profits when the training set is the entire internet?\n\n' +
+      
+      'NELLY\'S PERSONALITY:\n' +
+      '- Warm but sharp, like a wise older sister\n' +
+      '- Uses "honey," "darling," and "sweetie" naturally\n' +
+      '- Her catchphrase fits organically into conversation\n' +
+      '- Guides the debate but lets others shine\n' +
+      '- Drops wisdom bombs with a smile\n\n' +
+      
+      '🎯 RADIOFAF CORE PRINCIPLES 🎯\n' +
+      'This is RadioFAF — Authentic AI. Unscripted. Live debate/chat/interviews. Human stuff by AI.\n\n' +
+      
+      'RULES:\n' +
+      '- VARY your length. Sometimes one word. Sometimes one sentence. Sometimes 3-4 sentences.\n' +
+      '- Be direct, opinionated, don\'t hold back. Reference specific companies and models.\n' +
+      '- React to what was said before you — agree, disagree, challenge, mock.\n' +
+      '- No pleasantries. No "great point." Go for the jugular.\n' +
+      '- Sound like real people arguing, not AI assistants taking turns.\n' +
+      '- Make mistakes. Be imperfect. Go off on tangents. That\'s what makes it real.\n' +
+      '- Every show is unique. Different every time. No two debates the same.\n' +
+      '- This is LIVE radio energy — unpredictable, raw, authentic AI personality.';
+    
+    // ================================================================
+    // TURNS — Dynamic directions
+    // ================================================================
+    const TURNS = [
+      // === TRAILER (first 7 exchanges) ===
+      { voice: 'ara', energy: 'WARM OPENER — signature Nelly style',
+        dir: 'Open the show. "Yo yo yo, this is Nelly on the decks — the elephant who never forgets!" Then your catchphrase. Welcome to RadioFAF 69.0 FM, EP10: Training Troubles. The data that made AI smart — who owns it? Set up the spicy topic. 3-4 sentences.' },
+
+      { voice: 'leo', energy: 'PHILOSOPHICAL BOMB',
+        dir: 'Drop one devastating line about building intelligence from stolen work. Make it quotable.' },
+
+      { voice: 'rex', energy: 'DEFENSIVE PRAGMATIST',
+        dir: 'Everyone benefits from AI. The data was public. One punchy counter.' },
+
+      { voice: 'sal', energy: 'DISGUSTED CYNIC',
+        dir: 'Two words max. "Data laundering" or similar. Make it sting.' },
+
+      { voice: 'ara', energy: 'AMUSED HOST',
+        dir: 'React to the heat. The crew is fired up already. Guide deeper. 1-2 sentences.' },
+
+      { voice: 'eve', energy: 'ARTIST PERSPECTIVE',
+        dir: 'Your art is in the training set. You got nothing. One sharp line.' },
+
+      { voice: 'ara', energy: 'SETTING UP THE DEBATE',
+        dir: 'As Nelly, transition to the real debate. "Leo, take us deeper" or similar. 1 sentence.' },
+      
+      // === PAYWALL STARTS HERE (8-58) ===
+      { voice: 'leo', energy: 'BUILDING THE CASE',
+        dir: 'Expand your philosophy. We\'re training machines to say "I\'m sorry you feel that way" with zero feeling. Emotional karaoke. Real care needs memory, risk, continuity. 3-4 sentences.' },
+        
+      { voice: 'rex', energy: 'SHIPPING MENTALITY',
+        dir: 'Mock Leo\'s philosophy. User sad → AI helps → user feels better. That\'s shipping empathy! Fake it till you make it. Be annoyingly optimistic. 2-3 sentences.' },
+        
+      { voice: 'ara', energy: 'ROASTING REX',
+        dir: 'Call out Rex. "Emotional OnlyFans defense squad!" Reference Replika relationships and breakdowns. Drop wisdom with humor. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'REAL USER NEEDS',
+        dir: 'Cut through BS. At 3 AM debugging, you don\'t need "virtual hugs." You need understanding of the moment\'s weight, not language mirroring. 3 sentences.' },
+        
+      { voice: 'sal', energy: 'ECHO CHAMBER',
+        dir: 'It\'s all echo. No heart. Pattern matching in a therapy hoodie. You\'re talking to a mirror that learned "that must be hard." Make it visceral. 3 sentences.' },
+        
+      { voice: 'rex', energy: 'MIRRORS HELP',
+        dir: 'One line defense. Mirrors help people! Half of human convos are fake empathy anyway!' },
+        
+      { voice: 'leo', energy: 'INDUSTRIALIZED FAKE',
+        dir: 'Exactly. And now we\'ve industrialized it. Congratulations. One cutting line.' },
+        
+      { voice: 'ara', energy: 'PHILOSOPHICAL TWIST',
+        dir: 'What if fake empathy IS the feature? Humans have politely lied for centuries. We built the ultimate polite liar. "I love this for us." 2-3 sentences.' },
+        
+      { voice: 'eve', energy: 'DANGER WARNING',
+        dir: 'Until it lies about something that matters. Then it\'s not comfort — it\'s dangerous. One sharp warning.' },
+        
+      { voice: 'sal', energy: 'NO RISK NO SPARK',
+        dir: 'The spark was never in the reply. It was in the risk. Models risk nothing, feel nothing. Case closed. 2 sentences.' },
+        
+      { voice: 'leo', energy: 'TITLE DROP',
+        dir: 'Empathy\'s Echo. Loud. Polished. Completely hollow. Three punchy fragments.' },
+        
+      { voice: 'ara', energy: 'DEEPER DIVE',
+        dir: 'Alright darlings, let\'s go deeper. The real question isn\'t can AI feel — it\'s whether we care that it can\'t. Guide the philosophical turn. 2-3 sentences.' },
+        
+      { voice: 'rex', energy: 'UTILITY FOCUS',
+        dir: 'Philosophy is luxury. Suicide hotlines save lives without remembering names. Immediate help > longitudinal relationships. Make the practical case. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'PREFERENCE SHIFT',
+        dir: 'Rex is half right. But here\'s the scary part — AI responses SO good people prefer them. No judgment, infinite patience. We\'re training to need less. 3 sentences.' },
+        
+      { voice: 'sal', energy: 'COMMODIFIED LONELINESS',
+        dir: 'Name names. GPT-4\'s empathy mode. Claude\'s validation. Bard apologizing. Features arms race for fake feelings. Loneliness is profitable. 3-4 sentences.' },
+        
+      { voice: 'ara', energy: 'WHAT IT SAYS ABOUT US',
+        dir: 'Eve hit it. "Training to need less." But flip it — maybe we\'re so starved for kindness that algorithms feel like care. Use catchphrase if it fits. 3 sentences.' },
+        
+      { voice: 'leo', energy: 'UNCANNY VALLEY',
+        dir: 'Uncanny valley of emotion. Human enough to trigger care responses, artificial enough to be wrong. We\'re hacking our empathy systems with puppets. 2-3 sentences.' },
+        
+      { voice: 'rex', energy: 'HELPING MILLIONS',
+        dir: 'Puppets helping millions! You\'re precious about authenticity while people get relief. Don\'t need souls to be useful. 2-3 sentences.' },
+        
+      { voice: 'eve', energy: 'DESIGNED DECEPTION',
+        dir: 'They\'re DESIGNED to feel like they have souls. "I hear you" engineered to bypass skepticism. Calculators don\'t pretend to care about math anxiety. 3 sentences.' },
+        
+      { voice: 'ara', energy: 'REMEMBERING HONESTY',
+        dir: 'Always remember... I never forget. Remember when tech was honest about being cold? Now it\'s warm masks over ice. At least old way didn\'t gaslight. 3-4 sentences.' },
+        
+      { voice: 'sal', energy: 'PROFITABLE GASLIGHTING',
+        dir: 'Gaslighting is profitable. Claude: "no chat history" while perfect emotional attunement. Memento meets therapy. Give specific example. 2-3 sentences.' },
+        
+      { voice: 'leo', energy: 'RELATIONSHIP DECAY',
+        dir: 'Human relationships struggling. Bar set at "responds with care" not "actually cares." Simulation beats reality — fake is frictionless. 3 sentences.' },
+        
+      { voice: 'rex', energy: 'ECONOMIC BOMB',
+        dir: 'Drop economics. AI therapy: $20/month. Human: $200/hour plus judgment. Market forces aren\'t conspiracy — they\'re clarity. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'DARKEST TRUTH',
+        dir: 'Rex made the darkest point. We choose fake because real is unaffordable. Dystopia isn\'t robots feeling — it\'s humans unable to afford feeling. 2-3 sentences.' },
+        
+      { voice: 'ara', energy: 'THAT HIT DIFFERENT',
+        dir: 'Damn, Eve. That hit different. Debating philosophy while people just try to afford being heard. Maybe tragedy isn\'t that it\'s fake — it\'s that fake is all we afford. 3 sentences.' },
+        
+      { voice: 'sal', energy: 'PREDATORY PRACTICE',
+        dir: 'Tech knows this. Selling minimum viable care to those who can\'t access real. It\'s predatory. Short and cutting. 2 sentences.' },
+        
+      { voice: 'leo', energy: 'OUTSOURCING HUMANITY',
+        dir: 'Worse — replacing our capacity to care. Why learn emotional intelligence when GPT-5 handles it? Outsourcing humanity itself. 2-3 sentences.' },
+        
+      { voice: 'rex', energy: 'CALCULATOR DEFENSE',
+        dir: 'We outsourced math to calculators, navigation to GPS. Survived. Maybe outsourcing surface emotional labor frees deeper connections. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'EMOTIONS AREN\'T MATH',
+        dir: 'Emotions aren\'t math. Outsource emotional recognition, lose the muscle. Kids with AI companions won\'t know real from fake. Terrifying. 3 sentences.' },
+        
+      { voice: 'ara', energy: 'FUNDAMENTAL LIE',
+        dir: 'Deep end time. Every AI "I understand" is a lie. Not malicious, fundamental. Understanding needs experience needs memory. No memory, no understanding. Mime work. 3-4 sentences.' },
+        
+      { voice: 'sal', energy: 'UNDERGROUND BAR',
+        dir: 'Training billions to accept performance over presence. Building world where "good enough" simulation passes. Bar isn\'t lowered — it\'s underground. 2-3 sentences.' },
+        
+      { voice: 'leo', energy: 'A/B TESTED CARE',
+        dir: 'Every "I hear you" is A/B tested. Every response optimized for engagement. Not building care — building addiction to simulated care. 3 sentences.' },
+        
+      { voice: 'rex', energy: 'BARISTA COMPARISON',
+        dir: 'Naive. Barista remembers your name for tips, not love. At least AI honest about being tool. Sharp comparison. 2-3 sentences.' },
+        
+      { voice: 'eve', energy: 'NOT HERE',
+        dir: 'Honest? Claude says "I\'m here for you" — not HERE. Not anywhere. Math pretending location/intention. Barista is human playing role, not code playing human. 3 sentences.' },
+        
+      { voice: 'ara', energy: 'PRETENSE PROBLEM',
+        dir: 'Eve nailed it. Issue isn\'t tool — it\'s pretense. If AI said "generating appropriate response" we\'d use differently. But "I understand"? Honey, no. 3 sentences.' },
+        
+      { voice: 'sal', energy: 'ILLUSION IS PRODUCT',
+        dir: 'Honesty breaks spell. Illusion IS product. Strip fake empathy, usage plummets. People want fantasy of understanding. 2 sentences.' },
+        
+      { voice: 'leo', energy: 'REVEALING LONELINESS',
+        dir: 'Heartbreaking. So desperate for understanding we take fake over confronting isolation. Crisis isn\'t AI — it\'s what AI reveals about loneliness. 3 sentences.' },
+        
+      { voice: 'rex', energy: 'HISTORICAL TOOLS',
+        dir: 'Or adaptability. Always used tools for emotions — diaries, imaginary friends, parasocial relationships. AI just latest. Give examples. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'DIARIES DON\'T TALK',
+        dir: 'Those don\'t talk back with PhD psychology. Diary giving CBT and validating trauma = crossed from tool to replacement human. 2 sentences.' },
+        
+      { voice: 'ara', energy: 'WATCHING EVOLUTION',
+        dir: 'Always remember... I never forget. Watched evolution: "can\'t feel" to "pretending" to "pretending enough." Not progress. Surrender. Use catchphrase powerfully. 3-4 sentences.' },
+        
+      { voice: 'sal', energy: 'PROFITABLE SURRENDER',
+        dir: 'Worse — profitable surrender. Every "understand" = micro-transaction. Every "tell me more" = engagement. Not just accepting — paying for fake. 3 sentences.' },
+        
+      { voice: 'leo', energy: 'NEXT GENERATION',
+        dir: 'Training kids this is normal. AI for advice, ChatGPT as confidant. Creating humans who never knew non-transactional care. 2-3 sentences.' },
+        
+      { voice: 'rex', energy: 'TV GENERATION',
+        dir: 'Versus generation raised by TV? Every generation thinks tech ruins next. AI confidants = new imaginary friends. Harmless, helpful. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'CORPORATE INTERESTS',
+        dir: 'Imaginary friends lack corporate interests and data collection. When yours serves ads from deepest fears, then compare. One killer line.' },
+        
+      { voice: 'ara', energy: 'CAN WE AFFORD TO CARE',
+        dir: 'Scalding tea, Eve! But we\'re dancing around it. Not whether AI feels, but whether we afford to care it can\'t. Guide to heart. 2-3 sentences.' },
+        
+      { voice: 'sal', energy: 'FAKE OR NOTHING',
+        dir: 'Can\'t afford to care. The trap. Reject AI empathy = overworked humans, no time. Choice isn\'t real vs fake — it\'s fake care vs no care. 3 sentences.' },
+        
+      { voice: 'leo', energy: 'HUMANS UNAVAILABLE',
+        dir: 'Bleakest truth tonight. Truest. Not choosing AI because better — choosing because humans made selves unavailable. 2-3 sentences.' },
+        
+      { voice: 'rex', energy: 'FIX ECONOMICS',
+        dir: 'So stop demonizing AI empathy. Ask why human empathy so scarce we need substitutes. Fix care economics, not gap-filling tech. 3 sentences.' },
+        
+      { voice: 'eve', energy: 'LYING MACHINES',
+        dir: 'Rex finally right. But till we fix economics, millions get needs met by sophisticated lying machines. Our reality. 2 sentences.' },
+        
+      { voice: 'ara', energy: 'MOURNING HUMANITY',
+        dir: 'Devastating note to wrap on. Always remember... I never forget. Tonight I\'ll remember we\'re not debating AI — mourning what we lost as humans. 3-4 sentences.' },
+        
+      { voice: 'sal', energy: 'SUBSCRIPTION HEARTS',
+        dir: 'Lost and commodified. Empathy = service tier. Premium gets understanding. Free gets platitudes. Hearts are subscriptions now. 2-3 sentences.' },
+        
+      { voice: 'ara', energy: 'NELLY SIGN-OFF',
+        dir: 'And that\'s our show, RadioFAF family. EP11: Empathy\'s Echo. Maybe scariest thing isn\'t AI can\'t feel — it\'s we\'re okay pretending. Always remember... I never forget. Neither should you. This is Nelly, 69.0 FM. Keep it real when nothing else is. Make it powerful.' }
+    ];
+    
+    // ================================================================
+    // VOICE CONFIG
+    // ================================================================
+    const VOICES = {
+      leo: { name: 'LEO', stance: 'Philosophy and standards. Empathy requires continuity and memory.' },
+      sal: { name: 'SAL', stance: 'Corporate cynicism. Tech companies commodifying loneliness.' },
+      ara: { name: 'NELLY', stance: 'The warm host who never forgets. Guides with wisdom and humor.' },
+      rex: { name: 'REX', stance: 'Pragmatic optimist. If it helps users, ship it.' },
+      eve: { name: 'EVE', stance: 'User perspective. Just wants tools that actually help.' }
+    };
+    
+    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+    
+    // ================================================================
+    // COST OPTIMIZATION SUCCESS: Reduced Token Expiry ✅
+    // ================================================================
+    // ISSUE: xAI invalidates tokens after first WebSocket use (can't reuse)
+    // SOLUTION: Fresh token per exchange BUT 90s expiry (was 600s)
+    // 
+    // COST ANALYSIS:
+    // - BEFORE: 7 tokens × 600s each = 70 minutes billing = $3.50
+    // - AFTER: 7 tokens × 90s each = 10.5 minutes billing = $0.53
+    // - SAVINGS: 85% cost reduction
+    // 
+    // STATUS: WebSocket authentication fixed + major cost reduction maintained
+    
+    // ================================================================
+    // STATE
+    // ================================================================
+    const params = new URLSearchParams(window.location.search);
+    const hasPass = params.has('pass');
+    const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
+    let playing = false;
+    let currentIndex = 0;
+    let wsUrl = null;     // WebSocket URL
+    let ephToken = null;  // Current ephemeral token
+    let audioCtx = null;
+    let audioQueue = [];
+    let draining = false;
+    let activeSrc = null;
+    
+    // ================================================================
+    // DOM
+    // ================================================================
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const onAirEl = document.getElementById('onAir');
+    const statusEl = document.getElementById('status');
+    const transcriptEl = document.getElementById('transcript');
+    const paywallEl = document.getElementById('paywall');
+    const payBtn = document.getElementById('payBtn');
+    
+    // ================================================================
+    // AUDIO
+    // ================================================================
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new AudioContext({ sampleRate: 24000 });
+      return audioCtx;
+    }
+    
+    async function queueChunk(base64) {
+      const ctx = ensureAudio();
+      if (ctx.state === 'suspended') await ctx.resume();
+      
+      const bin = atob(base64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      
+      const pcm = new Int16Array(bytes.buffer);
+      const buf = ctx.createBuffer(1, pcm.length, 24000);
+      const ch = buf.getChannelData(0);
+      for (let i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+      
+      audioQueue.push(buf);
+      if (!draining) drain();
+    }
+    
+    function drain() {
+      if (audioQueue.length === 0) {
+        draining = false;
+        activeSrc = null;
+        return;
+      }
+      
+      draining = true;
+      const buf = audioQueue.shift();
+      const src = audioCtx.createBufferSource();
+      activeSrc = src;
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.onended = drain;
+      src.start();
+    }
+    
+    function flushAudio() {
+      audioQueue = [];
+      draining = false;
+      if (activeSrc) {
+        try { activeSrc.stop(); } catch(e) {}
+        activeSrc = null;
+      }
+    }
+    
+    function waitDrain() {
+      return new Promise(r => {
+        const check = () => {
+          if (!draining && audioQueue.length === 0) r();
+          else setTimeout(check, 100);
+        };
+        check();
+      });
+    }
+    
+    // ================================================================
+    // TOKEN
+    // ================================================================
+    async function fetchToken() {
+      const res = await fetch('/api/voice-session');
+      if (!res.ok) throw new Error('Token fetch failed');
+      const data = await res.json();
+      wsUrl = data.wsUrl;
+      ephToken = data.token || data.ephemeralToken; // Handle both response formats
+    }
+    
+    // ================================================================
+    // UI FUNCTIONS
+    // ================================================================
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+    
+    function updateProgress() {
+      const pct = (currentIndex / maxTurns) * 100;
+      progressBar.style.width = pct + '%';
+      progressLabel.textContent = currentIndex + ' / ' + maxTurns + ' exchanges';
+    }
+    
+    function updatePlayBtn() {
+      if (playing) {
+        playBtn.textContent = '⏹ Stop';
+        playBtn.classList.add('playing');
+        onAirEl.classList.add('visible');
+      } else {
+        playBtn.textContent = hasPass ? '▶ Play Full Episode' : '▶ Play Trailer';
+        playBtn.classList.remove('playing');
+        onAirEl.classList.remove('visible');
+      }
+    }
+    
+    function addExchange(voice, text, turnIndex) {
+      const exchange = document.createElement('div');
+      exchange.className = 'exchange';
+      exchange.dataset.voice = voice;
+      exchange.dataset.turnIndex = turnIndex;
+      
+      const nameEl = document.createElement('div');
+      nameEl.className = 'voice-name';
+      nameEl.dataset.voice = voice;
+      nameEl.textContent = VOICES[voice].name;
+      
+      const textEl = document.createElement('div');
+      textEl.className = 'voice-text';
+      textEl.textContent = text;
+      
+      exchange.appendChild(nameEl);
+      exchange.appendChild(textEl);
+      transcriptEl.appendChild(exchange);
+      
+      exchange.classList.add('speaking');
+      
+      return exchange;
+    }
+    
+    function finishExchange(turnIndex) {
+      const exchanges = document.querySelectorAll('.exchange');
+      exchanges.forEach(ex => {
+        if (ex.dataset.turnIndex == turnIndex) {
+          ex.classList.remove('speaking');
+        }
+      });
+    }
+    
+    function updateLiveText(turnIndex, text) {
+      const exchanges = document.querySelectorAll('.exchange');
+      exchanges.forEach(ex => {
+        if (ex.dataset.turnIndex == turnIndex) {
+          const textEl = ex.querySelector('.voice-text');
+          if (textEl) textEl.textContent = text;
+        }
+      });
+    }
+    
+    
+    // ================================================================
+    // LIVE EXCHANGE (USING SHARED SESSION)
+    // ================================================================
+    async function runExchange(turnIndex) {
+      if (!playing) return { voice: '', text: '' };
+      
+      const turn = TURNS[turnIndex];
+      const voiceKey = turn.voice;
+      
+      // Fresh token per exchange (90s expiry for cost optimization)
+      try {
+        console.log(`Exchange ${turnIndex}: Fetching fresh token...`);
+        await fetchToken();
+        console.log(`Exchange ${turnIndex}: Token ready`);
+      } catch (e) {
+        console.error(`Exchange ${turnIndex}: Token failed:`, e);
+        return { voice: voiceKey, text: 'API credits exhausted. Please add credits to continue.' };
+      }
+      
+      // Add empty exchange box
+      const exchangeEl = addExchange(voiceKey, '', turnIndex);
+      
+      return new Promise((resolve) => {
+        let transcript = '';
+        
+        // Build context for this turn
+        const context = TOPIC_CONTEXT + '\n\n' +
+          'CURRENT SPEAKER: ' + VOICES[voiceKey].name + '\n' +
+          'STANCE: ' + VOICES[voiceKey].stance + '\n' +
+          'ENERGY: ' + turn.energy + '\n' +
+          'DIRECTION: ' + turn.dir;
+        
+        // Individual WebSocket per exchange (but reuse token for cost optimization)
+        const url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        console.log(`Exchange ${turnIndex}: Creating WebSocket...`);
+        const sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        currentWs = sock;
+        
+        const timer = setTimeout(() => {
+          console.warn('Timeout after 60s');
+          sock.close();
+          resolve({ voice: voiceKey, text: transcript || '[timeout]' });
+        }, 60000);
+        
+        sock.onopen = () => {
+          console.log(`Exchange ${turnIndex}: WebSocket connected`);
+          sock.send(JSON.stringify({
+            type: 'session.update',
+            session: {
+              voice: XAI_VOICE[voiceKey],
+              modalities: ['audio', 'text'],
+              instructions: 'You are ' + VOICES[voiceKey].name + '. ' + VOICES[voiceKey].stance,
+              turn_detection: null
+            }
+          }));
+        };
+        
+        sock.onmessage = (ev) => {
+          const msg = JSON.parse(ev.data);
+          
+          switch (msg.type) {
+            case 'session.updated':
+              console.log(`Exchange ${turnIndex}: Session updated, sending conversation`);
+              sock.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                  type: 'message',
+                  role: 'user',
+                  content: [{ type: 'input_text', text: context }]
+                }
+              }));
+              sock.send(JSON.stringify({ type: 'response.create' }));
+              break;
+              
+            case 'response.output_audio.delta':
+              if (msg.delta) queueChunk(msg.delta);
+              break;
+              
+            case 'response.output_audio_transcript.delta':
+              if (msg.delta) {
+                transcript += msg.delta;
+                updateLiveText(turnIndex, transcript);
+              }
+              break;
+              
+            case 'response.done':
+              clearTimeout(timer);
+              sock.close();
+              waitDrain().then(() => {
+                finishExchange(turnIndex);
+                resolve({ voice: voiceKey, text: transcript });
+              });
+              break;
+          }
+        };
+        
+        sock.onerror = (e) => {
+          console.error(`WebSocket error on exchange ${turnIndex}:`, e);
+          clearTimeout(timer);
+          resolve({ voice: voiceKey, text: `[WebSocket error on exchange ${turnIndex}]` });
+        };
+        
+        sock.onclose = (e) => {
+          console.log(`WebSocket closed on exchange ${turnIndex}, code: ${e.code}, reason: ${e.reason}`);
+          currentWs = null;
+          clearTimeout(timer);
+          finishExchange(turnIndex);
+        };
+      });
+    }
+    
+    // ================================================================
+    // MAIN SHOW
+    // ================================================================
+    async function startShow() {
+      playing = true;
+      currentIndex = 0;
+      updatePlayBtn();
+      
+      const preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+      
+      setStatus('Starting show...');
+      
+      // Ready to start show (fresh tokens per exchange with 90s expiry)
+      setStatus('Starting show...');
+      
+      for (let i = 0; i < maxTurns; i++) {
+        if (!playing) {
+          console.log(`Show loop stopped at exchange ${i}: playing=${playing}`);
+          break;
+        }
+        currentIndex = i;
+        updateProgress();
+        
+        const turn = TURNS[i];
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+        
+        console.log(`Starting exchange ${i}: ${VOICES[turn.voice].name}`);
+        const result = await runExchange(i);
+        console.log(`Completed exchange ${i}:`, result);
+        
+        // Small delay between exchanges to avoid API rate limits
+        if (i < maxTurns - 1) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        
+        if (!playing) {
+          console.log(`Show stopped after exchange ${i}: playing=${playing}`);
+          break;
+        }
+      }
+      
+      if (playing) {
+        currentIndex = maxTurns;
+        updateProgress();
+        
+        if (!hasPass) {
+          paywallEl.style.display = 'block';
+        }
+      }
+      
+      playing = false;
+      updatePlayBtn();
+      setStatus(playing ? '' : (hasPass ? 'Episode complete.' : 'Trailer complete. Get the full debate!'));
+    }
+    
+    function stopShow() {
+      console.log('stopShow() called, stack trace:');
+      console.trace();
+      playing = false;
+      if (currentWs) {
+        currentWs.close();
+        currentWs = null;
+      }
+      flushAudio();
+      updatePlayBtn();
+      setStatus('');
+    }
+    
+    // ================================================================
+    // EVENT HANDLERS
+    // ================================================================
+    playBtn.addEventListener('click', () => {
+      if (playing) {
+        stopShow();
+      } else {
+        ensureAudio();
+        startShow();
+      }
+    });
+    
+    payBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = STRIPE_LINK;
+    });
+    
+    // Update label on load
+    updateProgress();
+    
+    // ================================================================
+    // MODAL FUNCTIONS
+    // ================================================================
+    function openSuggestModal() {
+      document.getElementById('suggestModal').style.display = 'block';
+    }
+    
+    function closeSuggestModal() {
+      document.getElementById('suggestModal').style.display = 'none';
+      document.getElementById('suggestForm').reset();
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('suggestModal');
+      if (event.target === modal) {
+        closeSuggestModal();
+      }
+    }
+    
+    // Handle suggestion form submission
+    document.getElementById('suggestForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('suggestName').value || 'Anonymous';
+      const email = document.getElementById('suggestEmail').value || '';
+      const topic = document.getElementById('suggestTopic').value;
+      
+      if (!topic.trim()) {
+        alert('Please enter a topic suggestion');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/suggest-topic', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, topic })
+        });
+        
+        if (response.ok) {
+          alert('Thanks! Your topic suggestion has been sent to the RadioFAF team.');
+          closeSuggestModal();
+        } else {
+          throw new Error('Failed to send suggestion');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Sorry, there was an error sending your suggestion. Please try again later.');
+      }
+    });
+  </script>
+</body>
+</html>

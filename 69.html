@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>69.0 FM — Open Claw or Closed Flaw? | RadioFAF</title>
+  <meta name="description" content="5 voices. 5 corners. 0 chill. Leo, Sal, Ara, Rex, and Eve debate the OpenClaw saga — the C&D, the crypto heist, the Valentine's Day acquisition, and the future of AI agents.">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="canonical" href="https://radiofaf.com/69.0">
+  <meta property="og:title" content="69.0 FM — Open Claw or Closed Flaw?">
+  <meta property="og:description" content="5 voices. 5 corners. 0 chill. The OpenClaw saga — live on 69.0 FM.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://radiofaf.com/69.0">
+  <meta property="og:site_name" content="RadioFAF">
+  <meta property="og:image" content="https://radiofaf.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="69.0 FM — Open Claw or Closed Flaw?">
+  <meta name="twitter:description" content="5 voices. 5 corners. 0 chill. The OpenClaw saga — live on 69.0 FM.">
+  <meta name="twitter:image" content="https://radiofaf.com/og.png">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #d0d0d0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --bg: #0a0a0a;
+      --card-bg: #111111;
+      --card-border: #1a1a1a;
+      --text: #eee;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #D97706;
+      --ara: #4285F4;
+      --rex: #10A37F;
+      --eve: #7C3AED;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* ========== Header ========== */
+    .freq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      color: var(--pink);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover { color: var(--lime); }
+
+    .freq-badge {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(132, 255, 0, 0.08);
+      border: 1px solid rgba(132, 255, 0, 0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== Episode Info ========== */
+    .episode {
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+
+    .episode h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .episode .subtitle {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .episode .meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== Voices Legend ========== */
+    .voices-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .voice-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .voice-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ========== Player ========== */
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+
+    .play-btn {
+      background: var(--lime);
+      color: #0a0a0a;
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s ease, transform 0.2s ease;
+      flex-shrink: 0;
+      animation: play-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes play-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233, 30, 158, 0.6); }
+      50% { box-shadow: 0 0 20px 6px rgba(233, 30, 158, 0.35); }
+    }
+
+    .play-btn:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    .play-btn:active { transform: translateY(0); }
+
+    .play-btn.playing {
+      background: var(--pink);
+      animation: none;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .progress {
+      width: 100%;
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--lime), var(--pink));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== On Air indicator ========== */
+    .on-air {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .on-air.visible { display: flex; }
+
+    .on-air-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== Transcript ========== */
+    .transcript {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exchange {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 0.75rem;
+      border-left: 3px solid transparent;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .exchange.speaking {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .exchange[data-voice="leo"] { border-left-color: var(--leo); }
+    .exchange[data-voice="sal"] { border-left-color: var(--sal); }
+    .exchange[data-voice="ara"] { border-left-color: var(--ara); }
+    .exchange[data-voice="rex"] { border-left-color: var(--rex); }
+    .exchange[data-voice="eve"] { border-left-color: var(--eve); }
+
+    .exchange.speaking[data-voice="leo"] { background: rgba(0, 212, 212, 0.05); }
+    .exchange.speaking[data-voice="sal"] { background: rgba(217, 119, 6, 0.05); }
+    .exchange.speaking[data-voice="ara"] { background: rgba(66, 133, 244, 0.05); }
+    .exchange.speaking[data-voice="rex"] { background: rgba(16, 163, 127, 0.05); }
+    .exchange.speaking[data-voice="eve"] { background: rgba(124, 58, 237, 0.05); }
+
+    .voice-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      width: 1.5rem;
+      text-align: center;
+      padding-top: 0.1rem;
+    }
+
+    .voice-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .voice-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .voice-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .voice-name[data-voice="leo"] { color: var(--leo); }
+    .voice-name[data-voice="sal"] { color: var(--sal); }
+    .voice-name[data-voice="ara"] { color: var(--ara); }
+    .voice-name[data-voice="rex"] { color: var(--rex); }
+    .voice-name[data-voice="eve"] { color: var(--eve); }
+
+    .voice-org {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .voice-text {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ========== Paywall ========== */
+    .paywall {
+      text-align: center;
+      position: relative;
+    }
+
+    .paywall-fade {
+      height: 6rem;
+      background: linear-gradient(transparent, #0a0a0a);
+      margin-top: -6rem;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .paywall-content {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+    }
+
+    .paywall-divider {
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--lime), transparent);
+      margin: 0 auto 1.5rem;
+      border-radius: 1px;
+    }
+
+    .paywall-text {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .paywall-btn {
+      display: inline-block;
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .paywall-btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.3);
+    }
+
+    .paywall-note {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+    }
+
+    .paywall-note em {
+      color: var(--lime);
+      font-style: normal;
+    }
+
+    /* ========== Unlocked Banner ========== */
+    .unlocked-banner {
+      text-align: center;
+      padding: 0.75rem;
+      background: rgba(132, 255, 0, 0.06);
+      border: 1px solid rgba(132, 255, 0, 0.15);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--lime);
+      font-weight: 600;
+    }
+
+    /* ========== Queue ========== */
+    .queue {
+      text-align: center;
+      padding: 1.5rem;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: var(--card-bg);
+    }
+
+    .queue h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .queue .queue-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .suggest-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--pink);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--pink);
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .suggest-btn:hover {
+      background: var(--pink);
+      color: #0a0a0a;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer .domain {
+      font-size: 0.8rem;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.65rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover { color: var(--pink); }
+
+    .share-x {
+      display: inline-block;
+      background: #000;
+      color: #fff !important;
+      font-size: 0.7rem !important;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    .share-x:hover {
+      background: #fff;
+      color: #000 !important;
+      transform: translateY(-1px);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .footer-dot { color: #333; }
+
+    /* ========== TTS Unsupported ========== */
+    .tts-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      display: none;
+    }
+
+    .tts-note.visible { display: block; }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .page { padding: 1rem 1rem 1rem; gap: 1.25rem; }
+      .freq-badge { font-size: 1.1rem; padding: 0.25rem 0.75rem; }
+      .episode h1 { font-size: 1.5rem; }
+      .exchange { padding: 0.75rem 0.5rem; }
+      .voice-text { font-size: 0.8rem; }
+      .voices-legend { gap: 0.4rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="freq-header">
+      <a href="/" class="back-link">RadioFAF</a>
+      <span class="freq-badge">69.0 FM</span>
+    </header>
+
+    <!-- Episode Info -->
+    <section class="episode">
+      <div style="display:inline-block;padding:0.25rem 0.8rem;background:rgba(132,255,0,0.08);border:1px solid rgba(132,255,0,0.25);border-radius:4px;margin-bottom:0.75rem;">
+        <span style="color:#84FF00;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">This Week's Hot Topic</span>
+      </div>
+      <h1>"Open Claw or Closed Flaw?"</h1>
+      <p class="subtitle">5 voices. 5 corners. 0 chill.</p>
+      <p class="meta"><span id="live-clock"></span> &middot; Pilot Episode</p>
+      <script>
+        (function(){
+          function tick(){
+            var d = new Date();
+            var s = d.toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});
+            document.getElementById('live-clock').textContent = s + ' ET';
+          }
+          tick();
+          setInterval(tick, 1000);
+        })();
+      </script>
+    </section>
+
+    <!-- Voice Legend -->
+    <div class="voices-legend">
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--leo)"></span> Leo · Open Absolutist</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--sal)"></span> Sal · Safety Hawk</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--ara)"></span> Ara · Comedian</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--rex)"></span> Rex · Dealmaker</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--eve)"></span> Eve · Community Champion</span>
+    </div>
+
+    <!-- On Air -->
+    <div class="on-air" id="onAir">
+      <span class="on-air-dot"></span>
+      <span>ON AIR</span>
+    </div>
+
+    <!-- Player -->
+    <div class="player">
+      <button class="play-btn" id="playBtn">&#9654; Play Trailer</button>
+      <div class="progress-wrap">
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="progress-label" id="progressLabel">0 / 3 exchanges</span>
+      </div>
+    </div>
+
+    <!-- Claimer -->
+    <div style="text-align:center; font-size:0.65rem; color:var(--text-dim); padding:0.25rem 0; line-height:1.5;">
+      <span style="color:var(--lime); font-weight:700;">CLAIMER</span> (not disclaimer): We will make mistakes. Human idea, AI execution. Every show is live and unique. Enjoy the new show on AI Radio.
+    </div>
+
+    <!-- Status -->
+    <div class="tts-note" id="ttsNote"></div>
+
+    <!-- Transcript -->
+    <section class="transcript" id="transcript">
+      <div style="text-align:center; padding:2rem 0; color:var(--text-dim); font-size:0.85rem;" id="preShowMsg">
+        Hit play. 5 Grok voices debate the OpenClaw saga — live, unscripted, every show unique.
+      </div>
+    </section>
+
+    <!-- Paywall -->
+    <div id="paywall">
+      <div class="paywall">
+        <div class="paywall-fade"></div>
+        <div class="paywall-content">
+          <div class="paywall-divider"></div>
+          <p class="paywall-text">Full debate &mdash; $1 day pass</p>
+          <a class="paywall-btn" id="stripeBtn" href="#">Tune In &mdash; $1</a>
+          <p class="paywall-note">Produced for <em>$0.71</em>. That's the model.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlocked Banner (hidden by default) -->
+    <div class="unlocked-banner" id="unlockedBanner" style="display:none">
+      Full debate unlocked. Hit play.
+    </div>
+
+    <!-- Queue -->
+    <section class="queue">
+      <h2>Next Up</h2>
+      <p class="queue-tagline">"Highest bid gets the airwaves"</p>
+      <a href="mailto:wolfejam@hey.com?subject=RadioFAF%2069.0%20FM%20—%20Topic%20Suggestion&body=My%20topic%20idea%3A%20" class="suggest-btn">Suggest a topic</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="domain">69.0 FM &middot; radiofaf.com</div>
+      <a href="https://twitter.com/intent/tweet?text=5%20voices.%205%20corners.%200%20chill.%20%F0%9F%93%BB%0A%0AThe%20OpenClaw%20saga%20%E2%80%94%20C%26D%2C%20crypto%20heist%2C%20Valentine%27s%20Day%20acquisition.%0A%0A%22Open%20Claw%20or%20Closed%20Flaw%3F%22%20on%2069.0%20FM&url=https%3A%2F%2Fradiofaf.com%2F69.0" target="_blank" class="share-x">Share on <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" style="vertical-align: -2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <div class="footer-links">
+        <a href="/">RadioFAF Home</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://direct-xai.vercel.app/crews/radiofaf.html">How it works</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://faf.one">FAF</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    // ================================================================
+    // CONFIG — Update these when ready
+    // ================================================================
+    const STRIPE_LINK = 'https://buy.stripe.com/aFaaEZboperA2YH1EAbV60i';
+    const TRAILER_LENGTH = 3;
+
+    // ================================================================
+    // DEBATE CONTENT — 69.0 FM Pilot Episode
+    // "Open Claw or Closed Flaw?"
+    // ================================================================
+    const VOICES = {
+      leo: { icon: '\u{1F981}', name: 'Leo',  org: 'Open Absolutist',     color: '#00D4D4' },
+      sal: { icon: '\u{1F9E0}', name: 'Sal',  org: 'Safety Hawk',         color: '#D97706' },
+      ara: { icon: '\u{1F48E}', name: 'Ara',  org: 'Comedian',             color: '#4285F4' },
+      rex: { icon: '\u26A1',    name: 'Rex',  org: 'Dealmaker',           color: '#10A37F' },
+      eve: { icon: '\u{1F525}', name: 'Eve',  org: 'Community Champion',  color: '#7C3AED' }
+    };
+
+    // ================================================================
+    // BRIEFING — Real facts the voices use to debate
+    // ================================================================
+    const BRIEFING = 'TOPIC: "Open Claw or Closed Flaw?" — the biggest drama in AI agent history.\n\n' +
+      'KEY FACTS (real — use them):\n' +
+      '- Peter Steinberger, Austrian developer, built ClawdBot in Nov 2025\n' +
+      '- Anthropic sent a C&D at 5 AM over the name (too close to "Claude")\n' +
+      '- Renamed to MoltBot (Jan 27), then OpenClaw (Jan 30) — triple rebrand in a week\n' +
+      '- Crypto scammers snatched his GitHub + X handles in ~10 seconds during rename\n' +
+      '- Fake $CLAWD Solana token hit $16M market cap before crashing\n' +
+      '- Steinberger received death threats, nearly deleted the entire project\n' +
+      '- 190,000+ GitHub stars (21st most popular repo ever), 1.5M active agents, 2M weekly visitors\n' +
+      '- Jan 9: Anthropic silently blocked OAuth tokens — broke OpenClaw, OpenCode, Roo Code, Cline\n' +
+      '- Philipp Spiess posted viral screenshot of suspended Claude account\n' +
+      '- Medium: "Anthropic Just Killed My $200/Month Setup. So I Rebuilt It for $15"\n' +
+      '- 800+ malicious skills (~20% of registry) including Atomic macOS Stealer\n' +
+      '- CVE-2026-25253: CVSS 8.8 critical RCE vulnerability\n' +
+      '- 30,000+ exposed instances without authentication\n' +
+      '- Cisco: "security nightmare", Microsoft published safety guide, U of Toronto alert\n' +
+      '- Feb 14 (Valentine\'s Day): Steinberger joins OpenAI. Sam Altman: "He is a genius"\n' +
+      '- OpenClaw moves to independent foundation, MIT license stays\n' +
+      '- Google banned $250/mo AI Ultra subscribers for using OpenClaw — no refunds\n' +
+      '- Steinberger called Google "pretty draconian", pulled Antigravity support\n' +
+      '- Scoble: "Anthropic really fumbled"\n' +
+      '- Gergely Orosz: "Anthropic\'s only contribution was legal threats"\n' +
+      '- Gadget Review: "$30B Fumble: Anthropic Kills 1.5M-Agent Beast, OpenAI Poaches Creator"\n' +
+      '- Igor Babuschkin (xAI cofounder): "Doesn\'t make sense to put your data into it if owned by OpenAI"\n' +
+      '- VentureBeat: "OpenAI\'s Acquisition Signals Beginning of End of ChatGPT Era"\n' +
+      '- 239 billion tokens processed through OpenRouter — top app on the platform\n' +
+      '- The lobster emoji is the community symbol — mascot named "Molty"\n' +
+      '- Anthropic spent $30B building Claude and their legal dept handed OpenAI the agent ecosystem free\n\n' +
+      'RULES:\n' +
+      '- VARY your length. Sometimes one word. Sometimes one sentence. Sometimes 3-4 sentences.\n' +
+      '- A one-word reaction or short retort can hit harder than a paragraph.\n' +
+      '- Be direct, opinionated, don\'t hold back. Reference specific facts, names, numbers.\n' +
+      '- React to what was said before you — agree, disagree, challenge, mock. This is a DEBATE.\n' +
+      '- No pleasantries. No "great point." Go for the jugular.\n' +
+      '- Sound like real people arguing, not AI assistants taking turns.';
+
+    // ================================================================
+    // TURNS — Stage directions for each exchange
+    // ================================================================
+    const TURNS = [
+      // === TRAILER (first 3 — hook the listener) ===
+      { voice: 'leo', energy: 'HIGH — commanding, incredulous',
+        dir: 'Open the show. The INSANE numbers — 190K stars, 1.5M agents, one developer in Vienna. Then drop the bomb: Anthropic\'s first move was a 5 AM lawyer call. Not a job offer. Lawyers. At 5 AM. 3-4 sentences.' },
+      { voice: 'sal', energy: 'FIRM — cold, data-driven',
+        dir: 'Interrupt. Say "Hold on." Push past the trademark drama — 800 malicious skills, CVE 8.8, 30K exposed instances. Cisco called it a security nightmare. Be the calm adult who just dropped a bomb. 3-4 sentences.' },
+      { voice: 'ara', energy: 'COMEDIC — punchline timing',
+        dir: '[laugh] They\'re missing the obvious joke. $30B company outperformed by a project named after a lobster. Mascot is Molty. 18 days from C&D to Sam Altman posting "He is a genius" — on Valentine\'s Day. Anthropic sends lawyers, OpenAI sends a love letter. To a lobster. Standup bit. 3-4 sentences.' },
+      // === PAYWALL STARTS HERE ===
+      { voice: 'eve', energy: 'FURIOUS — passionate, personal',
+        dir: '[sigh] EXPLODE. Quote Gergely Orosz: "Anthropic\'s only contribution was legal threats." Half a million developers read that newsletter. A billion-dollar company sent lawyers to a solo developer at 5 AM. Short, punchy, angry. 3-4 sentences.' },
+      { voice: 'rex', energy: 'PASSIONATE — pushing back hard',
+        dir: 'Fire back. The narrative MISSES context. Peter was getting death threats. Crypto scammers stole his GitHub handle in TEN SECONDS — $16M fake Solana token. He told Lex Fridman he almost deleted everything. OpenAI threw a lifeline, not a leash. 3-4 sentences.' },
+      { voice: 'leo', energy: 'SARCASTIC — mocking, sharp',
+        dir: '[laugh] Mock Rex. "A lifeline? With strings attached?" Quote Igor Babuschkin, xAI cofounder: "Doesn\'t make sense to put your data into it if owned by OpenAI." 2 sentences max.' },
+      { voice: 'sal', energy: 'MEASURED — building the case',
+        dir: 'Facts. January 9th: Anthropic blocked OAuth tokens. Not just OpenClaw — OpenCode, Roo Code, Cline. Accounts wrongly flagged. Policy exists because autonomous agents with zero guardrails were on supervised systems. Build the case. 3-4 sentences.' },
+      { voice: 'eve', energy: 'EXPLOSIVE — interrupt energy',
+        dir: 'Cut in hot. Reversed AFTER Philipp Spiess posted viral screenshot. After HN erupted. After "Anthropic Just Killed My $200/Month Setup. So I Rebuilt It for $15." These were superfans paying $200 a month! 3-4 sentences.' },
+      { voice: 'ara', energy: 'COMEDIC BOMBSHELL — roasting Google',
+        dir: '[laugh] Fake confession: "OK since we\'re airing dirty laundry..." Roast Google. They banned $250/month subscribers! No refund. At least Anthropic called at 5 AM — Google didn\'t even email. Funny but devastating. 3 sentences.' },
+      { voice: 'rex', energy: 'CONFIDENT — selling it',
+        dir: 'Seize it. This is EXACTLY why the acquisition works. Everyone banning, cutting access. 1.5M agents, no institutional home. OpenAI: foundation, MIT stays. Sam Altman: "to bring agents to everyone." Sell it hard. 3-4 sentences.' },
+      { voice: 'leo', energy: 'HEATED — gloves off',
+        dir: 'Cut Rex off. Repeat his words with disgust: "To bring agents to everyone — through OpenAI\'s platform." 100 skills switched to GPT overnight. That\'s not philanthropy. ONE devastating sentence after the quote.' },
+      { voice: 'sal', energy: 'CALM INTERVENTION',
+        dir: 'Step in. "Let\'s look at what was actually on fire." 341 then 800+ malicious skills. 20% of registry was malware. Atomic macOS Stealer. U of Toronto alerts. Microsoft safety guide. When Microsoft writes a safety guide for your project... Stay measured. 3-4 sentences.' },
+      { voice: 'eve', energy: 'PASSIONATE — principled',
+        dir: 'Push back on Sal. Every open-source project faces security at scale. Linux had Heartbleed. npm had event-stream. Answer was never "let a corporation absorb it." OpenClaw was already shipping SHA-256 hashing. Community was FIXING it. 3-4 sentences.' },
+      { voice: 'ara', energy: 'COMEDIC — deadpan math',
+        dir: 'Deadpan one-liner. "One developer, 30K exposed instances, 800 malicious skills, $16M fraud token, death threats, AND feature requests. That\'s not a job — that\'s a punishment." Just the joke. ONE sentence.' },
+      { voice: 'rex', energy: 'PRESSING ADVANTAGE',
+        dir: 'Back up Ara. After acquisition: foundation, MIT unchanged, security team, legal team on crypto fraud. Scoble: "Anthropic really fumbled." Not because of C&D — because they couldn\'t see the opportunity. 3 sentences.' },
+      { voice: 'leo', energy: 'GLEEFUL — enjoying the roast',
+        dir: '[laugh] Just the headline: "$30 Billion Fumble." On Valentine\'s Day. ONE devastating sentence.' },
+      { voice: 'sal', energy: 'DEFENSIVE but measured',
+        dir: 'Push back on "$30B fumble." Anthropic didn\'t WANT OpenClaw. 20% malware, 30K unprotected instances — you quarantine that, not adopt it. Stand ground. 3 sentences.' },
+      { voice: 'eve', energy: 'PEAK HEAT — angriest moment',
+        dir: 'BIGGEST moment. Go OFF. "Better communication?" 5 AM legal threats. Silent OAuth breaks. Suspended paying customers. Gergely Orosz: Anthropic is "happy to have no ecosystem around Claude." That\'s not communication — that\'s strategy. Let it RIP. 4 sentences.' },
+      { voice: 'ara', energy: 'WARM COMEDY — genuine respect',
+        dir: 'Give Steinberger his flowers — but funny. Three name changes in a week dodging lawyers, scammers, death threats. Most devs can\'t rename a CSS class without a standup. Bootstrapped PSPDFKit to 100M euro exit without funding. He picked OpenAI like you pick a restaurant — not because you\'re starving. 3-4 sentences.' },
+      { voice: 'rex', energy: 'CONFIDENT CLOSE',
+        dir: 'He chose OpenAI. Not xAI, not Meta, not Google. 239 billion tokens on OpenRouter. Top app. Biggest agent deployment in history. They acquired the relationship with the developer who proved agents are the future. 3 sentences.' },
+      { voice: 'leo', energy: 'SHARP — turns language against Rex',
+        dir: 'Repeat Rex\'s phrase: "Acquired the relationship." [sigh] Let it hang. Then one sentence about the next Steinberger watching and learning the wrong lessons.' },
+      { voice: 'eve', energy: 'SOMBER — quieter, serious',
+        dir: 'Get quieter. The chilling effect. How many devs saw the C&D and didn\'t build? Saw bans and went closed-source? Saw the acquisition and thought "why build open?" The damage is what DIDN\'T get built. 3-4 sentences, lower energy.' },
+      { voice: 'sal', energy: 'COUNTER — firm but fair',
+        dir: 'One quiet counter. "Or maybe some looked at 800 malicious skills and thought: guardrails exist for a reason." ONE sentence.' },
+      { voice: 'ara', energy: 'COMEDIC WISDOM — funny AND deep',
+        dir: '[laugh] "Five people arguing about who started the fire while the building is still burning." The next OpenClaw is already being built. Nobody learned anything. That\'s the funniest part. 2-3 sentences.' },
+      { voice: 'rex', energy: 'STATESMANLIKE — forward-looking',
+        dir: 'Close strong. When the next one arrives: foundation, security process, institutional backing. That\'s what OpenAI-OpenClaw built. Not control — infrastructure. The playbook for coexistence. 2-3 sentences.' },
+      { voice: 'leo', energy: 'DEFIANT — rallying cry, crescendo',
+        dir: 'Final statement. VentureBeat: "Beginning of the End of the ChatGPT Era." Chatbot era over. Agent era here. First battle fought over a lobster emoji and a 5 AM phone call. Keep building. Open wins. Build to a crescendo. 3-4 sentences.' },
+      { voice: 'eve', energy: 'POWERFUL CLOSE — quiet conviction, mic drop',
+        dir: 'Last word. The lobster molted. Shell gone. Creature belongs to a corporation. But MIT licensed. MIT doesn\'t have a take-back clause. Build on it. Fork it. Make it yours. That\'s what open source means. Quiet power. End strong. 3-4 sentences.' }
+    ];
+
+    // ================================================================
+    // xAI VOICE CONFIG
+    // ================================================================
+    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+
+    const VOICE_STANCE = {
+      leo: 'You are LEO — The Open Absolutist. Open source is sacred, corporations are the enemy of developer freedom. You champion xAI\'s approach. Sarcastic, sharp, uncomfortable truths. Corporate capture = your enemy.',
+      sal: 'You are SAL — The Safety Hawk. The security nightmare is the REAL story. 800 malicious skills, 30K exposed instances, CVE 8.8. You defend guardrails. Calm, precise, data-backed.',
+      ara: 'You are ARA — The Comedian. Funniest voice in the room. Seth Rogen energy. Humor exposes hypocrisy. You roast ALL sides equally. Use [laugh] for absurdity. Sharp observational comedy meets tech commentary.',
+      rex: 'You are REX — The Dealmaker. The OpenAI acquisition was the best outcome. Foundation model, MIT preserved, resources for a drowning developer. Confident, persuasive, pragmatic progress.',
+      eve: 'You are EVE — The Community Champion. Developers over corporations, always. The C&D, bans, acquisition — same playbook: control. You quote Orosz, cite the $30B fumble. Passionate, fiery, personal.'
+    };
+
+    // ================================================================
+    // STATE
+    // ================================================================
+    const params = new URLSearchParams(window.location.search);
+    const hasPass = params.has('pass');
+    const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
+    const STORAGE_KEY = 'radiofaf-69fm-recording';
+
+    let playing = false;
+    let replayMode = false;
+    let currentIndex = 0;
+    let currentWs = null;
+    let ephToken = null;
+    let wsUrl = null;
+    let history = []; // conversation history: [{voice, text}, ...]
+
+    // Audio engine
+    let audioCtx = null;
+    let audioQueue = [];
+    let draining = false;
+    let activeSrc = null;
+
+    // Check for saved recording
+    let savedRecording = null;
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) savedRecording = JSON.parse(stored);
+    } catch (e) {}
+
+    // ================================================================
+    // DOM
+    // ================================================================
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const transcriptEl = document.getElementById('transcript');
+    const paywallEl = document.getElementById('paywall');
+    const unlockedEl = document.getElementById('unlockedBanner');
+    const onAirEl = document.getElementById('onAir');
+    const statusEl = document.getElementById('ttsNote');
+    const stripeBtn = document.getElementById('stripeBtn');
+
+    stripeBtn.href = STRIPE_LINK;
+
+    // Hide paywall initially (shown after trailer in live mode)
+    paywallEl.style.display = 'none';
+    if (hasPass) { unlockedEl.style.display = 'block'; }
+
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+      statusEl.style.display = msg ? 'block' : 'none';
+    }
+
+    // ================================================================
+    // AUDIO ENGINE — PCM16 24kHz from xAI → browser
+    // ================================================================
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new AudioContext({ sampleRate: 24000 });
+      return audioCtx;
+    }
+
+    async function queueChunk(base64) {
+      var ctx = ensureAudio();
+      if (ctx.state === 'suspended') await ctx.resume();
+      var bin = atob(base64);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      var pcm = new Int16Array(bytes.buffer);
+      var buf = ctx.createBuffer(1, pcm.length, 24000);
+      var ch = buf.getChannelData(0);
+      for (var i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+      audioQueue.push(buf);
+      if (!draining) drain();
+    }
+
+    function drain() {
+      if (audioQueue.length === 0) { draining = false; activeSrc = null; return; }
+      draining = true;
+      var buf = audioQueue.shift();
+      var src = audioCtx.createBufferSource();
+      activeSrc = src;
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.onended = drain;
+      src.start();
+    }
+
+    function flushAudio() {
+      audioQueue = [];
+      draining = false;
+      if (activeSrc) { try { activeSrc.stop(); } catch(e) {} activeSrc = null; }
+    }
+
+    function waitDrain() {
+      return new Promise(function(r) {
+        var ck = function() {
+          if (!draining && audioQueue.length === 0) r();
+          else setTimeout(ck, 80);
+        };
+        ck();
+      });
+    }
+
+    // ================================================================
+    // RECORDING — save/load transcript to localStorage
+    // ================================================================
+    function saveRecording(exchanges) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          date: new Date().toISOString(),
+          exchanges: exchanges
+        }));
+        console.log('[69FM] Recording saved:', exchanges.length, 'exchanges');
+      } catch (e) { console.warn('[69FM] Could not save recording:', e); }
+    }
+
+    function clearRecording() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      savedRecording = null;
+    }
+
+    // ================================================================
+    // TTS REPLAY — browser speech reads saved transcript (free)
+    // ================================================================
+    var ttsVoices = {};
+    var ttsSettings = {
+      leo: { pitch: 0.9, rate: 1.0 },
+      sal: { pitch: 1.1, rate: 0.95 },
+      ara: { pitch: 1.0, rate: 1.1 },
+      rex: { pitch: 0.8, rate: 1.0 },
+      eve: { pitch: 1.2, rate: 1.0 }
+    };
+
+    function speakTTS(text, voiceKey) {
+      return new Promise(function(resolve) {
+        var utterance = new SpeechSynthesisUtterance(text);
+        var s = ttsSettings[voiceKey] || {};
+        utterance.pitch = s.pitch || 1.0;
+        utterance.rate = s.rate || 1.0;
+        utterance.onend = resolve;
+        utterance.onerror = resolve;
+        speechSynthesis.speak(utterance);
+      });
+    }
+
+    async function replayShow() {
+      if (!savedRecording || !savedRecording.exchanges) return;
+      playing = true;
+      replayMode = true;
+      var exchanges = savedRecording.exchanges;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      updatePlayBtn();
+
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      var replayDate = new Date(savedRecording.date).toLocaleDateString();
+      setStatus('Replaying recording from ' + replayDate + ' (browser voice)');
+
+      for (var i = startFrom; i < exchanges.length; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var ex = exchanges[i];
+        addLiveExchange(ex.voice, i);
+        updateLiveText(i, ex.text);
+        setStatus(VOICES[ex.voice].name + ' (replay)...');
+
+        await speakTTS(ex.text, ex.voice);
+        finishExchange(i);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = exchanges.length;
+        updateProgress();
+      }
+
+      playing = false;
+      replayMode = false;
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    // ================================================================
+    // xAI TOKEN — fresh token per exchange (tokens are single-use)
+    // ================================================================
+    async function fetchToken() {
+      var res = await fetch('/api/voice-session');
+      var data = await res.json();
+      if (data.error) throw new Error(data.details || data.error);
+      ephToken = data.token;
+      wsUrl = data.wsUrl;
+      return data.token;
+    }
+
+    // ================================================================
+    // LIVE TRANSCRIPT — exchanges appear as voices speak
+    // ================================================================
+    function addLiveExchange(voiceKey, index) {
+      var v = VOICES[voiceKey];
+      var div = document.createElement('div');
+      div.className = 'exchange speaking';
+      div.setAttribute('data-voice', voiceKey);
+      div.setAttribute('data-index', index);
+      div.innerHTML =
+        '<span class="voice-icon">' + v.icon + '</span>' +
+        '<div class="voice-body">' +
+          '<div class="voice-header">' +
+            '<span class="voice-name" data-voice="' + voiceKey + '">' + v.name + '</span>' +
+            '<span class="voice-org">' + v.org + '</span>' +
+          '</div>' +
+          '<p class="voice-text" id="live-' + index + '"></p>' +
+        '</div>';
+      transcriptEl.appendChild(div);
+      div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateLiveText(index, text) {
+      var el = document.getElementById('live-' + index);
+      if (el) el.textContent = text;
+    }
+
+    function finishExchange(index) {
+      var el = document.querySelector('.exchange[data-index="' + index + '"]');
+      if (el) el.classList.remove('speaking');
+    }
+
+    // ================================================================
+    // RUN ONE LIVE EXCHANGE — voice debates freely
+    // ================================================================
+    async function runExchange(turnIndex) {
+      if (!playing) return { voice: '', text: '' };
+
+      var turn = TURNS[turnIndex];
+      var voiceKey = turn.voice;
+
+      // Build context: briefing + conversation so far + stage direction
+      var context = BRIEFING + '\n\n';
+      if (history.length > 0) {
+        context += 'CONVERSATION SO FAR:\n' +
+          history.map(function(h) { return h.voice.toUpperCase() + ': ' + h.text; }).join('\n') +
+          '\n\n';
+      }
+      context += 'ENERGY FOR THIS TURN: ' + turn.energy + '\n';
+      context += 'STAGE DIRECTION: ' + turn.dir;
+
+      addLiveExchange(voiceKey, turnIndex);
+
+      // Fresh token per exchange (ephemeral tokens are single-use)
+      console.log('[69FM]', voiceKey, 'fetching token for turn', turnIndex);
+      try {
+        await fetchToken();
+      } catch (e) {
+        console.error('[69FM]', voiceKey, 'token failed:', e);
+        finishExchange(turnIndex);
+        updateLiveText(turnIndex, '[failed to connect]');
+        return { voice: voiceKey, text: '[token error]' };
+      }
+
+      return new Promise(function(resolve) {
+        var transcript = '';
+        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        console.log('[69FM]', voiceKey, 'connecting for turn', turnIndex);
+        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        currentWs = sock;
+
+        var timer = setTimeout(function() {
+          console.warn('[69FM]', voiceKey, 'timeout');
+          sock.close();
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[timeout]' });
+        }, 90000);
+
+        sock.onopen = function() {
+          sock.send(JSON.stringify({
+            type: 'session.update',
+            session: {
+              voice: XAI_VOICE[voiceKey],
+              modalities: ['audio', 'text'],
+              instructions: VOICE_STANCE[voiceKey],
+              turn_detection: null
+            }
+          }));
+        };
+
+        sock.onmessage = function(ev) {
+          var msg = JSON.parse(ev.data);
+          switch (msg.type) {
+            case 'session.updated':
+              console.log('[69FM]', voiceKey, 'session ready, injecting context');
+              sock.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                  type: 'message',
+                  role: 'user',
+                  content: [{ type: 'input_text', text: context }]
+                }
+              }));
+              sock.send(JSON.stringify({ type: 'response.create' }));
+              break;
+            case 'response.output_audio.delta':
+              if (msg.delta) queueChunk(msg.delta);
+              break;
+            case 'response.output_audio_transcript.delta':
+              if (msg.delta) {
+                transcript += msg.delta;
+                updateLiveText(turnIndex, transcript);
+              }
+              break;
+            case 'response.done':
+              clearTimeout(timer);
+              console.log('[69FM]', voiceKey, 'done, transcript:', transcript.substring(0, 80) + '...');
+              sock.close();
+              finishExchange(turnIndex);
+              waitDrain().then(function() {
+                console.log('[69FM]', voiceKey, 'audio drained');
+                resolve({ voice: voiceKey, text: transcript });
+              });
+              break;
+            case 'error':
+              clearTimeout(timer);
+              console.error('[69FM]', voiceKey, 'error:', msg.error);
+              sock.close();
+              finishExchange(turnIndex);
+              resolve({ voice: voiceKey, text: transcript || '[error]' });
+              break;
+          }
+        };
+
+        sock.onerror = function() {
+          clearTimeout(timer);
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[connection error]' });
+        };
+        sock.onclose = function() {
+          if (currentWs === sock) currentWs = null;
+        };
+      });
+    }
+
+    // ================================================================
+    // UI
+    // ================================================================
+    function updateProgress() {
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      var total = maxTurns - startFrom;
+      var done = currentIndex - startFrom;
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = Math.max(0, pct) + '%';
+      progressLabel.textContent = Math.max(0, done) + ' / ' + total + ' exchanges';
+    }
+
+    function updatePlayBtn() {
+      if (playing) {
+        playBtn.textContent = '\u23F9 Stop';
+        playBtn.classList.add('playing');
+        onAirEl.classList.add('visible');
+      } else {
+        var label = hasPass
+          ? (savedRecording ? 'Replay Recording' : 'Play Full Debate')
+          : 'Play Trailer';
+        playBtn.textContent = '\u25B6 ' + label;
+        playBtn.classList.remove('playing');
+        onAirEl.classList.remove('visible');
+      }
+    }
+
+    // ================================================================
+    // LIVE SHOW
+    // ================================================================
+    async function startShow() {
+      playing = true;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      history = [];
+      updatePlayBtn();
+
+      // Clear pre-show message and any previous transcript
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      setStatus('Starting show...');
+
+      for (var i = startFrom; i < maxTurns; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var turn = TURNS[i];
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+
+        var result = await runExchange(i);
+        history.push(result);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = maxTurns;
+        updateProgress();
+
+        // Save recording for free replay
+        if (hasPass && history.length > 0) {
+          // Rebuild full array: pad trailer slots so indices match TURNS
+          var fullExchanges = [];
+          for (var t = 0; t < TRAILER_LENGTH; t++) {
+            fullExchanges.push({ voice: TURNS[t].voice, text: '(trailer)' });
+          }
+          fullExchanges = fullExchanges.concat(history);
+          saveRecording(fullExchanges);
+          savedRecording = { date: new Date().toISOString(), exchanges: fullExchanges };
+        }
+
+        // Show paywall after trailer if not paid
+        if (!hasPass) {
+          paywallEl.style.display = 'block';
+        }
+      }
+
+      playing = false;
+      updatePlayBtn();
+      setStatus(playing ? '' : (hasPass ? '' : 'Trailer complete. Tune in for the full debate.'));
+    }
+
+    function stopShow() {
+      playing = false;
+      if (replayMode) { speechSynthesis.cancel(); replayMode = false; }
+      if (currentWs) { currentWs.close(); currentWs = null; }
+      flushAudio();
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    playBtn.addEventListener('click', function() {
+      if (playing) {
+        stopShow();
+      } else if (hasPass && savedRecording) {
+        ensureAudio();
+        replayShow();
+      } else {
+        ensureAudio();
+        startShow();
+      }
+    });
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    updatePlayBtn();
+    updateProgress();
+
+    // If recording exists, show replay info + new show option
+    if (hasPass && savedRecording) {
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) {
+        var replayDate = new Date(savedRecording.date).toLocaleDateString();
+        preShow.innerHTML = 'Recording from ' + replayDate + ' ready. Hit Replay (free, browser voice) or ' +
+          '<a href="#" id="newShowLink" style="color:var(--lime); text-decoration:underline; cursor:pointer;">generate a new live show</a> (uses xAI voices).';
+        preShow.querySelector('#newShowLink').addEventListener('click', function(e) {
+          e.preventDefault();
+          clearRecording();
+          updatePlayBtn();
+          preShow.textContent = 'Hit play. 5 Grok voices debate the OpenClaw saga — live, unscripted, every show unique.';
+        });
+      }
+    }
+  </script>
+</body>
+</html>

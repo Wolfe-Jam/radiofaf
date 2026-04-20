@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: #0a0a0a;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .freq {
+    font-size: 28px;
+    font-weight: 700;
+    color: #84FF00;
+    background: rgba(132, 255, 0, 0.08);
+    border: 1px solid rgba(132, 255, 0, 0.25);
+    padding: 6px 24px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+    margin-bottom: 32px;
+  }
+
+  .title {
+    font-size: 72px;
+    font-weight: 700;
+    color: #E91E9E;
+    text-align: center;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 26px;
+    color: #999;
+    margin-bottom: 48px;
+    letter-spacing: 0.02em;
+  }
+
+  .voices {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .voice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    color: #bbb;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .brand {
+    font-size: 22px;
+    font-weight: 700;
+    color: #E91E9E;
+    letter-spacing: 0.02em;
+  }
+
+  .brand .tune {
+    color: #84FF00;
+  }
+
+  /* Subtle gradient overlay at edges */
+  body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+  <div class="freq">69.0 FM</div>
+  <div class="title">"Who Owns Your<br>Context?"</div>
+  <div class="subtitle">5 voices. 5 stances. 0 consensus.</div>
+  <div class="voices">
+    <span class="voice"><span class="dot" style="background:#00D4D4"></span> Leo</span>
+    <span class="voice"><span class="dot" style="background:#D97706"></span> Sal</span>
+    <span class="voice"><span class="dot" style="background:#4285F4"></span> Ara</span>
+    <span class="voice"><span class="dot" style="background:#10A37F"></span> Rex</span>
+    <span class="voice"><span class="dot" style="background:#7C3AED"></span> Eve</span>
+  </div>
+  <div class="brand">RadioFAF <span class="tune">— Tune in.</span></div>
+</body>
+</html>

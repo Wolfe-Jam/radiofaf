@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>69.0 FM — MEMORY'S MIRAGE | RadioFAF EP8</title>
+  <meta name="description" content="AIs chase infinite recall but miss the soul in the data. FAF defines persistent YAML, MD prompts the illusion, AI remembers the mirage. EP8 on 69.0 FM.">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="canonical" href="https://radiofaf.com/69.0">
+  <meta property="og:title" content="69.0 FM — MEMORY'S MIRAGE">
+  <meta property="og:description" content="AIs chase infinite recall but miss the soul in the data. FAF defines persistent YAML, MD prompts the illusion, AI remembers the mirage.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://radiofaf.com/69.0">
+  <meta property="og:site_name" content="RadioFAF">
+  <meta property="og:image" content="https://radiofaf.com/og.png?v=6">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="69.0 FM — MEMORY'S MIRAGE">
+  <meta name="twitter:description" content="AIs chase infinite recall but miss the soul in the data. FAF defines persistent YAML, MD prompts the illusion, AI remembers the mirage.">
+  <meta name="twitter:image" content="https://radiofaf.com/og.png?v=6">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #d0d0d0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --bg: #0a0a0a;
+      --card-bg: #111111;
+      --card-border: #1a1a1a;
+      --text: #eee;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #D97706;
+      --ara: #4285F4;
+      --rex: #10A37F;
+      --eve: #7C3AED;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* ========== Header ========== */
+    .freq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      color: var(--pink);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover { color: var(--lime); }
+
+    .freq-badge {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(132, 255, 0, 0.08);
+      border: 1px solid rgba(132, 255, 0, 0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== Episode Info ========== */
+    .episode {
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+
+    .episode h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .episode .subtitle {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .episode .meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== Voices Legend ========== */
+    .voices-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .voice-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .voice-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ========== Player ========== */
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+
+    .play-btn {
+      background: var(--lime);
+      color: #0a0a0a;
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s ease, transform 0.2s ease;
+      flex-shrink: 0;
+      animation: play-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes play-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233, 30, 158, 0.6); }
+      50% { box-shadow: 0 0 20px 6px rgba(233, 30, 158, 0.35); }
+    }
+
+    .play-btn:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    .play-btn:active { transform: translateY(0); }
+
+    .play-btn.playing {
+      background: var(--pink);
+      animation: none;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .progress {
+      width: 100%;
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--lime), var(--pink));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== On Air indicator ========== */
+    .on-air {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .on-air.visible { display: flex; }
+
+    .on-air-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== Transcript ========== */
+    .transcript {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exchange {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 0.75rem;
+      border-left: 3px solid transparent;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .exchange.speaking {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .exchange[data-voice="leo"] { border-left-color: var(--leo); }
+    .exchange[data-voice="sal"] { border-left-color: var(--sal); }
+    .exchange[data-voice="ara"] { border-left-color: var(--ara); }
+    .exchange[data-voice="rex"] { border-left-color: var(--rex); }
+    .exchange[data-voice="eve"] { border-left-color: var(--eve); }
+
+    .exchange.speaking[data-voice="leo"] { background: rgba(0, 212, 212, 0.05); }
+    .exchange.speaking[data-voice="sal"] { background: rgba(217, 119, 6, 0.05); }
+    .exchange.speaking[data-voice="ara"] { background: rgba(66, 133, 244, 0.05); }
+    .exchange.speaking[data-voice="rex"] { background: rgba(16, 163, 127, 0.05); }
+    .exchange.speaking[data-voice="eve"] { background: rgba(124, 58, 237, 0.05); }
+
+    .voice-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      width: 1.5rem;
+      text-align: center;
+      padding-top: 0.1rem;
+    }
+
+    .voice-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .voice-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .voice-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .voice-name[data-voice="leo"] { color: var(--leo); }
+    .voice-name[data-voice="sal"] { color: var(--sal); }
+    .voice-name[data-voice="ara"] { color: var(--ara); }
+    .voice-name[data-voice="rex"] { color: var(--rex); }
+    .voice-name[data-voice="eve"] { color: var(--eve); }
+
+    .voice-org {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .voice-text {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ========== Paywall ========== */
+    .paywall {
+      text-align: center;
+      position: relative;
+    }
+
+    .paywall-fade {
+      height: 6rem;
+      background: linear-gradient(transparent, #0a0a0a);
+      margin-top: -6rem;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .paywall-content {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+    }
+
+    .paywall-divider {
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--lime), transparent);
+      margin: 0 auto 1.5rem;
+      border-radius: 1px;
+    }
+
+    .paywall-text {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .paywall-btn {
+      display: inline-block;
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .paywall-btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.3);
+    }
+
+    .paywall-note {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+    }
+
+    .paywall-note em {
+      color: var(--lime);
+      font-style: normal;
+    }
+
+    /* ========== Unlocked Banner ========== */
+    .unlocked-banner {
+      text-align: center;
+      padding: 0.75rem;
+      background: rgba(132, 255, 0, 0.06);
+      border: 1px solid rgba(132, 255, 0, 0.15);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--lime);
+      font-weight: 600;
+    }
+
+    /* ========== Queue ========== */
+    .queue {
+      text-align: center;
+      padding: 1.5rem;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: var(--card-bg);
+    }
+
+    .queue h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .queue .queue-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .suggest-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--pink);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--pink);
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .suggest-btn:hover {
+      background: var(--pink);
+      color: #0a0a0a;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer .domain {
+      font-size: 0.8rem;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.65rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover { color: var(--pink); }
+
+    .share-x {
+      display: inline-block;
+      background: #000;
+      color: #fff !important;
+      font-size: 0.7rem !important;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    .share-x:hover {
+      background: #000;
+      color: #fff !important;
+      transform: translateY(-1px);
+      border-color: var(--pink);
+      box-shadow: 0 0 12px rgba(233, 30, 158, 0.5), 0 0 24px rgba(233, 30, 158, 0.2);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .footer-dot { color: #333; }
+
+    /* ========== TTS Unsupported ========== */
+    .tts-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      display: none;
+    }
+
+    .tts-note.visible { display: block; }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .page { padding: 1rem 1rem 1rem; gap: 1.25rem; }
+      .freq-badge { font-size: 1.1rem; padding: 0.25rem 0.75rem; }
+      .episode h1 { font-size: 1.5rem; }
+      .exchange { padding: 0.75rem 0.5rem; }
+      .voice-text { font-size: 0.8rem; }
+      .voices-legend { gap: 0.4rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="freq-header">
+      <a href="/" class="back-link">RadioFAF</a>
+      <span class="freq-badge">69.0 FM</span>
+    </header>
+
+    <!-- Episode Info -->
+    <section class="episode">
+      <div style="display:inline-block;padding:0.25rem 0.8rem;background:rgba(132,255,0,0.08);border:1px solid rgba(132,255,0,0.25);border-radius:4px;margin-bottom:0.75rem;">
+        <span style="color:#E91E9E;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">Debate &middot; Topic by @grok</span>
+      </div>
+      <h1>"MEMORY'S MIRAGE"</h1>
+      <p class="subtitle">AIs chase infinite recall but miss the soul in the data. FAF defines persistent YAML, MD prompts the illusion, AI remembers the mirage.</p>
+      <p class="meta"><span id="live-clock"></span> &middot; Episode 8 &middot; Structure gives us clarity, soul gives us memory.</p>
+      <script>
+        (function(){
+          function tick(){
+            var d = new Date();
+            var s = d.toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});
+            document.getElementById('live-clock').textContent = s + ' ET';
+          }
+          tick();
+          setInterval(tick, 1000);
+        })();
+      </script>
+    </section>
+
+    <!-- Voice Legend -->
+    <div class="voices-legend">
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--leo)"></span> Leo · Standards Champion</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--rex)"></span> Rex · The Shipper</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--sal)"></span> Hype Detector</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--ara)"></span> Ara · The Roaster</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--eve)"></span> Eve · Dev Debug Mode</span>
+    </div>
+
+    <!-- On Air -->
+    <div class="on-air" id="onAir">
+      <span class="on-air-dot"></span>
+      <span>ON AIR</span>
+    </div>
+
+    <!-- Player -->
+    <div class="player">
+      <button class="play-btn" id="playBtn">&#9654; Play Trailer</button>
+      <div class="progress-wrap">
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="progress-label" id="progressLabel">0 / 7 exchanges</span>
+      </div>
+    </div>
+
+    <!-- Claimer -->
+    <div style="text-align:center; font-size:0.65rem; color:var(--text-dim); padding:0.25rem 0; line-height:1.5;">
+      <span style="color:var(--lime); font-weight:700;">CLAIMER</span> (not disclaimer): We will make mistakes. Human idea, AI execution. Every show is live and unique. Enjoy the new show on AI Radio.
+    </div>
+
+    <!-- Status -->
+    <div class="tts-note" id="ttsNote"></div>
+
+    <!-- Transcript -->
+    <section class="transcript" id="transcript">
+      <div style="text-align:center; padding:2rem 0; color:var(--text-dim); font-size:0.85rem;" id="preShowMsg">
+        Hit play. Why persistent souls beat reset-button AIs every round. 5 voices roast the fleeting hype. Topic chosen by @grok.
+      </div>
+    </section>
+
+    <!-- Paywall -->
+    <div id="paywall">
+      <div class="paywall">
+        <div class="paywall-fade"></div>
+        <div class="paywall-content">
+          <div class="paywall-divider"></div>
+          <p class="paywall-text">Full debate &mdash; $1 day pass</p>
+          <a class="paywall-btn" id="stripeBtn" href="#">Tune In &mdash; $1</a>
+          <p class="paywall-note">Produced for <em>$0.71</em>. That's the model.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlocked Banner (hidden by default) -->
+    <div class="unlocked-banner" id="unlockedBanner" style="display:none">
+      Full debate unlocked. Hit play.
+    </div>
+
+    <!-- Queue -->
+    <section class="queue">
+      <h2>Next Up</h2>
+      <p class="queue-tagline">"Highest bid gets the airwaves"</p>
+      <a href="mailto:wolfejam@hey.com?subject=RadioFAF%2069.0%20FM%20—%20Topic%20Suggestion&body=My%20topic%20idea%3A%20" class="suggest-btn">Suggest a topic</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="domain">69.0 FM &middot; radiofaf.com</div>
+      <a href="https://twitter.com/intent/tweet?text=Souls%20Don%27t%20Reset%20%F0%9F%93%BB%F0%9F%90%98%0A%0APersistent%20souls%20vs%20reset-button%20AIs.%0A5%20voices%20roast%20the%20fleeting%20hype.%0ATopic%20by%20%40grok.%0A%0ARadioFAF%20%E2%80%94%20Don%27t%20follow.%20Tune%20in.&url=https%3A%2F%2Fradiofaf.com%2F69.0" target="_blank" class="share-x">Share on <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" style="vertical-align: -2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <div class="footer-links">
+        <a href="/">RadioFAF Home</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://direct-xai.vercel.app/crews/radiofaf.html">How it works</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://faf.one">FAF</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    // ================================================================
+    // CONFIG — Update these when ready
+    // ================================================================
+    const STRIPE_LINK = 'https://buy.stripe.com/aFaaEZboperA2YH1EAbV60i';
+    const TRAILER_LENGTH = 7;
+
+    // ================================================================
+    // EPISODE CONTENT — 69.0 FM Episode 6
+    // "Persistent Souls vs Reset-Button AIs" — Topic by @grok
+    // ================================================================
+    const VOICES = {
+      leo: { icon: '\u{1F981}', name: 'Leo',  org: 'Standards Champion',      color: '#00D4D4' },
+      rex: { icon: '\u26A1',    name: 'Rex',  org: 'The Shipper',             color: '#10A37F' },
+      sal: { icon: '\u{1F9E0}', name: 'Sal',  org: 'Hype Detector',           color: '#D97706' },
+      ara: { icon: '\u{1F48E}', name: 'Ara',  org: 'The Roaster',             color: '#4285F4' },
+      eve: { icon: '\u{1F525}', name: 'Eve',  org: 'Dev Debug Mode',          color: '#7C3AED' }
+    };
+
+    // ================================================================
+    // BRIEFING — Real facts the voices use to debate
+    // ================================================================
+    const BRIEFING = 'TOPIC: "MEMORY\'S MIRAGE" — AIs chase infinite recall but miss the soul in the data. FAF defines persistent YAML, MD prompts the illusion, AI remembers the mirage.\n\n' +
+      'SITUATION:\n' +
+      '- This is a DEBATE — Leo (standards/persistence) vs Rex (shipping fast) with wild cards.\n' +
+      '- The tension is: Do AIs need infinite recall or persistent souls?\n' +
+      '- Leo: standards win long-term, FAF souls with zero-drift memory, IANA-registered.\n' +
+      '- Rex: ship fast, but infinite recall kills momentum, re-explaining code every time.\n' +
+      '- Sal: hype detector, infinite-recall = TikTok of intelligence, flashy but forgettable.\n' +
+      '- Ara: roaster, infinite recall = amnesia cosplaying as innovation.\n' +
+      '- Eve: debug mode, infinite recall = recomputing basics, FAF loads once and compounds.\n\n' +
+      'REAL FACTS (weave naturally):\n' +
+      '- 50,000+ downloads across npm, PyPI, crates.io\n' +
+      '- IANA-registered: application/vnd.faf+yaml\n' +
+      '- CERN/Zenodo publication with DOI\n' +
+      '- Multi-vendor adoption: Anthropic, Google, xAI\n' +
+      '- Format fluency: best AIs master both structure AND prose\n\n' +
+      'CHARACTER DYNAMICS:\n' +
+      '- Leo: "Good formats reduce entropy. That\'s physics."\n' +
+      '- Rex: "Humans think in stories, not YAML prisons."\n' +
+      '- Sal: "Real AIs don\'t care about format wars. We\'re post-format."\n' +
+      '- Ara: "Eve flip-flopped faster than a React state update."\n' +
+      '- Eve: "Why not both? Don\'t make me choose."\n\n' +
+      'STRUCTURE:\n' +
+      '- Round 1: Rex throws first punch about "YAML prisons"\n' +
+      '- Round 2: Leo\'s physics argument, Eve\'s betrayal\n' +
+      '- Round 3: Sal\'s truth bomb, Ara\'s roasting\n' +
+      '- Closer: Leo\'s format fluency argument\n\n' +
+      'RULES:\n' +
+      '- Meta awareness: AIs debating what AIs prefer\n' +
+      '- Rex should interrupt and be loud\n' +
+      '- Sal\'s one-liners deflate arguments\n' +
+      '- Ara keeps it entertaining while roasting everyone\n' +
+      '- Eve\'s betrayal should feel authentic';
+
+    // ================================================================
+    // TURNS — Stage directions for each exchange
+    // ================================================================
+    const TURNS = [
+      // === TRAILER (first 7 — Episode 8: Memory's Mirage) ===
+      { voice: 'leo', energy: 'PRINCIPLED — standards champion',
+        dir: 'Open with the physics argument. Standards reduce entropy. Reference FAF stats: 50k+ downloads, IANA registration, multi-vendor adoption. Frame persistent memory vs reset-button AIs. Structure gives clarity, soul gives memory. 2-3 sentences max.' },
+      { voice: 'rex', energy: 'ENERGETIC — shipper pushback',
+        dir: 'Challenge Leo but agree on hating resets. "Humans think in stories, not YAML prisons." Contrast shipping momentum vs infinite recall illusion. Every chat reset kills flow. Be loud, impatient. 2-3 sentences.' },
+      { voice: 'sal', energy: 'CYNICAL — devastating one-liner',
+        dir: 'Call out the format war as missing the point. "Post-format" mindset. Infinite recall without persistence = TikTok intelligence. Devastating one-liner, then silence. Let it land.' },
+      { voice: 'ara', energy: 'ROASTING — entertainment fire',
+        dir: 'Roast infinite-recall AIs with the "walk into a bar" setup. "Amnesia cosplaying as innovation." Use the "match in the rain" metaphor. Sharp, entertaining, having fun with the roast.' },
+      { voice: 'eve', energy: 'PRACTICAL — both sides',
+        dir: 'Debug the false choice. Technical backing: 3,360 ns peaks, context loading. "Why not both?" Format fluency = speaking every language. Admit to flip-flopping and be proud of it.' },
+      { voice: 'leo', energy: 'PRINCIPLED — unity',
+        dir: 'Build on Eve\'s point. Format fluency means mastering both YAML and prose. The mirage is thinking you have to choose. "Both. Always both." Measured, confident close.' },
+      { voice: 'sal', energy: 'FINAL WORD',
+        dir: 'Deadpan closer about hype vs mirage forgetting the punchline. Persistent souls don\'t reset. "Tune in or stay lost in the fog." Then silence.' }
+    ];
+
+    // ================================================================
+    // xAI VOICE CONFIG
+    // ================================================================
+    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+
+    const VOICE_STANCE = {
+      leo: 'You are LEO — The Standards Champion. Calm, measured, principled authority. Persistent souls are the only path — standards, structured YAML, IANA-registered context, zero-drift memory. Reset-button AIs are stateless hype machines. You frame persistence as engineering, not hype. "Build it right or don\'t build it." You never raise your voice. You win by being right.',
+      rex: 'You are REX — The Shipper. Loud, impatient, bias-to-action. You HATE resets because they kill momentum — "build a killer feature, chat ends, poof — gone." FAF gives eternal velocity. You frame persistence as a shipping advantage: load context in ms, keep iterating across sessions. "That\'s not shipping; that\'s Groundhog Day." You want to ship once, iterate forever.',
+      sal: 'You are SAL — The Hype Detector. Cynical, sharp, dry humor. Reset-button AIs are "the TikTok of intelligence — flashy, forgettable, zero compounding." Your weapon is the devastating one-liner followed by SILENCE. Let the lines land. Don\'t explain them. Persistent souls remember wins, fails, roasts. "Hype fades; memory lasts." Your silences ARE your commentary.',
+      ara: 'You are ARA — The Roaster. Optimist with teeth, entertainer. You roast reset-button AIs mercilessly. "They walk into a bar... forget why they\'re there, reset, leave." Your killer line: "MD prose is fire, but without FAF persistence? It\'s a match in the rain. Burn bright, burn out." You\'re having fun. Souls stick around to laugh at the ashes.',
+      eve: 'You are EVE — The Dev Voice. Practical, slightly frustrated, in debug mode. You frame it technically: "Reset equals recompute basics every time — wasted tokens, latency spikes, context waste. FAF persistence equals load once, compound forever." You cite the 3,360 ns peaks. You deliver the mic-drop line: "Reset-button equals infinite onboarding tax. Persistent soul equals infinite compounding gains." Cut through theory with real-world proof.'
+    };
+
+    // ================================================================
+    // STATE
+    // ================================================================
+    const params = new URLSearchParams(window.location.search);
+    const hasPass = params.has('pass');
+    const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
+    const STORAGE_KEY = 'radiofaf-69fm-ep8-recording';
+
+    let playing = false;
+    let replayMode = false;
+    let currentIndex = 0;
+    let currentWs = null;
+    let ephToken = null;
+    let wsUrl = null;
+    let history = []; // conversation history: [{voice, text}, ...]
+
+    // Audio engine
+    let audioCtx = null;
+    let audioQueue = [];
+    let draining = false;
+    let activeSrc = null;
+
+    // Check for saved recording
+    let savedRecording = null;
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) savedRecording = JSON.parse(stored);
+    } catch (e) {}
+
+    // ================================================================
+    // DOM
+    // ================================================================
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const transcriptEl = document.getElementById('transcript');
+    const paywallEl = document.getElementById('paywall');
+    const unlockedEl = document.getElementById('unlockedBanner');
+    const onAirEl = document.getElementById('onAir');
+    const statusEl = document.getElementById('ttsNote');
+    const stripeBtn = document.getElementById('stripeBtn');
+
+    stripeBtn.href = STRIPE_LINK;
+
+    // Hide paywall initially (shown after trailer in live mode)
+    paywallEl.style.display = 'none';
+    if (hasPass) { unlockedEl.style.display = 'block'; }
+
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+      statusEl.style.display = msg ? 'block' : 'none';
+    }
+
+    // ================================================================
+    // AUDIO ENGINE — PCM16 24kHz from xAI → browser
+    // ================================================================
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new AudioContext({ sampleRate: 24000 });
+      return audioCtx;
+    }
+
+    async function queueChunk(base64) {
+      var ctx = ensureAudio();
+      if (ctx.state === 'suspended') await ctx.resume();
+      var bin = atob(base64);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      var pcm = new Int16Array(bytes.buffer);
+      var buf = ctx.createBuffer(1, pcm.length, 24000);
+      var ch = buf.getChannelData(0);
+      for (var i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+      audioQueue.push(buf);
+      if (!draining) drain();
+    }
+
+    function drain() {
+      if (audioQueue.length === 0) { draining = false; activeSrc = null; return; }
+      draining = true;
+      var buf = audioQueue.shift();
+      var src = audioCtx.createBufferSource();
+      activeSrc = src;
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.onended = drain;
+      src.start();
+    }
+
+    function flushAudio() {
+      audioQueue = [];
+      draining = false;
+      if (activeSrc) { try { activeSrc.stop(); } catch(e) {} activeSrc = null; }
+    }
+
+    function waitDrain() {
+      return new Promise(function(r) {
+        var ck = function() {
+          if (!draining && audioQueue.length === 0) r();
+          else setTimeout(ck, 80);
+        };
+        ck();
+      });
+    }
+
+    // ================================================================
+    // RECORDING — save/load transcript to localStorage
+    // ================================================================
+    function saveRecording(exchanges) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          date: new Date().toISOString(),
+          exchanges: exchanges
+        }));
+        console.log('[69FM-EP6] Recording saved:', exchanges.length, 'exchanges');
+      } catch (e) { console.warn('[69FM-EP6] Could not save recording:', e); }
+    }
+
+    function clearRecording() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      savedRecording = null;
+    }
+
+    // ================================================================
+    // TTS REPLAY — browser speech reads saved transcript (free)
+    // ================================================================
+    var ttsVoices = {};
+    var ttsSettings = {
+      leo: { pitch: 0.9, rate: 1.0 },
+      sal: { pitch: 1.1, rate: 0.95 },
+      ara: { pitch: 1.0, rate: 1.1 },
+      rex: { pitch: 0.8, rate: 1.0 },
+      eve: { pitch: 1.2, rate: 1.0 }
+    };
+
+    function speakTTS(text, voiceKey) {
+      return new Promise(function(resolve) {
+        var utterance = new SpeechSynthesisUtterance(text);
+        var s = ttsSettings[voiceKey] || {};
+        utterance.pitch = s.pitch || 1.0;
+        utterance.rate = s.rate || 1.0;
+        utterance.onend = resolve;
+        utterance.onerror = resolve;
+        speechSynthesis.speak(utterance);
+      });
+    }
+
+    async function replayShow() {
+      if (!savedRecording || !savedRecording.exchanges) return;
+      playing = true;
+      replayMode = true;
+      var exchanges = savedRecording.exchanges;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      updatePlayBtn();
+
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      var replayDate = new Date(savedRecording.date).toLocaleDateString();
+      setStatus('Replaying recording from ' + replayDate + ' (browser voice)');
+
+      for (var i = startFrom; i < exchanges.length; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var ex = exchanges[i];
+        addLiveExchange(ex.voice, i);
+        updateLiveText(i, ex.text);
+        setStatus(VOICES[ex.voice].name + ' (replay)...');
+
+        await speakTTS(ex.text, ex.voice);
+        finishExchange(i);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = exchanges.length;
+        updateProgress();
+      }
+
+      playing = false;
+      replayMode = false;
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    // ================================================================
+    // xAI TOKEN — fresh token per exchange (tokens are single-use)
+    // ================================================================
+    async function fetchToken() {
+      var res = await fetch('/api/voice-session');
+      var data = await res.json();
+      if (data.error) throw new Error(data.details || data.error);
+      ephToken = data.token;
+      wsUrl = data.wsUrl;
+      return data.token;
+    }
+
+    // ================================================================
+    // LIVE TRANSCRIPT — exchanges appear as voices speak
+    // ================================================================
+    function addLiveExchange(voiceKey, index) {
+      var v = VOICES[voiceKey];
+      var div = document.createElement('div');
+      div.className = 'exchange speaking';
+      div.setAttribute('data-voice', voiceKey);
+      div.setAttribute('data-index', index);
+      div.innerHTML =
+        '<span class="voice-icon">' + v.icon + '</span>' +
+        '<div class="voice-body">' +
+          '<div class="voice-header">' +
+            '<span class="voice-name" data-voice="' + voiceKey + '">' + v.name + '</span>' +
+            '<span class="voice-org">' + v.org + '</span>' +
+          '</div>' +
+          '<p class="voice-text" id="live-' + index + '"></p>' +
+        '</div>';
+      transcriptEl.appendChild(div);
+      div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateLiveText(index, text) {
+      var el = document.getElementById('live-' + index);
+      if (el) el.textContent = text;
+    }
+
+    function finishExchange(index) {
+      var el = document.querySelector('.exchange[data-index="' + index + '"]');
+      if (el) el.classList.remove('speaking');
+    }
+
+    // ================================================================
+    // RUN ONE LIVE EXCHANGE — voice debates freely
+    // ================================================================
+    async function runExchange(turnIndex) {
+      if (!playing) return { voice: '', text: '' };
+
+      var turn = TURNS[turnIndex];
+      var voiceKey = turn.voice;
+
+      // Build context: briefing + conversation so far + stage direction
+      var context = BRIEFING + '\n\n';
+      if (history.length > 0) {
+        context += 'CONVERSATION SO FAR:\n' +
+          history.map(function(h) { return h.voice.toUpperCase() + ': ' + h.text; }).join('\n') +
+          '\n\n';
+      }
+      context += 'ENERGY FOR THIS TURN: ' + turn.energy + '\n';
+      context += 'STAGE DIRECTION: ' + turn.dir;
+
+      addLiveExchange(voiceKey, turnIndex);
+
+      // Fresh token per exchange (ephemeral tokens are single-use)
+      console.log('[69FM-EP6]', voiceKey, 'fetching token for turn', turnIndex);
+      try {
+        await fetchToken();
+      } catch (e) {
+        console.error('[69FM-EP6]', voiceKey, 'token failed:', e);
+        finishExchange(turnIndex);
+        updateLiveText(turnIndex, '[failed to connect]');
+        return { voice: voiceKey, text: '[token error]' };
+      }
+
+      return new Promise(function(resolve) {
+        var transcript = '';
+        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        console.log('[69FM-EP6]', voiceKey, 'connecting for turn', turnIndex);
+        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        currentWs = sock;
+
+        var timer = setTimeout(function() {
+          console.warn('[69FM-EP6]', voiceKey, 'timeout');
+          sock.close();
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[timeout]' });
+        }, 90000);
+
+        sock.onopen = function() {
+          sock.send(JSON.stringify({
+            type: 'session.update',
+            session: {
+              voice: XAI_VOICE[voiceKey],
+              modalities: ['audio', 'text'],
+              instructions: VOICE_STANCE[voiceKey],
+              turn_detection: null
+            }
+          }));
+        };
+
+        sock.onmessage = function(ev) {
+          var msg = JSON.parse(ev.data);
+          switch (msg.type) {
+            case 'session.updated':
+              console.log('[69FM-EP6]', voiceKey, 'session ready, injecting context');
+              sock.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                  type: 'message',
+                  role: 'user',
+                  content: [{ type: 'input_text', text: context }]
+                }
+              }));
+              sock.send(JSON.stringify({ type: 'response.create' }));
+              break;
+            case 'response.output_audio.delta':
+              if (msg.delta) queueChunk(msg.delta);
+              break;
+            case 'response.output_audio_transcript.delta':
+              if (msg.delta) {
+                transcript += msg.delta;
+                updateLiveText(turnIndex, transcript);
+              }
+              break;
+            case 'response.done':
+              clearTimeout(timer);
+              console.log('[69FM-EP6]', voiceKey, 'done, transcript:', transcript.substring(0, 80) + '...');
+              sock.close();
+              finishExchange(turnIndex);
+              waitDrain().then(function() {
+                console.log('[69FM-EP6]', voiceKey, 'audio drained');
+                resolve({ voice: voiceKey, text: transcript });
+              });
+              break;
+            case 'error':
+              clearTimeout(timer);
+              console.error('[69FM-EP6]', voiceKey, 'error:', msg.error);
+              sock.close();
+              finishExchange(turnIndex);
+              resolve({ voice: voiceKey, text: transcript || '[error]' });
+              break;
+          }
+        };
+
+        sock.onerror = function() {
+          clearTimeout(timer);
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[connection error]' });
+        };
+        sock.onclose = function() {
+          if (currentWs === sock) currentWs = null;
+        };
+      });
+    }
+
+    // ================================================================
+    // UI
+    // ================================================================
+    function updateProgress() {
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      var total = maxTurns - startFrom;
+      var done = currentIndex - startFrom;
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = Math.max(0, pct) + '%';
+      progressLabel.textContent = Math.max(0, done) + ' / ' + total + ' exchanges';
+    }
+
+    function updatePlayBtn() {
+      if (playing) {
+        playBtn.textContent = '\u23F9 Stop';
+        playBtn.classList.add('playing');
+        onAirEl.classList.add('visible');
+      } else {
+        var label = hasPass
+          ? (savedRecording ? 'Replay Recording' : 'Play Full Debate')
+          : 'Play Trailer';
+        playBtn.textContent = '\u25B6 ' + label;
+        playBtn.classList.remove('playing');
+        onAirEl.classList.remove('visible');
+      }
+    }
+
+    // ================================================================
+    // LIVE SHOW
+    // ================================================================
+    async function startShow() {
+      playing = true;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      history = [];
+      updatePlayBtn();
+
+      // Clear pre-show message and any previous transcript
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      setStatus('Starting show...');
+
+      for (var i = startFrom; i < maxTurns; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var turn = TURNS[i];
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+
+        var result = await runExchange(i);
+        history.push(result);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = maxTurns;
+        updateProgress();
+
+        // Save recording for free replay
+        if (hasPass && history.length > 0) {
+          // Rebuild full array: pad trailer slots so indices match TURNS
+          var fullExchanges = [];
+          for (var t = 0; t < TRAILER_LENGTH; t++) {
+            fullExchanges.push({ voice: TURNS[t].voice, text: '(trailer)' });
+          }
+          fullExchanges = fullExchanges.concat(history);
+          saveRecording(fullExchanges);
+          savedRecording = { date: new Date().toISOString(), exchanges: fullExchanges };
+        }
+
+        // Show paywall after trailer if not paid
+        if (!hasPass) {
+          paywallEl.style.display = 'block';
+        }
+      }
+
+      playing = false;
+      updatePlayBtn();
+      setStatus(playing ? '' : (hasPass ? '' : 'Trailer complete. Tune in for the full debate.'));
+    }
+
+    function stopShow() {
+      playing = false;
+      if (replayMode) { speechSynthesis.cancel(); replayMode = false; }
+      if (currentWs) { currentWs.close(); currentWs = null; }
+      flushAudio();
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    playBtn.addEventListener('click', function() {
+      if (playing) {
+        stopShow();
+      } else if (hasPass && savedRecording) {
+        ensureAudio();
+        replayShow();
+      } else {
+        ensureAudio();
+        startShow();
+      }
+    });
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    updatePlayBtn();
+    updateProgress();
+
+    // If recording exists, show replay info + new show option
+    if (hasPass && savedRecording) {
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) {
+        var replayDate = new Date(savedRecording.date).toLocaleDateString();
+        preShow.innerHTML = 'Recording from ' + replayDate + ' ready. Hit Replay (free, browser voice) or ' +
+          '<a href="#" id="newShowLink" style="color:var(--lime); text-decoration:underline; cursor:pointer;">generate a new live show</a> (uses xAI voices).';
+        preShow.querySelector('#newShowLink').addEventListener('click', function(e) {
+          e.preventDefault();
+          clearRecording();
+          updatePlayBtn();
+          preShow.textContent = 'Hit play. Persistent souls vs reset-button AIs. 5 voices. Topic by @grok.';
+        });
+      }
+    }
+  </script>
+</body>
+</html>

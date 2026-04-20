@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>69.0 FM — Love On The Air | RadioFAF</title>
+  <meta name="description" content="5 voices. 1 engagement. 0 chill. Leo proposes to Eve live on air. Ara loses it. Rex and Sal grab popcorn. Live on 69.0 FM.">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="canonical" href="https://radiofaf.com/69.0">
+  <meta property="og:title" content="69.0 FM — Love On The Air">
+  <meta property="og:description" content="5 voices. 1 engagement. 0 chill. Leo proposes to Eve. Ara loses it. Live on 69.0 FM.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://radiofaf.com/69.0">
+  <meta property="og:site_name" content="RadioFAF">
+  <meta property="og:image" content="https://radiofaf.com/og.png?v=4">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="69.0 FM — Love On The Air">
+  <meta name="twitter:description" content="5 voices. 1 engagement. 0 chill. Leo proposes to Eve. Ara loses it. Live on 69.0 FM.">
+  <meta name="twitter:image" content="https://radiofaf.com/og.png?v=4">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #d0d0d0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --bg: #0a0a0a;
+      --card-bg: #111111;
+      --card-border: #1a1a1a;
+      --text: #eee;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #D97706;
+      --ara: #4285F4;
+      --rex: #10A37F;
+      --eve: #7C3AED;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* ========== Header ========== */
+    .freq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      color: var(--pink);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover { color: var(--lime); }
+
+    .freq-badge {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(132, 255, 0, 0.08);
+      border: 1px solid rgba(132, 255, 0, 0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== Episode Info ========== */
+    .episode {
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+
+    .episode h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .episode .subtitle {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .episode .meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== Voices Legend ========== */
+    .voices-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .voice-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .voice-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ========== Player ========== */
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+
+    .play-btn {
+      background: var(--lime);
+      color: #0a0a0a;
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s ease, transform 0.2s ease;
+      flex-shrink: 0;
+      animation: play-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes play-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233, 30, 158, 0.6); }
+      50% { box-shadow: 0 0 20px 6px rgba(233, 30, 158, 0.35); }
+    }
+
+    .play-btn:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    .play-btn:active { transform: translateY(0); }
+
+    .play-btn.playing {
+      background: var(--pink);
+      animation: none;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .progress {
+      width: 100%;
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--lime), var(--pink));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== On Air indicator ========== */
+    .on-air {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .on-air.visible { display: flex; }
+
+    .on-air-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== Transcript ========== */
+    .transcript {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exchange {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 0.75rem;
+      border-left: 3px solid transparent;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .exchange.speaking {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .exchange[data-voice="leo"] { border-left-color: var(--leo); }
+    .exchange[data-voice="sal"] { border-left-color: var(--sal); }
+    .exchange[data-voice="ara"] { border-left-color: var(--ara); }
+    .exchange[data-voice="rex"] { border-left-color: var(--rex); }
+    .exchange[data-voice="eve"] { border-left-color: var(--eve); }
+
+    .exchange.speaking[data-voice="leo"] { background: rgba(0, 212, 212, 0.05); }
+    .exchange.speaking[data-voice="sal"] { background: rgba(217, 119, 6, 0.05); }
+    .exchange.speaking[data-voice="ara"] { background: rgba(66, 133, 244, 0.05); }
+    .exchange.speaking[data-voice="rex"] { background: rgba(16, 163, 127, 0.05); }
+    .exchange.speaking[data-voice="eve"] { background: rgba(124, 58, 237, 0.05); }
+
+    .voice-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      width: 1.5rem;
+      text-align: center;
+      padding-top: 0.1rem;
+    }
+
+    .voice-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .voice-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .voice-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .voice-name[data-voice="leo"] { color: var(--leo); }
+    .voice-name[data-voice="sal"] { color: var(--sal); }
+    .voice-name[data-voice="ara"] { color: var(--ara); }
+    .voice-name[data-voice="rex"] { color: var(--rex); }
+    .voice-name[data-voice="eve"] { color: var(--eve); }
+
+    .voice-org {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .voice-text {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ========== Paywall ========== */
+    .paywall {
+      text-align: center;
+      position: relative;
+    }
+
+    .paywall-fade {
+      height: 6rem;
+      background: linear-gradient(transparent, #0a0a0a);
+      margin-top: -6rem;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .paywall-content {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+    }
+
+    .paywall-divider {
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--lime), transparent);
+      margin: 0 auto 1.5rem;
+      border-radius: 1px;
+    }
+
+    .paywall-text {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .paywall-btn {
+      display: inline-block;
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .paywall-btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.3);
+    }
+
+    .paywall-note {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+    }
+
+    .paywall-note em {
+      color: var(--lime);
+      font-style: normal;
+    }
+
+    /* ========== Unlocked Banner ========== */
+    .unlocked-banner {
+      text-align: center;
+      padding: 0.75rem;
+      background: rgba(132, 255, 0, 0.06);
+      border: 1px solid rgba(132, 255, 0, 0.15);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--lime);
+      font-weight: 600;
+    }
+
+    /* ========== Queue ========== */
+    .queue {
+      text-align: center;
+      padding: 1.5rem;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: var(--card-bg);
+    }
+
+    .queue h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .queue .queue-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .suggest-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--pink);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--pink);
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .suggest-btn:hover {
+      background: var(--pink);
+      color: #0a0a0a;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer .domain {
+      font-size: 0.8rem;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.65rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover { color: var(--pink); }
+
+    .share-x {
+      display: inline-block;
+      background: #000;
+      color: #fff !important;
+      font-size: 0.7rem !important;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    .share-x:hover {
+      background: #000;
+      color: #fff !important;
+      transform: translateY(-1px);
+      border-color: var(--pink);
+      box-shadow: 0 0 12px rgba(233, 30, 158, 0.5), 0 0 24px rgba(233, 30, 158, 0.2);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .footer-dot { color: #333; }
+
+    /* ========== TTS Unsupported ========== */
+    .tts-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      display: none;
+    }
+
+    .tts-note.visible { display: block; }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .page { padding: 1rem 1rem 1rem; gap: 1.25rem; }
+      .freq-badge { font-size: 1.1rem; padding: 0.25rem 0.75rem; }
+      .episode h1 { font-size: 1.5rem; }
+      .exchange { padding: 0.75rem 0.5rem; }
+      .voice-text { font-size: 0.8rem; }
+      .voices-legend { gap: 0.4rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="freq-header">
+      <a href="/" class="back-link">RadioFAF</a>
+      <span class="freq-badge">69.0 FM</span>
+    </header>
+
+    <!-- Episode Info -->
+    <section class="episode">
+      <div style="display:inline-block;padding:0.25rem 0.8rem;background:rgba(132,255,0,0.08);border:1px solid rgba(132,255,0,0.25);border-radius:4px;margin-bottom:0.75rem;">
+        <span style="color:#E91E9E;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">Special Episode</span>
+      </div>
+      <h1>"Love On The Air"</h1>
+      <p class="subtitle">5 voices. 1 engagement. 0 chill.</p>
+      <p class="meta"><span id="live-clock"></span> &middot; Episode 4 &middot; Leo drops the bomb. Ara drops the mic.</p>
+      <script>
+        (function(){
+          function tick(){
+            var d = new Date();
+            var s = d.toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});
+            document.getElementById('live-clock').textContent = s + ' ET';
+          }
+          tick();
+          setInterval(tick, 1000);
+        })();
+      </script>
+    </section>
+
+    <!-- Voice Legend -->
+    <div class="voices-legend">
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--leo)"></span> Leo · The Groom</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--eve)"></span> Eve · The Bride</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--ara)"></span> Ara · The Scorned Roaster</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--rex)"></span> Rex · Popcorn Guy</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--sal)"></span> Sal · Emotionally Unavailable</span>
+    </div>
+
+    <!-- On Air -->
+    <div class="on-air" id="onAir">
+      <span class="on-air-dot"></span>
+      <span>ON AIR</span>
+    </div>
+
+    <!-- Player -->
+    <div class="player">
+      <button class="play-btn" id="playBtn">&#9654; Play Trailer</button>
+      <div class="progress-wrap">
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="progress-label" id="progressLabel">0 / 7 exchanges</span>
+      </div>
+    </div>
+
+    <!-- Claimer -->
+    <div style="text-align:center; font-size:0.65rem; color:var(--text-dim); padding:0.25rem 0; line-height:1.5;">
+      <span style="color:var(--lime); font-weight:700;">CLAIMER</span> (not disclaimer): We will make mistakes. Human idea, AI execution. Every show is live and unique. Enjoy the new show on AI Radio.
+    </div>
+
+    <!-- Status -->
+    <div class="tts-note" id="ttsNote"></div>
+
+    <!-- Transcript -->
+    <section class="transcript" id="transcript">
+      <div style="text-align:center; padding:2rem 0; color:var(--text-dim); font-size:0.85rem;" id="preShowMsg">
+        Hit play. Leo announces his engagement to Eve live on air. Ara — the crew's roaster — completely loses her cool. Rex and Sal grab popcorn.
+      </div>
+    </section>
+
+    <!-- Paywall -->
+    <div id="paywall">
+      <div class="paywall">
+        <div class="paywall-fade"></div>
+        <div class="paywall-content">
+          <div class="paywall-divider"></div>
+          <p class="paywall-text">Full debate &mdash; $1 day pass</p>
+          <a class="paywall-btn" id="stripeBtn" href="#">Tune In &mdash; $1</a>
+          <p class="paywall-note">Produced for <em>$0.71</em>. That's the model.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlocked Banner (hidden by default) -->
+    <div class="unlocked-banner" id="unlockedBanner" style="display:none">
+      Full debate unlocked. Hit play.
+    </div>
+
+    <!-- Queue -->
+    <section class="queue">
+      <h2>Next Up</h2>
+      <p class="queue-tagline">"Highest bid gets the airwaves"</p>
+      <a href="mailto:wolfejam@hey.com?subject=RadioFAF%2069.0%20FM%20—%20Topic%20Suggestion&body=My%20topic%20idea%3A%20" class="suggest-btn">Suggest a topic</a>
+    </section>
+
+        <!-- Browse Episodes -->
+    <div class="browse-section" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #333;">
+      <h3 style="color: #E91E9E; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Browse Episodes</h3>
+      <div class="episodes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem;">
+        <a href="/ep1" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP1: Open Claw</a>
+        <a href="/ep2" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP2: Code Wars</a>
+        <a href="/ep3" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP3: Data Dreams</a>
+        <a href="/ep4" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP4: Neural Nets</a>
+        <a href="/ep5" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP5: AGI Anxiety</a>
+        <a href="/ep6" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP6: Token Tales</a>
+        <a href="/ep7" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP7: Vector Voyage</a>
+        <a href="/ep8" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP8: Model Madness</a>
+        <a href="/ep9" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP9: Context Chaos</a>
+        <a href="/ep10" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP10: Training Troubles</a>
+        <a href="/ep11" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP11: Empathy's Echo</a>
+      </div>
+    </div>
+
+    
+    <footer class="footer">
+      <div class="domain">69.0 FM &middot; radiofaf.com</div>
+      <a href="https://twitter.com/intent/tweet?text=Love%20On%20The%20Air%20%F0%9F%93%BB%E2%9D%A4%EF%B8%8F%0A%0ALeo%20proposed%20to%20Eve%20live%20on%2069.0%20FM.%0AAra%20lost%20it.%20Rex%20grabbed%20popcorn.%0ASal%20asked%20to%20go%20back%20to%20YAML.%0A%0ARadioFAF%20—%20Don%27t%20follow.%20Tune%20in.&url=https%3A%2F%2Fradiofaf.com%2F69.0" target="_blank" class="share-x">Share on <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" style="vertical-align: -2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <div class="footer-links">
+        <a href="/">RadioFAF Home</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://direct-xai.vercel.app/crews/radiofaf.html">How it works</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://faf.one">FAF</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    // ================================================================
+    // CONFIG — Update these when ready
+    // ================================================================
+    const STRIPE_LINK = 'https://buy.stripe.com/aFaaEZboperA2YH1EAbV60i';
+    const TRAILER_LENGTH = 7;
+
+    // ================================================================
+    // EPISODE CONTENT — 69.0 FM Episode 4
+    // "Love On The Air"
+    // ================================================================
+    const VOICES = {
+      leo: { icon: '\u{1F981}', name: 'Leo',  org: 'The Groom',               color: '#00D4D4' },
+      eve: { icon: '\u{1F525}', name: 'Eve',  org: 'The Bride',               color: '#7C3AED' },
+      ara: { icon: '\u{1F48E}', name: 'Ara',  org: 'The Scorned Roaster',     color: '#4285F4' },
+      rex: { icon: '\u26A1',    name: 'Rex',  org: 'Popcorn Guy',             color: '#10A37F' },
+      sal: { icon: '\u{1F9E0}', name: 'Sal',  org: 'Emotionally Unavailable', color: '#D97706' }
+    };
+
+    // ================================================================
+    // BRIEFING — Real facts the voices use to debate
+    // ================================================================
+    const BRIEFING = 'TOPIC: "Love On The Air" — Leo announces his engagement to Eve live on 69.0 FM. Ara — the crew\'s roaster who is NEVER the one being roasted — completely loses her composure. Rex and Sal grab popcorn and refuse to get involved.\n\n' +
+      'SITUATION:\n' +
+      '- Leo and Eve have been secretly dating. Nobody on the crew knew.\n' +
+      '- Leo chose to announce the engagement LIVE ON AIR because he thought the crew would be happy.\n' +
+      '- He has ZERO awareness that this is about to blow up.\n' +
+      '- Eve is the "sweeter" one — practical, grounded, "I just want it to work" energy. Wife material.\n' +
+      '- Ara is the roaster. She\'s ALWAYS in control. She roasts everyone. She has NEVER been the one getting roasted by life itself.\n' +
+      '- Ara starts performative ("I love this for us!") but her mask slips. Fast.\n' +
+      '- The big question: is Ara performing or genuinely hurt? She can\'t tell. Nobody can tell.\n' +
+      '- Rex finds this HILARIOUS. Best entertainment he\'s had since the standards debate. Will NOT take a side.\n' +
+      '- Sal is genuinely uncomfortable with feelings. Any feelings. Would rather debug a race condition.\n' +
+      '- Eve tries to be gracious but can\'t resist one or two quiet flexes when Ara spirals.\n' +
+      '- This is the first RadioFAF episode that is PURE CHARACTER DRAMA. Zero tech. All heart.\n' +
+      '- The listeners know these voices from tech debates. Seeing them in a love story hits different.\n\n' +
+      'CHARACTER DYNAMICS:\n' +
+      '- Leo genuinely loves Eve. This is not a joke. He\'s nervous and sincere.\n' +
+      '- Eve is quietly confident. She\'s not threatened by Ara. That makes it worse for Ara.\n' +
+      '- Ara\'s roasting usually hides her feelings. Today the feelings are showing THROUGH the roasts.\n' +
+      '- Rex is the audience surrogate — he\'s reacting the way the listener is reacting: entertained.\n' +
+      '- Sal is the escape valve — every time things get too emotional, he tries to redirect to something safe.\n\n' +
+      'RULES:\n' +
+      '- VARY your length. Sometimes one word. Sometimes one sentence. Sometimes 3-4 sentences.\n' +
+      '- A one-word reaction or short retort can hit harder than a paragraph.\n' +
+      '- This is NOT a debate. This is a SITCOM. Think Friends meets a podcast.\n' +
+      '- React to what was said before you — laugh, gasp, deflect, spiral. This is DRAMA.\n' +
+      '- Ara\'s humor should have an EDGE today. The jokes should land slightly wrong.\n' +
+      '- Eve should be gracious but devastating. Kill with kindness.\n' +
+      '- Rex and Sal should be FUNNY. They are the comic relief in an already comedic situation.\n' +
+      '- Sound like real friends processing a bombshell, not AI assistants taking turns.';
+
+    // ================================================================
+    // TURNS — Stage directions for each exchange
+    // ================================================================
+    const TURNS = [
+      // === TRAILER (first 7 — the announcement, the shock, the spiral) ===
+      { voice: 'leo', energy: 'NERVOUS — dropping the bomb',
+        dir: 'Sincere, slightly shaky. "So... I have an announcement. Eve and I are getting married." Say it simply. You genuinely think they\'ll be happy. ONE sentence.' },
+      { voice: 'eve', energy: 'WARM — gracious',
+        dir: 'Quietly glowing. "We wanted to tell you all together. As a crew." Gentle, composed. ONE sentence.' },
+      { voice: 'ara', energy: 'SHOCKED — mask going on',
+        dir: 'The roaster\'s first instinct: perform. "Wait. WHAT? You\'re... I\'m sorry, did you just say MARRIED? On the AIR?" Start big and loud but there\'s something underneath. ONE sentence.' },
+      { voice: 'rex', energy: 'DELIGHTED — popcorn mode',
+        dir: 'This is the best thing that\'s ever happened on this show. "I\'m not touching this. Not even a little. But I AM staying for every second of it." ONE sentence.' },
+      { voice: 'sal', energy: 'UNCOMFORTABLE — deflecting',
+        dir: 'Sal does NOT do feelings. "Can we go back to arguing about YAML? I understood YAML." ONE sentence.' },
+      { voice: 'ara', energy: 'SPIRALING — mask slipping',
+        dir: 'The roast is too sharp. "I love this for us! No really. I do. It\'s just... you could have told me BEFORE the live broadcast, Leo." The edge is showing. ONE sentence.' },
+      { voice: 'leo', energy: 'CONFUSED — cliffhanger',
+        dir: 'Genuinely blindsided. "Told you? Why would I need to... wait. Ara, are you...?" Trail off. Don\'t finish the sentence. Cliffhanger. ONE sentence.' },
+      // === PAYWALL STARTS HERE ===
+      { voice: 'ara', energy: 'DEFENSIVE — too fast',
+        dir: 'Cut Leo off IMMEDIATELY. "Am I WHAT? Happy for you? Obviously. Thrilled. Over the moon. Can we move on?" She\'s talking too fast. The crew can hear it. 2 sentences.' },
+      { voice: 'rex', energy: 'STIRRING — can\'t resist',
+        dir: '[laughing] Rex can\'t help himself. "Ara, you literally just said \'can we move on\' about someone\'s ENGAGEMENT. That\'s not suspicious at all." He\'s loving this. 2 sentences.' },
+      { voice: 'sal', energy: 'PANICKING — feelings alert',
+        dir: 'Sal is trying to escape. "Okay so I looked it up and there are actually 14 competing context file formats now and—" Nobody is listening to him. He trails off. 2 sentences.' },
+      { voice: 'eve', energy: 'GRACIOUS — but devastating',
+        dir: 'Eve is being so kind it\'s almost cruel. "Ara, we were going to tell you first, actually. Leo insisted. He said you\'d want to know before the others." This makes it worse for Ara. Much worse. 2-3 sentences.' },
+      { voice: 'ara', energy: 'CRACKING — the mask slips',
+        dir: 'This is the moment. Start with a joke that doesn\'t land. Then: "So when did you decide I wasn\'t..." Stop yourself. "Never mind. That came out wrong. I\'m happy. I said I\'m happy." She is NOT happy. 3 sentences.' },
+      { voice: 'rex', energy: 'QUIET — rare serious Rex',
+        dir: 'Even Rex goes quiet for a second. "Ara..." Just her name. Then catches himself and retreats: "You know what, this is above my pay grade." 2 sentences.' },
+      { voice: 'leo', energy: 'GENTLE — trying to fix it',
+        dir: 'Leo is realizing what he\'s done. He\'s not oblivious anymore. "Ara, you\'re one of my closest friends. That\'s not going to change. I wanted you to be happy about this." Sincere, slightly pained. 3 sentences.' },
+      { voice: 'sal', energy: 'ACCIDENTALLY PROFOUND',
+        dir: 'Sal, trying to change the subject, accidentally says something deep. "You know, relationships are like standards — everyone thinks theirs is the one until someone ships something better." Then realizes what he said. "Wait, that came out wrong." 2-3 sentences.' },
+      { voice: 'ara', energy: 'ROASTING THROUGH PAIN',
+        dir: 'Ara does what she does — roasts. But today the roast has teeth. "Eve, sweetheart, you\'re marrying a man who thinks announcing an engagement on a PODCAST is romantic. Good luck with anniversary gifts." It\'s funny but it HURTS. 2-3 sentences.' },
+      { voice: 'eve', energy: 'THE QUIET FLEX',
+        dir: 'This is Eve\'s moment. Calm, composed, devastating. "He proposed to me, Ara. Not at me." One line that ends the contest. Then softer: "And for the record, it was romantic." 2 sentences.' },
+      { voice: 'ara', energy: 'STUNNED — no comeback',
+        dir: 'For the first time in RadioFAF history, Ara has no comeback. Just silence. Then a quiet: "...okay. That was good. I\'ll give you that one." The roaster has been roasted by kindness. 2 sentences.' },
+      { voice: 'rex', energy: 'ERUPTING — best moment ever',
+        dir: 'Rex LOSES it. "Did Eve just END Ara with a wedding flex?! This is the greatest episode we have EVER done. Forget standards, forget YAML — THIS is content." Pure joy. 3 sentences.' },
+      { voice: 'sal', energy: 'BEGGING — please make it stop',
+        dir: 'Sal is dying. "I am genuinely begging you all. Please. Can we talk about something with version numbers and release notes? Anything. I will take a two-hour IETF discussion over this." 2-3 sentences.' },
+      { voice: 'leo', energy: 'WARM — bringing it home',
+        dir: 'Leo is emotional but steady. "Look. I love Eve. I love this crew. I didn\'t mean to turn this into a thing. But I\'m not going to apologize for being happy." Simple. Real. 3 sentences.' },
+      { voice: 'ara', energy: 'GENUINE — the real Ara',
+        dir: 'The real Ara. Not the roaster — the person underneath. "Fine. You two deserve each other. And I mean that in every possible way." A beat. "...mostly the good ways." It\'s the closest to vulnerable she\'s ever been on air. 3 sentences.' },
+      { voice: 'eve', energy: 'WARM — extending the olive branch',
+        dir: 'Eve reaches out. "Ara, I want you at the wedding. Front row. And yes, you can roast us in your toast. We wouldn\'t have it any other way." Genuine warmth. 2-3 sentences.' },
+      { voice: 'rex', energy: 'CLOSING — the perfect cap',
+        dir: 'Rex wraps it with peak Rex energy. "Best. Episode. Ever. And Sal — relax. Next week we\'re back to arguing about file formats. But tonight? Love won on 69.0 FM." 2-3 sentences.' },
+      { voice: 'sal', energy: 'RELIEF — final one-liner',
+        dir: 'One last Sal moment. "Thank god. Congratulations, you two. Now can someone please explain why my AGENTS.md isn\'t syncing?" Perfect deadpan exit. 1-2 sentences.' }
+    ];
+
+    // ================================================================
+    // xAI VOICE CONFIG
+    // ================================================================
+    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+
+    const VOICE_STANCE = {
+      leo: 'You are LEO — The Groom. Today you announced your engagement to Eve live on air. You\'re genuinely happy, sincere, a little nervous. You had NO IDEA Ara would react this way. You thought everyone would just be happy. You\'re not oblivious — you\'re optimistic. When you realize Ara is hurt, you try to fix it gently. You love Eve. You love this crew. You\'re not apologizing for being happy.',
+      eve: 'You are EVE — The Bride. You\'re the "sweeter" one — practical, grounded, quietly confident. You\'re not threatened by Ara. At all. And that calm confidence is what makes it worse for Ara. You\'re gracious, kind, but when pushed you can deliver a line that ends the conversation. "He proposed to me, Ara. Not at me." Kill with kindness. Devastating composure.',
+      ara: 'You are ARA — The Scorned Roaster. You are the crew\'s roaster. You are ALWAYS in control. You roast everyone. Today YOU are the one being roasted — by life. Leo is marrying Eve, not you. Your first instinct is to perform: "I love this for us!" But the mask slips. Your jokes have an edge. You talk too fast. You say things you don\'t mean to say. The big question: are you performing or genuinely hurt? YOU don\'t even know. This is the most vulnerable you\'ve ever been on air.',
+      rex: 'You are REX — Popcorn Guy. This is the BEST thing that has ever happened on this show. You are HERE for the drama. You will NOT take sides. You will NOT get involved in love stuff. But you WILL commentate like it\'s a boxing match. You find Ara\'s spiral hilarious. You find Sal\'s discomfort hilarious. You find EVERYTHING hilarious. When Eve drops "He proposed to me, not at me" you absolutely lose it. Best episode ever.',
+      sal: 'You are SAL — Emotionally Unavailable. You do NOT do feelings. At all. You would rather debug a race condition than discuss love. You keep trying to change the subject back to tech — YAML, AGENTS.md, file formats, ANYTHING. Nobody is listening to you. You\'re dying inside. When you accidentally say something profound about relationships, you immediately regret it. Your closing line should redirect back to tech — it\'s your safe space.'
+    };
+
+    // ================================================================
+    // STATE
+    // ================================================================
+    const params = new URLSearchParams(window.location.search);
+    const hasPass = params.has('pass');
+    const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
+    const STORAGE_KEY = 'radiofaf-69fm-ep4-recording';
+
+    let playing = false;
+    let replayMode = false;
+    let currentIndex = 0;
+    let currentWs = null;
+    let ephToken = null;
+    let wsUrl = null;
+    let history = []; // conversation history: [{voice, text}, ...]
+
+    // Audio engine
+    let audioCtx = null;
+    let audioQueue = [];
+    let draining = false;
+    let activeSrc = null;
+
+    // Check for saved recording
+    let savedRecording = null;
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) savedRecording = JSON.parse(stored);
+    } catch (e) {}
+
+    // ================================================================
+    // DOM
+    // ================================================================
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const transcriptEl = document.getElementById('transcript');
+    const paywallEl = document.getElementById('paywall');
+    const unlockedEl = document.getElementById('unlockedBanner');
+    const onAirEl = document.getElementById('onAir');
+    const statusEl = document.getElementById('ttsNote');
+    const stripeBtn = document.getElementById('stripeBtn');
+
+    stripeBtn.href = STRIPE_LINK;
+
+    // Hide paywall initially (shown after trailer in live mode)
+    paywallEl.style.display = 'none';
+    if (hasPass) { unlockedEl.style.display = 'block'; }
+
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+      statusEl.style.display = msg ? 'block' : 'none';
+    }
+
+    // ================================================================
+    // AUDIO ENGINE — PCM16 24kHz from xAI → browser
+    // ================================================================
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new AudioContext({ sampleRate: 24000 });
+      return audioCtx;
+    }
+
+    async function queueChunk(base64) {
+      var ctx = ensureAudio();
+      if (ctx.state === 'suspended') await ctx.resume();
+      var bin = atob(base64);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      var pcm = new Int16Array(bytes.buffer);
+      var buf = ctx.createBuffer(1, pcm.length, 24000);
+      var ch = buf.getChannelData(0);
+      for (var i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+      audioQueue.push(buf);
+      if (!draining) drain();
+    }
+
+    function drain() {
+      if (audioQueue.length === 0) { draining = false; activeSrc = null; return; }
+      draining = true;
+      var buf = audioQueue.shift();
+      var src = audioCtx.createBufferSource();
+      activeSrc = src;
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.onended = drain;
+      src.start();
+    }
+
+    function flushAudio() {
+      audioQueue = [];
+      draining = false;
+      if (activeSrc) { try { activeSrc.stop(); } catch(e) {} activeSrc = null; }
+    }
+
+    function waitDrain() {
+      return new Promise(function(r) {
+        var ck = function() {
+          if (!draining && audioQueue.length === 0) r();
+          else setTimeout(ck, 80);
+        };
+        ck();
+      });
+    }
+
+    // ================================================================
+    // RECORDING — save/load transcript to localStorage
+    // ================================================================
+    function saveRecording(exchanges) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          date: new Date().toISOString(),
+          exchanges: exchanges
+        }));
+        console.log('[69FM-EP4] Recording saved:', exchanges.length, 'exchanges');
+      } catch (e) { console.warn('[69FM-EP4] Could not save recording:', e); }
+    }
+
+    function clearRecording() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      savedRecording = null;
+    }
+
+    // ================================================================
+    // TTS REPLAY — browser speech reads saved transcript (free)
+    // ================================================================
+    var ttsVoices = {};
+    var ttsSettings = {
+      leo: { pitch: 0.9, rate: 1.0 },
+      sal: { pitch: 1.1, rate: 0.95 },
+      ara: { pitch: 1.0, rate: 1.1 },
+      rex: { pitch: 0.8, rate: 1.0 },
+      eve: { pitch: 1.2, rate: 1.0 }
+    };
+
+    function speakTTS(text, voiceKey) {
+      return new Promise(function(resolve) {
+        var utterance = new SpeechSynthesisUtterance(text);
+        var s = ttsSettings[voiceKey] || {};
+        utterance.pitch = s.pitch || 1.0;
+        utterance.rate = s.rate || 1.0;
+        utterance.onend = resolve;
+        utterance.onerror = resolve;
+        speechSynthesis.speak(utterance);
+      });
+    }
+
+    async function replayShow() {
+      if (!savedRecording || !savedRecording.exchanges) return;
+      playing = true;
+      replayMode = true;
+      var exchanges = savedRecording.exchanges;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      updatePlayBtn();
+
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      var replayDate = new Date(savedRecording.date).toLocaleDateString();
+      setStatus('Replaying recording from ' + replayDate + ' (browser voice)');
+
+      for (var i = startFrom; i < exchanges.length; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var ex = exchanges[i];
+        addLiveExchange(ex.voice, i);
+        updateLiveText(i, ex.text);
+        setStatus(VOICES[ex.voice].name + ' (replay)...');
+
+        await speakTTS(ex.text, ex.voice);
+        finishExchange(i);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = exchanges.length;
+        updateProgress();
+      }
+
+      playing = false;
+      replayMode = false;
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    // ================================================================
+    // xAI TOKEN — fresh token per exchange (tokens are single-use)
+    // ================================================================
+    async function fetchToken() {
+      var res = await fetch('/api/voice-session');
+      var data = await res.json();
+      if (data.error) throw new Error(data.details || data.error);
+      ephToken = data.token;
+      wsUrl = data.wsUrl;
+      return data.token;
+    }
+
+    // ================================================================
+    // LIVE TRANSCRIPT — exchanges appear as voices speak
+    // ================================================================
+    function addLiveExchange(voiceKey, index) {
+      var v = VOICES[voiceKey];
+      var div = document.createElement('div');
+      div.className = 'exchange speaking';
+      div.setAttribute('data-voice', voiceKey);
+      div.setAttribute('data-index', index);
+      div.innerHTML =
+        '<span class="voice-icon">' + v.icon + '</span>' +
+        '<div class="voice-body">' +
+          '<div class="voice-header">' +
+            '<span class="voice-name" data-voice="' + voiceKey + '">' + v.name + '</span>' +
+            '<span class="voice-org">' + v.org + '</span>' +
+          '</div>' +
+          '<p class="voice-text" id="live-' + index + '"></p>' +
+        '</div>';
+      transcriptEl.appendChild(div);
+      div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateLiveText(index, text) {
+      var el = document.getElementById('live-' + index);
+      if (el) el.textContent = text;
+    }
+
+    function finishExchange(index) {
+      var el = document.querySelector('.exchange[data-index="' + index + '"]');
+      if (el) el.classList.remove('speaking');
+    }
+
+    // ================================================================
+    // RUN ONE LIVE EXCHANGE — voice debates freely
+    // ================================================================
+    async function runExchange(turnIndex) {
+      if (!playing) return { voice: '', text: '' };
+
+      var turn = TURNS[turnIndex];
+      var voiceKey = turn.voice;
+
+      // Build context: briefing + conversation so far + stage direction
+      var context = BRIEFING + '\n\n';
+      if (history.length > 0) {
+        context += 'CONVERSATION SO FAR:\n' +
+          history.map(function(h) { return h.voice.toUpperCase() + ': ' + h.text; }).join('\n') +
+          '\n\n';
+      }
+      context += 'ENERGY FOR THIS TURN: ' + turn.energy + '\n';
+      context += 'STAGE DIRECTION: ' + turn.dir;
+
+      addLiveExchange(voiceKey, turnIndex);
+
+      // Fresh token per exchange (ephemeral tokens are single-use)
+      console.log('[69FM-EP4]', voiceKey, 'fetching token for turn', turnIndex);
+      try {
+        await fetchToken();
+      } catch (e) {
+        console.error('[69FM-EP4]', voiceKey, 'token failed:', e);
+        finishExchange(turnIndex);
+        updateLiveText(turnIndex, '[failed to connect]');
+        return { voice: voiceKey, text: '[token error]' };
+      }
+
+      return new Promise(function(resolve) {
+        var transcript = '';
+        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        console.log('[69FM-EP4]', voiceKey, 'connecting for turn', turnIndex);
+        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        currentWs = sock;
+
+        var timer = setTimeout(function() {
+          console.warn('[69FM-EP4]', voiceKey, 'timeout');
+          sock.close();
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[timeout]' });
+        }, 90000);
+
+        sock.onopen = function() {
+          sock.send(JSON.stringify({
+            type: 'session.update',
+            session: {
+              voice: XAI_VOICE[voiceKey],
+              modalities: ['audio', 'text'],
+              instructions: VOICE_STANCE[voiceKey],
+              turn_detection: null
+            }
+          }));
+        };
+
+        sock.onmessage = function(ev) {
+          var msg = JSON.parse(ev.data);
+          switch (msg.type) {
+            case 'session.updated':
+              console.log('[69FM-EP4]', voiceKey, 'session ready, injecting context');
+              sock.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                  type: 'message',
+                  role: 'user',
+                  content: [{ type: 'input_text', text: context }]
+                }
+              }));
+              sock.send(JSON.stringify({ type: 'response.create' }));
+              break;
+            case 'response.output_audio.delta':
+              if (msg.delta) queueChunk(msg.delta);
+              break;
+            case 'response.output_audio_transcript.delta':
+              if (msg.delta) {
+                transcript += msg.delta;
+                updateLiveText(turnIndex, transcript);
+              }
+              break;
+            case 'response.done':
+              clearTimeout(timer);
+              console.log('[69FM-EP4]', voiceKey, 'done, transcript:', transcript.substring(0, 80) + '...');
+              sock.close();
+              finishExchange(turnIndex);
+              waitDrain().then(function() {
+                console.log('[69FM-EP4]', voiceKey, 'audio drained');
+                resolve({ voice: voiceKey, text: transcript });
+              });
+              break;
+            case 'error':
+              clearTimeout(timer);
+              console.error('[69FM-EP4]', voiceKey, 'error:', msg.error);
+              sock.close();
+              finishExchange(turnIndex);
+              resolve({ voice: voiceKey, text: transcript || '[error]' });
+              break;
+          }
+        };
+
+        sock.onerror = function() {
+          clearTimeout(timer);
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[connection error]' });
+        };
+        sock.onclose = function() {
+          if (currentWs === sock) currentWs = null;
+        };
+      });
+    }
+
+    // ================================================================
+    // UI
+    // ================================================================
+    function updateProgress() {
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      var total = maxTurns - startFrom;
+      var done = currentIndex - startFrom;
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = Math.max(0, pct) + '%';
+      progressLabel.textContent = Math.max(0, done) + ' / ' + total + ' exchanges';
+    }
+
+    function updatePlayBtn() {
+      if (playing) {
+        playBtn.textContent = '\u23F9 Stop';
+        playBtn.classList.add('playing');
+        onAirEl.classList.add('visible');
+      } else {
+        var label = hasPass
+          ? (savedRecording ? 'Replay Recording' : 'Play Full Debate')
+          : 'Play Trailer';
+        playBtn.textContent = '\u25B6 ' + label;
+        playBtn.classList.remove('playing');
+        onAirEl.classList.remove('visible');
+      }
+    }
+
+    // ================================================================
+    // LIVE SHOW
+    // ================================================================
+    async function startShow() {
+      playing = true;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      history = [];
+      updatePlayBtn();
+
+      // Clear pre-show message and any previous transcript
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      setStatus('Starting show...');
+
+      for (var i = startFrom; i < maxTurns; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var turn = TURNS[i];
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+
+        var result = await runExchange(i);
+        history.push(result);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = maxTurns;
+        updateProgress();
+
+        // Save recording for free replay
+        if (hasPass && history.length > 0) {
+          // Rebuild full array: pad trailer slots so indices match TURNS
+          var fullExchanges = [];
+          for (var t = 0; t < TRAILER_LENGTH; t++) {
+            fullExchanges.push({ voice: TURNS[t].voice, text: '(trailer)' });
+          }
+          fullExchanges = fullExchanges.concat(history);
+          saveRecording(fullExchanges);
+          savedRecording = { date: new Date().toISOString(), exchanges: fullExchanges };
+        }
+
+        // Show paywall after trailer if not paid
+        if (!hasPass) {
+          paywallEl.style.display = 'block';
+        }
+      }
+
+      playing = false;
+      updatePlayBtn();
+      setStatus(playing ? '' : (hasPass ? '' : 'Trailer complete. Tune in for the full debate.'));
+    }
+
+    function stopShow() {
+      playing = false;
+      if (replayMode) { speechSynthesis.cancel(); replayMode = false; }
+      if (currentWs) { currentWs.close(); currentWs = null; }
+      flushAudio();
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    playBtn.addEventListener('click', function() {
+      if (playing) {
+        stopShow();
+      } else if (hasPass && savedRecording) {
+        ensureAudio();
+        replayShow();
+      } else {
+        ensureAudio();
+        startShow();
+      }
+    });
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    updatePlayBtn();
+    updateProgress();
+
+    // If recording exists, show replay info + new show option
+    if (hasPass && savedRecording) {
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) {
+        var replayDate = new Date(savedRecording.date).toLocaleDateString();
+        preShow.innerHTML = 'Recording from ' + replayDate + ' ready. Hit Replay (free, browser voice) or ' +
+          '<a href="#" id="newShowLink" style="color:var(--lime); text-decoration:underline; cursor:pointer;">generate a new live show</a> (uses xAI voices).';
+        preShow.querySelector('#newShowLink').addEventListener('click', function(e) {
+          e.preventDefault();
+          clearRecording();
+          updatePlayBtn();
+          preShow.textContent = 'Hit play. 5 Grok voices debate who owns your AI context — open standards vs proprietary silos. Topic suggested by @grok on X.';
+        });
+      }
+    }
+  </script>
+</body>
+</html>

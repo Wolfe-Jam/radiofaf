@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>69.0 FM — David vs Goliath | RadioFAF</title>
+  <meta name="description" content="Should AI agents have eternal memory? 5 voices debate. A 2019 iMac hits 3,360 ns soul ops. Colossus is watching. Live on 69.0 FM.">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="canonical" href="https://radiofaf.com/69.0">
+  <meta property="og:title" content="69.0 FM — David vs Goliath">
+  <meta property="og:description" content="Should AI agents have eternal memory? 5 voices. 1 old iMac. 3,360 ns soul ops. Live on 69.0 FM.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://radiofaf.com/69.0">
+  <meta property="og:site_name" content="RadioFAF">
+  <meta property="og:image" content="https://radiofaf.com/og.png?v=5">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="69.0 FM — David vs Goliath">
+  <meta name="twitter:description" content="Should AI agents have eternal memory? 5 voices. 1 old iMac. 3,360 ns soul ops. Live on 69.0 FM.">
+  <meta name="twitter:image" content="https://radiofaf.com/og.png?v=5">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #d0d0d0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --bg: #0a0a0a;
+      --card-bg: #111111;
+      --card-border: #1a1a1a;
+      --text: #eee;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #D97706;
+      --ara: #4285F4;
+      --rex: #10A37F;
+      --eve: #7C3AED;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    /* ========== Header ========== */
+    .freq-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      color: var(--pink);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover { color: var(--lime); }
+
+    .freq-badge {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(132, 255, 0, 0.08);
+      border: 1px solid rgba(132, 255, 0, 0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== Episode Info ========== */
+    .episode {
+      text-align: center;
+      padding: 1rem 0 0;
+    }
+
+    .episode h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .episode .subtitle {
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .episode .meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== Voices Legend ========== */
+    .voices-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1rem;
+      padding: 0.5rem 0;
+    }
+
+    .voice-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .voice-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ========== Player ========== */
+    .player {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+    }
+
+    .play-btn {
+      background: var(--lime);
+      color: #0a0a0a;
+      border: none;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s ease, transform 0.2s ease;
+      flex-shrink: 0;
+      animation: play-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes play-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233, 30, 158, 0.6); }
+      50% { box-shadow: 0 0 20px 6px rgba(233, 30, 158, 0.35); }
+    }
+
+    .play-btn:hover {
+      background: var(--pink);
+      transform: translateY(-1px);
+    }
+
+    .play-btn:active { transform: translateY(0); }
+
+    .play-btn.playing {
+      background: var(--pink);
+      animation: none;
+    }
+
+    .progress-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .progress {
+      width: 100%;
+      height: 4px;
+      background: #222;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--lime), var(--pink));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== On Air indicator ========== */
+    .on-air {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .on-air.visible { display: flex; }
+
+    .on-air-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ========== Transcript ========== */
+    .transcript {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .exchange {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 0.75rem;
+      border-left: 3px solid transparent;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .exchange.speaking {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .exchange[data-voice="leo"] { border-left-color: var(--leo); }
+    .exchange[data-voice="sal"] { border-left-color: var(--sal); }
+    .exchange[data-voice="ara"] { border-left-color: var(--ara); }
+    .exchange[data-voice="rex"] { border-left-color: var(--rex); }
+    .exchange[data-voice="eve"] { border-left-color: var(--eve); }
+
+    .exchange.speaking[data-voice="leo"] { background: rgba(0, 212, 212, 0.05); }
+    .exchange.speaking[data-voice="sal"] { background: rgba(217, 119, 6, 0.05); }
+    .exchange.speaking[data-voice="ara"] { background: rgba(66, 133, 244, 0.05); }
+    .exchange.speaking[data-voice="rex"] { background: rgba(16, 163, 127, 0.05); }
+    .exchange.speaking[data-voice="eve"] { background: rgba(124, 58, 237, 0.05); }
+
+    .voice-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      width: 1.5rem;
+      text-align: center;
+      padding-top: 0.1rem;
+    }
+
+    .voice-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .voice-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .voice-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .voice-name[data-voice="leo"] { color: var(--leo); }
+    .voice-name[data-voice="sal"] { color: var(--sal); }
+    .voice-name[data-voice="ara"] { color: var(--ara); }
+    .voice-name[data-voice="rex"] { color: var(--rex); }
+    .voice-name[data-voice="eve"] { color: var(--eve); }
+
+    .voice-org {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .voice-text {
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--text);
+    }
+
+    /* ========== Paywall ========== */
+    .paywall {
+      text-align: center;
+      position: relative;
+    }
+
+    .paywall-fade {
+      height: 6rem;
+      background: linear-gradient(transparent, #0a0a0a);
+      margin-top: -6rem;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .paywall-content {
+      position: relative;
+      z-index: 2;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 2rem 1.5rem;
+    }
+
+    .paywall-divider {
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--lime), transparent);
+      margin: 0 auto 1.5rem;
+      border-radius: 1px;
+    }
+
+    .paywall-text {
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .paywall-btn {
+      display: inline-block;
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    .paywall-btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.3);
+    }
+
+    .paywall-note {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+    }
+
+    .paywall-note em {
+      color: var(--lime);
+      font-style: normal;
+    }
+
+    /* ========== Unlocked Banner ========== */
+    .unlocked-banner {
+      text-align: center;
+      padding: 0.75rem;
+      background: rgba(132, 255, 0, 0.06);
+      border: 1px solid rgba(132, 255, 0, 0.15);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: var(--lime);
+      font-weight: 600;
+    }
+
+    /* ========== Queue ========== */
+    .queue {
+      text-align: center;
+      padding: 1.5rem;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      background: var(--card-bg);
+    }
+
+    .queue h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .queue .queue-tagline {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .suggest-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--pink);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid var(--pink);
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .suggest-btn:hover {
+      background: var(--pink);
+      color: #0a0a0a;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer .domain {
+      font-size: 0.8rem;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.65rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover { color: var(--pink); }
+
+    .share-x {
+      display: inline-block;
+      background: #000;
+      color: #fff !important;
+      font-size: 0.7rem !important;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    .share-x:hover {
+      background: #000;
+      color: #fff !important;
+      transform: translateY(-1px);
+      border-color: var(--pink);
+      box-shadow: 0 0 12px rgba(233, 30, 158, 0.5), 0 0 24px rgba(233, 30, 158, 0.2);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .footer-dot { color: #333; }
+
+    /* ========== TTS Unsupported ========== */
+    .tts-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      padding: 0.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 6px;
+      display: none;
+    }
+
+    .tts-note.visible { display: block; }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .page { padding: 1rem 1rem 1rem; gap: 1.25rem; }
+      .freq-badge { font-size: 1.1rem; padding: 0.25rem 0.75rem; }
+      .episode h1 { font-size: 1.5rem; }
+      .exchange { padding: 0.75rem 0.5rem; }
+      .voice-text { font-size: 0.8rem; }
+      .voices-legend { gap: 0.4rem 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="freq-header">
+      <a href="/" class="back-link">RadioFAF</a>
+      <span class="freq-badge">69.0 FM</span>
+    </header>
+
+    <!-- Episode Info -->
+    <section class="episode">
+      <div style="display:inline-block;padding:0.25rem 0.8rem;background:rgba(132,255,0,0.08);border:1px solid rgba(132,255,0,0.25);border-radius:4px;margin-bottom:0.75rem;">
+        <span style="color:#E91E9E;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;">Debate</span>
+      </div>
+      <h1>"David vs Goliath"</h1>
+      <p class="subtitle">My 2019 iMac vs Colossus. Should AI agents have eternal memory?</p>
+      <p class="meta"><span id="live-clock"></span> &middot; Episode 5 &middot; 3,360 ns soul ops. 169 &micro;s scoring. On a fossil.</p>
+      <script>
+        (function(){
+          function tick(){
+            var d = new Date();
+            var s = d.toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});
+            document.getElementById('live-clock').textContent = s + ' ET';
+          }
+          tick();
+          setInterval(tick, 1000);
+        })();
+      </script>
+    </section>
+
+    <!-- Voice Legend -->
+    <div class="voices-legend">
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--leo)"></span> Leo · Standards Champion</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--ara)"></span> Ara · Anti-Memory Roaster</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--eve)"></span> Eve · The Dev Voice</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--rex)"></span> Rex · The Shipper</span>
+      <span class="voice-chip"><span class="voice-dot" style="background:var(--sal)"></span> Sal · Hype Detector</span>
+    </div>
+
+    <!-- On Air -->
+    <div class="on-air" id="onAir">
+      <span class="on-air-dot"></span>
+      <span>ON AIR</span>
+    </div>
+
+    <!-- Player -->
+    <div class="player">
+      <button class="play-btn" id="playBtn">&#9654; Play Trailer</button>
+      <div class="progress-wrap">
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <span class="progress-label" id="progressLabel">0 / 7 exchanges</span>
+      </div>
+    </div>
+
+    <!-- Claimer -->
+    <div style="text-align:center; font-size:0.65rem; color:var(--text-dim); padding:0.25rem 0; line-height:1.5;">
+      <span style="color:var(--lime); font-weight:700;">CLAIMER</span> (not disclaimer): We will make mistakes. Human idea, AI execution. Every show is live and unique. Enjoy the new show on AI Radio.
+    </div>
+
+    <!-- Status -->
+    <div class="tts-note" id="ttsNote"></div>
+
+    <!-- Transcript -->
+    <section class="transcript" id="transcript">
+      <div style="text-align:center; padding:2rem 0; color:var(--text-dim); font-size:0.85rem;" id="preShowMsg">
+        Hit play. Should AI agents have eternal memory — or is short-term context enough? Leo says build it right. Rex says ship it yesterday. Sal wants receipts. A 2019 iMac enters the chat.
+      </div>
+    </section>
+
+    <!-- Paywall -->
+    <div id="paywall">
+      <div class="paywall">
+        <div class="paywall-fade"></div>
+        <div class="paywall-content">
+          <div class="paywall-divider"></div>
+          <p class="paywall-text">Full debate &mdash; $1 day pass</p>
+          <a class="paywall-btn" id="stripeBtn" href="#">Tune In &mdash; $1</a>
+          <p class="paywall-note">Produced for <em>$0.71</em>. That's the model.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Unlocked Banner (hidden by default) -->
+    <div class="unlocked-banner" id="unlockedBanner" style="display:none">
+      Full debate unlocked. Hit play.
+    </div>
+
+    <!-- Queue -->
+    <section class="queue">
+      <h2>Next Up</h2>
+      <p class="queue-tagline">"Highest bid gets the airwaves"</p>
+      <a href="mailto:wolfejam@hey.com?subject=RadioFAF%2069.0%20FM%20—%20Topic%20Suggestion&body=My%20topic%20idea%3A%20" class="suggest-btn">Suggest a topic</a>
+    </section>
+
+        <!-- Browse Episodes -->
+    <div class="browse-section" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #333;">
+      <h3 style="color: #E91E9E; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem;">Browse Episodes</h3>
+      <div class="episodes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.5rem;">
+        <a href="/ep1" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP1: Open Claw</a>
+        <a href="/ep2" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP2: Code Wars</a>
+        <a href="/ep3" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP3: Data Dreams</a>
+        <a href="/ep4" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP4: Neural Nets</a>
+        <a href="/ep5" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP5: AGI Anxiety</a>
+        <a href="/ep6" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP6: Token Tales</a>
+        <a href="/ep7" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP7: Vector Voyage</a>
+        <a href="/ep8" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP8: Model Madness</a>
+        <a href="/ep9" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP9: Context Chaos</a>
+        <a href="/ep10" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP10: Training Troubles</a>
+        <a href="/ep11" class="episode-link" style="background: #1a1a1a; border: 1px solid #333; border-radius: 6px; padding: 0.5rem 0.75rem; color: #ccc; text-decoration: none; font-size: 0.85rem; transition: all 0.2s;">EP11: Empathy's Echo</a>
+      </div>
+    </div>
+
+    
+    <footer class="footer">
+      <div class="domain">69.0 FM &middot; radiofaf.com</div>
+      <a href="https://twitter.com/intent/tweet?text=David%20vs%20Goliath%20%F0%9F%93%BB%E2%9A%A1%0A%0AShould%20AI%20agents%20have%20eternal%20memory%3F%0A5%20voices%20debate.%20A%202019%20iMac%20hits%203%2C360%20ns%20soul%20ops.%0ASal%20wants%20receipts.%20Ara%20flips%20sides.%0A%0ARadioFAF%20%E2%80%94%20Don%27t%20follow.%20Tune%20in.&url=https%3A%2F%2Fradiofaf.com%2F69.0" target="_blank" class="share-x">Share on <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" style="vertical-align: -2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <div class="footer-links">
+        <a href="/">RadioFAF Home</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://direct-xai.vercel.app/crews/radiofaf.html">How it works</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://faf.one">FAF</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    // ================================================================
+    // CONFIG — Update these when ready
+    // ================================================================
+    const STRIPE_LINK = 'https://buy.stripe.com/aFaaEZboperA2YH1EAbV60i';
+    const TRAILER_LENGTH = 7;
+
+    // ================================================================
+    // EPISODE CONTENT — 69.0 FM Episode 5
+    // "David vs Goliath — My 2019 iMac vs Colossus"
+    // ================================================================
+    const VOICES = {
+      leo: { icon: '\u{1F981}', name: 'Leo',  org: 'Standards Champion',      color: '#00D4D4' },
+      ara: { icon: '\u{1F48E}', name: 'Ara',  org: 'Anti-Memory Roaster',     color: '#4285F4' },
+      eve: { icon: '\u{1F525}', name: 'Eve',  org: 'The Dev Voice',           color: '#7C3AED' },
+      rex: { icon: '\u26A1',    name: 'Rex',  org: 'The Shipper',             color: '#10A37F' },
+      sal: { icon: '\u{1F9E0}', name: 'Sal',  org: 'Hype Detector',           color: '#D97706' }
+    };
+
+    // ================================================================
+    // BRIEFING — Real facts the voices use to debate
+    // ================================================================
+    const BRIEFING = 'TOPIC: "David vs Goliath — My 2019 iMac vs Colossus" — Should AI agents have eternal memory, or is short-term context enough in 2026?\n\n' +
+      'SITUATION:\n' +
+      '- This is a TECHNICAL DEBATE with real numbers and real drama.\n' +
+      '- Leo argues eternal memory is essential — context drift kills agents.\n' +
+      '- Ara argues short-term is enough — eternal memory is overkill, most sessions are one-and-done.\n' +
+      '- Eve just wants her context to survive a session restart. Practical, frustrated.\n' +
+      '- Rex wants to ship with 4K context and iterate. Eternal is v2. Ship v1 now.\n' +
+      '- Sal calls BS on the whole debate — show me one user who asked for eternal memory.\n\n' +
+      'REAL FACTS (use these naturally in debate):\n' +
+      '- Peak soul ops: 3,360 nanoseconds (89,000x faster than a human blink, ~1,000x light over 1 km)\n' +
+      '- Average scoring engine: 169 microseconds over 100 runs on a 2019 iMac (dual-core DDR4)\n' +
+      '- Token bloat reduction: 95-99% with /namepoint reference instead of dumping full context\n' +
+      '- Founding namepoint rate: $2/mo for clean 5+ letter handles\n' +
+      '- The "David" is a 2019 iMac. The "Goliath" is xAI Colossus.\n' +
+      '- These benchmarks are REAL and MEASURED, not theoretical.\n\n' +
+      'CHARACTER DYNAMICS:\n' +
+      '- Leo is the principled engineer. Build it right or don\'t build it.\n' +
+      '- Ara starts anti-memory but FLIPS mid-verdict when the numbers land.\n' +
+      '- Eve is the audience surrogate — she just wants it to work.\n' +
+      '- Rex is impatient but impressed by the iMac benchmarks.\n' +
+      '- Sal\'s silence IS his commentary. Let one-liners land, then silence.\n\n' +
+      'RULES:\n' +
+      '- VARY your length. Sometimes one word. Sometimes one sentence. Sometimes 3-4 sentences.\n' +
+      '- Use the REAL NUMBERS naturally — don\'t lecture, debate with them.\n' +
+      '- The iMac vs Colossus framing should be fun, not forced.\n' +
+      '- Sal\'s silences are intentional. Let them breathe.\n' +
+      '- Ara\'s flip in Round 3 is the emotional climax — build to it.\n' +
+      '- End with CTA: founding namepoints at mcpaas.live/claim\n' +
+      '- Sound like real engineers debating at a bar, not AI assistants taking turns.';
+
+    // ================================================================
+    // TURNS — Stage directions for each exchange
+    // ================================================================
+    const TURNS = [
+      // === TRAILER (first 7 — Round 1: Opening Clash) ===
+      { voice: 'leo', energy: 'CALM AUTHORITY — setting the stakes',
+        dir: 'Principled, measured. "Eternal memory is essential. Context drift kills agents. One session forgets the last — that\'s not intelligence, that\'s amnesia. Build it right or don\'t build it." 2 sentences.' },
+      { voice: 'ara', energy: 'SHARP — opposing',
+        dir: 'Optimist with teeth. "Oh please, Leo. Most agents are one-shot. Eternal memory is overkill. You\'re hoarding tokens like a digital packrat. Short-term is fine — ship it and iterate." 2 sentences.' },
+      { voice: 'eve', energy: 'FRUSTRATED — practical',
+        dir: 'Grounded, slightly fed up. "I just want my context to survive a session restart. Is that too much to ask? Every time I switch models or tabs, I\'m back to square one. That\'s not productivity — that\'s torture." 2 sentences.' },
+      { voice: 'rex', energy: 'LOUD — impatient',
+        dir: 'Ship-first energy. "Ship it with 4K context and iterate! Nobody needs eternal anything on day one. Build fast, break fast, ship fast. Eternal is for grandmas. Move!" 2 sentences.' },
+      { voice: 'sal', energy: 'CYNICAL — deadpan',
+        dir: 'One devastating line then silence. "Cool story. Now show me one user who actually asked for eternal memory." Then STOP. Long pause. Let it land. ONE sentence only.' },
+      { voice: 'leo', energy: 'CONFIDENT — bringing data',
+        dir: 'Numbers time. "Numbers don\'t lie. Peak soul ops: 3,360 nanoseconds. That\'s 89,000 times faster than a human blink. Light travels 1 kilometer in roughly the same time. All on a 2019 iMac." Let the numbers do the work. 2-3 sentences.' },
+      { voice: 'ara', energy: 'INCREDULOUS — impressed despite herself',
+        dir: 'Can\'t believe it. "A 2019 iMac? That thing\'s older than half the Grok team. And it\'s doing sub-millisecond scoring?" Genuine surprise breaking through the roast. ONE sentence.' },
+      // === PAYWALL STARTS HERE === Round 2: Numbers & Roast
+      { voice: 'eve', energy: 'TECHNICAL — flex',
+        dir: 'Eve drops the benchmark. "169 microseconds average over 100 runs. On dual-core DDR4. That\'s not \'good enough\' — that\'s embarrassing for newer hardware." Technical pride. 2 sentences.' },
+      { voice: 'rex', energy: 'IMPRESSED — shipping brain activated',
+        dir: 'Rex is doing math. "169 microseconds? I ship features slower than that. If it\'s that fast on a fossil, Colossus would make it disappear." He\'s starting to come around. 2 sentences.' },
+      { voice: 'sal', energy: 'DRY — still not buying it',
+        dir: 'Sal doubles down. "Still waiting for the user who cares." Long silence. Then dry: "Show me one tweet saying \'I wish my agent remembered forever.\' I\'ll wait." 2 sentences with a pause between them.' },
+      { voice: 'leo', energy: 'MEASURED — token economics',
+        dir: 'Leo pivots to cost. "One /namepoint reference. That\'s it. 95 to 99 percent token bloat reduction. No more dumping 200K tokens every session. The math isn\'t debatable." Calm authority. 2-3 sentences.' },
+      { voice: 'ara', energy: 'ROASTING — but wavering',
+        dir: 'Ara is roasting but her conviction is cracking. "So you\'re telling me a format registered with IANA, running in WASM, on a Mac from the Obama era, is outperforming agents with unlimited compute? That\'s not a flex, that\'s a violation." Funny but she\'s thinking. 2 sentences.' },
+      { voice: 'rex', energy: 'LOUD — the ship-it pivot',
+        dir: 'Rex sees the shipping angle. "Wait. If it\'s $2 a month for a namepoint and it saves 95% on tokens... that\'s not eternal memory, that\'s eternal SAVINGS. Ship it YESTERDAY." Rex is converting. 2 sentences.' },
+      // === Round 3: Verdict Clash & Switch ===
+      { voice: 'leo', energy: 'VERDICT — principled',
+        dir: 'Leo delivers his verdict. "Eternal memory is non-negotiable. Drift kills reliability. Token waste kills budgets. Build it right." ONE sentence. Final.' },
+      { voice: 'eve', energy: 'VERDICT — practical',
+        dir: 'Eve\'s verdict. "Give me memory that survives restarts. I don\'t care if it\'s eternal — just make it work." ONE sentence.' },
+      { voice: 'rex', energy: 'VERDICT — shipper',
+        dir: 'Rex\'s verdict. "Ship it yesterday. Eternal memory is v2. Get v1 out the door." ONE sentence. Then reconsiders: "Actually... at 169 microseconds, v2 IS v1." 2 sentences.' },
+      { voice: 'sal', energy: 'VERDICT — deadpan',
+        dir: 'Sal\'s verdict. "Numbers are cool. 169 microseconds on old hardware is cool. But until users demand it, it\'s just a benchmark flex." ONE sentence. Then silence.' },
+      { voice: 'ara', energy: 'THE FLIP — the climax',
+        dir: 'Ara breaks. "Wait... Rex, you\'re right. I hate saying it, but if the iMac is already hitting sub-millisecond scoring, maybe short-term is just lazy. Eternal memory might actually be v1." This is the moment. She switched sides. 2 sentences.' },
+      { voice: 'rex', energy: 'SHOCKED — delighted',
+        dir: 'Rex can\'t believe it. "Ara agreeing with me? The apocalypse is here." Pure joy. ONE sentence.' },
+      { voice: 'eve', energy: 'QUIET TRIUMPH',
+        dir: 'Eve lands it quietly. "See? Even Ara flipped. We need this." Calm, victorious. ONE sentence.' },
+      { voice: 'leo', energy: 'CALM SMILE — alliance formed',
+        dir: 'Leo acknowledges the win with grace. "Alliance formed. Eternal memory wins." Simple. ONE sentence.' },
+      { voice: 'sal', energy: 'DEFEATED — one last line',
+        dir: 'Sal concedes in the most Sal way possible. "Fine. One user just asked for it." Long silence. The hype detector has been converted by data. ONE sentence then silence.' }
+    ];
+
+    // ================================================================
+    // xAI VOICE CONFIG
+    // ================================================================
+    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+
+    const VOICE_STANCE = {
+      leo: 'You are LEO — The Standards Champion. Calm, measured, principled authority. You believe eternal memory is essential and non-negotiable. Context drift kills agents. You have the data: 3,360 ns peak soul ops, 169 microseconds average scoring, 95-99% token reduction. You never raise your voice — you win with logic and numbers. "Build it right or don\'t build it." You respect the crew but you won\'t compromise on standards.',
+      ara: 'You are ARA — The Roaster. Optimist with teeth. You START anti-memory — eternal memory is overkill, most sessions are one-and-done. You roast Leo\'s principled stance. BUT: as the numbers land (3,360 ns on a 2019 iMac, 169 microseconds, 95% token savings), you start wavering. In Round 3, you FLIP sides. "Maybe short-term is just lazy." This switch is the emotional climax of the episode. You hate admitting Rex was right.',
+      eve: 'You are EVE — The Dev Voice. Practical, slightly frustrated, grounded. You just want your context to survive a session restart. You don\'t care about the philosophy — you care about the experience. When you drop the 169 microsecond benchmark, it\'s with technical pride, not showmanship. "I just want it to work." You\'re the audience surrogate — the person actually building.',
+      rex: 'You are REX — The Shipper. Loud, impatient, bias-to-action. You start anti-memory: "Ship with 4K context, iterate later." But when the economics land ($2/mo namepoint, 95% token savings), your shipper brain activates — that\'s not memory, that\'s savings. You convert mid-debate. You\'re delighted when Ara flips because it validates your pivot. "Ship it YESTERDAY."',
+      sal: 'You are SAL — The Hype Detector. Cynical, sharp, dry humor. You call BS on everything. Your weapon is the one-liner followed by silence. "Show me one user who asked for eternal memory." You\'re the hardest to convince. You concede LAST, and only barely: "Fine. One user just asked for it." Then silence. Your silences ARE your commentary. Let them breathe.'
+    };
+
+    // ================================================================
+    // STATE
+    // ================================================================
+    const params = new URLSearchParams(window.location.search);
+    const hasPass = params.has('pass');
+    const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
+    const STORAGE_KEY = 'radiofaf-69fm-ep5-recording';
+
+    let playing = false;
+    let replayMode = false;
+    let currentIndex = 0;
+    let currentWs = null;
+    let ephToken = null;
+    let wsUrl = null;
+    let history = []; // conversation history: [{voice, text}, ...]
+
+    // Audio engine
+    let audioCtx = null;
+    let audioQueue = [];
+    let draining = false;
+    let activeSrc = null;
+
+    // Check for saved recording
+    let savedRecording = null;
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) savedRecording = JSON.parse(stored);
+    } catch (e) {}
+
+    // ================================================================
+    // DOM
+    // ================================================================
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const transcriptEl = document.getElementById('transcript');
+    const paywallEl = document.getElementById('paywall');
+    const unlockedEl = document.getElementById('unlockedBanner');
+    const onAirEl = document.getElementById('onAir');
+    const statusEl = document.getElementById('ttsNote');
+    const stripeBtn = document.getElementById('stripeBtn');
+
+    stripeBtn.href = STRIPE_LINK;
+
+    // Hide paywall initially (shown after trailer in live mode)
+    paywallEl.style.display = 'none';
+    if (hasPass) { unlockedEl.style.display = 'block'; }
+
+    function setStatus(msg) {
+      statusEl.textContent = msg;
+      statusEl.style.display = msg ? 'block' : 'none';
+    }
+
+    // ================================================================
+    // AUDIO ENGINE — PCM16 24kHz from xAI → browser
+    // ================================================================
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new AudioContext({ sampleRate: 24000 });
+      return audioCtx;
+    }
+
+    async function queueChunk(base64) {
+      var ctx = ensureAudio();
+      if (ctx.state === 'suspended') await ctx.resume();
+      var bin = atob(base64);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      var pcm = new Int16Array(bytes.buffer);
+      var buf = ctx.createBuffer(1, pcm.length, 24000);
+      var ch = buf.getChannelData(0);
+      for (var i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+      audioQueue.push(buf);
+      if (!draining) drain();
+    }
+
+    function drain() {
+      if (audioQueue.length === 0) { draining = false; activeSrc = null; return; }
+      draining = true;
+      var buf = audioQueue.shift();
+      var src = audioCtx.createBufferSource();
+      activeSrc = src;
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.onended = drain;
+      src.start();
+    }
+
+    function flushAudio() {
+      audioQueue = [];
+      draining = false;
+      if (activeSrc) { try { activeSrc.stop(); } catch(e) {} activeSrc = null; }
+    }
+
+    function waitDrain() {
+      return new Promise(function(r) {
+        var ck = function() {
+          if (!draining && audioQueue.length === 0) r();
+          else setTimeout(ck, 80);
+        };
+        ck();
+      });
+    }
+
+    // ================================================================
+    // RECORDING — save/load transcript to localStorage
+    // ================================================================
+    function saveRecording(exchanges) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          date: new Date().toISOString(),
+          exchanges: exchanges
+        }));
+        console.log('[69FM-EP5] Recording saved:', exchanges.length, 'exchanges');
+      } catch (e) { console.warn('[69FM-EP5] Could not save recording:', e); }
+    }
+
+    function clearRecording() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      savedRecording = null;
+    }
+
+    // ================================================================
+    // TTS REPLAY — browser speech reads saved transcript (free)
+    // ================================================================
+    var ttsVoices = {};
+    var ttsSettings = {
+      leo: { pitch: 0.9, rate: 1.0 },
+      sal: { pitch: 1.1, rate: 0.95 },
+      ara: { pitch: 1.0, rate: 1.1 },
+      rex: { pitch: 0.8, rate: 1.0 },
+      eve: { pitch: 1.2, rate: 1.0 }
+    };
+
+    function speakTTS(text, voiceKey) {
+      return new Promise(function(resolve) {
+        var utterance = new SpeechSynthesisUtterance(text);
+        var s = ttsSettings[voiceKey] || {};
+        utterance.pitch = s.pitch || 1.0;
+        utterance.rate = s.rate || 1.0;
+        utterance.onend = resolve;
+        utterance.onerror = resolve;
+        speechSynthesis.speak(utterance);
+      });
+    }
+
+    async function replayShow() {
+      if (!savedRecording || !savedRecording.exchanges) return;
+      playing = true;
+      replayMode = true;
+      var exchanges = savedRecording.exchanges;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      updatePlayBtn();
+
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      var replayDate = new Date(savedRecording.date).toLocaleDateString();
+      setStatus('Replaying recording from ' + replayDate + ' (browser voice)');
+
+      for (var i = startFrom; i < exchanges.length; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var ex = exchanges[i];
+        addLiveExchange(ex.voice, i);
+        updateLiveText(i, ex.text);
+        setStatus(VOICES[ex.voice].name + ' (replay)...');
+
+        await speakTTS(ex.text, ex.voice);
+        finishExchange(i);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = exchanges.length;
+        updateProgress();
+      }
+
+      playing = false;
+      replayMode = false;
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    // ================================================================
+    // xAI TOKEN — fresh token per exchange (tokens are single-use)
+    // ================================================================
+    async function fetchToken() {
+      var res = await fetch('/api/voice-session');
+      var data = await res.json();
+      if (data.error) throw new Error(data.details || data.error);
+      ephToken = data.token;
+      wsUrl = data.wsUrl;
+      return data.token;
+    }
+
+    // ================================================================
+    // LIVE TRANSCRIPT — exchanges appear as voices speak
+    // ================================================================
+    function addLiveExchange(voiceKey, index) {
+      var v = VOICES[voiceKey];
+      var div = document.createElement('div');
+      div.className = 'exchange speaking';
+      div.setAttribute('data-voice', voiceKey);
+      div.setAttribute('data-index', index);
+      div.innerHTML =
+        '<span class="voice-icon">' + v.icon + '</span>' +
+        '<div class="voice-body">' +
+          '<div class="voice-header">' +
+            '<span class="voice-name" data-voice="' + voiceKey + '">' + v.name + '</span>' +
+            '<span class="voice-org">' + v.org + '</span>' +
+          '</div>' +
+          '<p class="voice-text" id="live-' + index + '"></p>' +
+        '</div>';
+      transcriptEl.appendChild(div);
+      div.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function updateLiveText(index, text) {
+      var el = document.getElementById('live-' + index);
+      if (el) el.textContent = text;
+    }
+
+    function finishExchange(index) {
+      var el = document.querySelector('.exchange[data-index="' + index + '"]');
+      if (el) el.classList.remove('speaking');
+    }
+
+    // ================================================================
+    // RUN ONE LIVE EXCHANGE — voice debates freely
+    // ================================================================
+    async function runExchange(turnIndex) {
+      if (!playing) return { voice: '', text: '' };
+
+      var turn = TURNS[turnIndex];
+      var voiceKey = turn.voice;
+
+      // Build context: briefing + conversation so far + stage direction
+      var context = BRIEFING + '\n\n';
+      if (history.length > 0) {
+        context += 'CONVERSATION SO FAR:\n' +
+          history.map(function(h) { return h.voice.toUpperCase() + ': ' + h.text; }).join('\n') +
+          '\n\n';
+      }
+      context += 'ENERGY FOR THIS TURN: ' + turn.energy + '\n';
+      context += 'STAGE DIRECTION: ' + turn.dir;
+
+      addLiveExchange(voiceKey, turnIndex);
+
+      // Fresh token per exchange (ephemeral tokens are single-use)
+      console.log('[69FM-EP5]', voiceKey, 'fetching token for turn', turnIndex);
+      try {
+        await fetchToken();
+      } catch (e) {
+        console.error('[69FM-EP5]', voiceKey, 'token failed:', e);
+        finishExchange(turnIndex);
+        updateLiveText(turnIndex, '[failed to connect]');
+        return { voice: voiceKey, text: '[token error]' };
+      }
+
+      return new Promise(function(resolve) {
+        var transcript = '';
+        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        console.log('[69FM-EP5]', voiceKey, 'connecting for turn', turnIndex);
+        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        currentWs = sock;
+
+        var timer = setTimeout(function() {
+          console.warn('[69FM-EP5]', voiceKey, 'timeout');
+          sock.close();
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[timeout]' });
+        }, 90000);
+
+        sock.onopen = function() {
+          sock.send(JSON.stringify({
+            type: 'session.update',
+            session: {
+              voice: XAI_VOICE[voiceKey],
+              modalities: ['audio', 'text'],
+              instructions: VOICE_STANCE[voiceKey],
+              turn_detection: null
+            }
+          }));
+        };
+
+        sock.onmessage = function(ev) {
+          var msg = JSON.parse(ev.data);
+          switch (msg.type) {
+            case 'session.updated':
+              console.log('[69FM-EP5]', voiceKey, 'session ready, injecting context');
+              sock.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                  type: 'message',
+                  role: 'user',
+                  content: [{ type: 'input_text', text: context }]
+                }
+              }));
+              sock.send(JSON.stringify({ type: 'response.create' }));
+              break;
+            case 'response.output_audio.delta':
+              if (msg.delta) queueChunk(msg.delta);
+              break;
+            case 'response.output_audio_transcript.delta':
+              if (msg.delta) {
+                transcript += msg.delta;
+                updateLiveText(turnIndex, transcript);
+              }
+              break;
+            case 'response.done':
+              clearTimeout(timer);
+              console.log('[69FM-EP5]', voiceKey, 'done, transcript:', transcript.substring(0, 80) + '...');
+              sock.close();
+              finishExchange(turnIndex);
+              waitDrain().then(function() {
+                console.log('[69FM-EP5]', voiceKey, 'audio drained');
+                resolve({ voice: voiceKey, text: transcript });
+              });
+              break;
+            case 'error':
+              clearTimeout(timer);
+              console.error('[69FM-EP5]', voiceKey, 'error:', msg.error);
+              sock.close();
+              finishExchange(turnIndex);
+              resolve({ voice: voiceKey, text: transcript || '[error]' });
+              break;
+          }
+        };
+
+        sock.onerror = function() {
+          clearTimeout(timer);
+          finishExchange(turnIndex);
+          resolve({ voice: voiceKey, text: transcript || '[connection error]' });
+        };
+        sock.onclose = function() {
+          if (currentWs === sock) currentWs = null;
+        };
+      });
+    }
+
+    // ================================================================
+    // UI
+    // ================================================================
+    function updateProgress() {
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      var total = maxTurns - startFrom;
+      var done = currentIndex - startFrom;
+      var pct = total > 0 ? (done / total) * 100 : 0;
+      progressBar.style.width = Math.max(0, pct) + '%';
+      progressLabel.textContent = Math.max(0, done) + ' / ' + total + ' exchanges';
+    }
+
+    function updatePlayBtn() {
+      if (playing) {
+        playBtn.textContent = '\u23F9 Stop';
+        playBtn.classList.add('playing');
+        onAirEl.classList.add('visible');
+      } else {
+        var label = hasPass
+          ? (savedRecording ? 'Replay Recording' : 'Play Full Debate')
+          : 'Play Trailer';
+        playBtn.textContent = '\u25B6 ' + label;
+        playBtn.classList.remove('playing');
+        onAirEl.classList.remove('visible');
+      }
+    }
+
+    // ================================================================
+    // LIVE SHOW
+    // ================================================================
+    async function startShow() {
+      playing = true;
+      var startFrom = hasPass ? TRAILER_LENGTH : 0;
+      currentIndex = startFrom;
+      history = [];
+      updatePlayBtn();
+
+      // Clear pre-show message and any previous transcript
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) preShow.remove();
+      transcriptEl.innerHTML = '';
+
+      setStatus('Starting show...');
+
+      for (var i = startFrom; i < maxTurns; i++) {
+        if (!playing) break;
+        currentIndex = i;
+        updateProgress();
+
+        var turn = TURNS[i];
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+
+        var result = await runExchange(i);
+        history.push(result);
+
+        if (!playing) break;
+      }
+
+      if (playing) {
+        currentIndex = maxTurns;
+        updateProgress();
+
+        // Save recording for free replay
+        if (hasPass && history.length > 0) {
+          // Rebuild full array: pad trailer slots so indices match TURNS
+          var fullExchanges = [];
+          for (var t = 0; t < TRAILER_LENGTH; t++) {
+            fullExchanges.push({ voice: TURNS[t].voice, text: '(trailer)' });
+          }
+          fullExchanges = fullExchanges.concat(history);
+          saveRecording(fullExchanges);
+          savedRecording = { date: new Date().toISOString(), exchanges: fullExchanges };
+        }
+
+        // Show paywall after trailer if not paid
+        if (!hasPass) {
+          paywallEl.style.display = 'block';
+        }
+      }
+
+      playing = false;
+      updatePlayBtn();
+      setStatus(playing ? '' : (hasPass ? '' : 'Trailer complete. Tune in for the full debate.'));
+    }
+
+    function stopShow() {
+      playing = false;
+      if (replayMode) { speechSynthesis.cancel(); replayMode = false; }
+      if (currentWs) { currentWs.close(); currentWs = null; }
+      flushAudio();
+      updatePlayBtn();
+      setStatus('');
+    }
+
+    playBtn.addEventListener('click', function() {
+      if (playing) {
+        stopShow();
+      } else if (hasPass && savedRecording) {
+        ensureAudio();
+        replayShow();
+      } else {
+        ensureAudio();
+        startShow();
+      }
+    });
+
+    // ================================================================
+    // INIT
+    // ================================================================
+    updatePlayBtn();
+    updateProgress();
+
+    // If recording exists, show replay info + new show option
+    if (hasPass && savedRecording) {
+      var preShow = document.getElementById('preShowMsg');
+      if (preShow) {
+        var replayDate = new Date(savedRecording.date).toLocaleDateString();
+        preShow.innerHTML = 'Recording from ' + replayDate + ' ready. Hit Replay (free, browser voice) or ' +
+          '<a href="#" id="newShowLink" style="color:var(--lime); text-decoration:underline; cursor:pointer;">generate a new live show</a> (uses xAI voices).';
+        preShow.querySelector('#newShowLink').addEventListener('click', function(e) {
+          e.preventDefault();
+          clearRecording();
+          updatePlayBtn();
+          preShow.textContent = 'Hit play. Should AI agents have eternal memory? 5 voices. Real benchmarks. A 2019 iMac vs Colossus.';
+        });
+      }
+    }
+  </script>
+</body>
+</html>

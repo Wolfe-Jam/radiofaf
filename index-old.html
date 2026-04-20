@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RadioFAF — Don't Follow. Tune In.</title>
+  <meta name="description" content="AI Radio. 5 voices debate live on your frequency. Listen to 69.0 FM now, or claim your own frequency.">
+  <meta name="keywords" content="RadioFAF, AI radio, frequency, live debate, AI voices, tune in">
+  <meta name="author" content="wolfejam">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="canonical" href="https://radiofaf.com/">
+  <meta property="og:title" content="RadioFAF — Don't Follow. Tune In.">
+  <meta property="og:description" content="AI Radio. 5 voices debate live. Listen now on 69.0 FM.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://radiofaf.com">
+  <meta property="og:site_name" content="RadioFAF">
+  <meta property="og:image" content="https://radiofaf.com/og.png?v=2">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="RadioFAF — Don't Follow. Tune In.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RadioFAF — Don't Follow. Tune In.">
+  <meta name="twitter:description" content="AI Radio. 5 voices debate live. Listen now on 69.0 FM.">
+  <meta name="twitter:image" content="https://radiofaf.com/og.png?v=2">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "RadioFAF",
+    "url": "https://radiofaf.com",
+    "description": "AI Radio. 5 voices debate live on your frequency.",
+    "applicationCategory": "EntertainmentApplication",
+    "operatingSystem": "Web",
+    "creator": {
+      "@type": "Organization",
+      "name": "FAF",
+      "url": "https://faf.one"
+    }
+  }
+  </script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #d0d0d0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --bg: #0a0a0a;
+      --card-bg: #111111;
+      --card-border: #1a1a1a;
+      --text: #fff;
+      --text-dim: #bbb;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      min-height: 100vh;
+    }
+
+    .spacer { flex: 1; }
+
+    /* ========== Hero ========== */
+    .hero {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero .tagline {
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: 0.02em;
+    }
+
+    .hero .tagline .tune-in {
+      color: var(--lime);
+      font-weight: 700;
+    }
+
+    /* ========== Now Playing ========== */
+    .now-playing {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.3s ease, transform 0.2s ease;
+      margin-top: -0.5rem;
+    }
+
+    .now-playing:hover {
+      border-color: var(--lime);
+      transform: translateY(-2px);
+    }
+
+    .np-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: #0a0a0a;
+      background: var(--lime);
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.08em;
+      animation: np-pulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes np-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .np-freq {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--lime);
+    }
+
+    .np-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--lime);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .np-price {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== Show Description ========== */
+    .show-desc {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .show-desc strong {
+      color: var(--text);
+    }
+
+    /* ========== Tune In CTA ========== */
+    .tune-in-cta {
+      text-align: center;
+    }
+
+    .tune-in-btn {
+      display: inline-block;
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.9rem 3rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      animation: tune-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes tune-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(233, 30, 158, 0.6); }
+      50% { box-shadow: 0 0 24px 8px rgba(233, 30, 158, 0.35); }
+    }
+
+    .tune-in-btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.3);
+    }
+
+    .tune-in-btn:active { transform: translateY(0); }
+
+    /* ========== Divider ========== */
+    .divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #333, transparent);
+      margin: 0 auto;
+    }
+
+    /* ========== Frequency Waitlist ========== */
+    .waitlist {
+      text-align: center;
+    }
+
+    .waitlist h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .waitlist .wl-sub {
+      font-size: 0.7rem;
+      color: #999;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .wl-form {
+      max-width: 380px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .wl-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      text-align: left;
+    }
+
+    .wl-label {
+      font-size: 0.65rem;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .wl-input {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.65rem;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .wl-input:focus {
+      border-color: var(--pink);
+    }
+
+    .wl-pick1 { border-color: var(--pink); }
+    .wl-pick2 { border-color: var(--lime); }
+
+    .wl-input::placeholder {
+      color: #666;
+    }
+
+    .wl-row-inline {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+    }
+
+    .wl-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .wl-optional {
+      font-size: 0.6rem;
+      color: #555;
+      font-style: italic;
+    }
+
+    .wl-add-pick {
+      background: none;
+      border: 1px dashed #282828;
+      border-radius: 4px;
+      padding: 0.4rem 0.6rem;
+      color: #444;
+      font-family: inherit;
+      font-size: 0.6rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease, color 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .wl-add-pick:hover {
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+
+    .wl-submit {
+      background: #000;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.5rem 1.2rem;
+      border: 1px solid #555;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      flex: 1;
+    }
+
+    .wl-submit:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .wl-submit:active { transform: translateY(0); }
+
+    .wl-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .wl-success {
+      display: none;
+      padding: 1rem;
+      background: rgba(132, 255, 0, 0.06);
+      border: 1px solid rgba(132, 255, 0, 0.15);
+      border-radius: 8px;
+      color: var(--lime);
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+    .wl-success.visible { display: block; }
+
+    .wl-note {
+      font-size: 0.55rem;
+      color: #777;
+      margin-top: 0.1rem;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      padding: 0.75rem 0 0.5rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-dual {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .footer-col {
+      text-align: center;
+    }
+
+    .footer-col .fc-brand {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-col .fc-brand.pink { color: var(--pink); }
+    .footer-col .fc-brand.lime { color: var(--lime); }
+
+    .footer-col .fc-brand:hover { opacity: 0.8; }
+
+    .footer-col .fc-desc {
+      font-size: 0.6rem;
+      color: #555;
+      margin-top: 0.15rem;
+    }
+
+    .footer-divider {
+      width: 1px;
+      height: 2rem;
+      background: #222;
+    }
+
+    .footer .domain {
+      font-size: 0.8rem;
+      color: var(--pink);
+      font-weight: 600;
+    }
+
+    .footer .sub {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.65rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer a:hover { color: var(--pink); }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .footer-dot { color: #333; }
+
+    .share-x {
+      display: inline-block;
+      background: #000;
+      color: #fff !important;
+      font-size: 0.7rem !important;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      transition: all 0.3s ease;
+    }
+
+    .share-x:hover {
+      background: #fff;
+      color: #000 !important;
+      transform: translateY(-1px);
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .page { padding: 1.5rem 1rem 1rem; gap: 1.75rem; }
+      .hero { padding: 1.5rem 0 0.5rem; }
+      .hero h1 { font-size: 2.4rem; }
+      .hero .tagline { font-size: 1.15rem; }
+      .now-playing { gap: 0.5rem; padding: 0.75rem; flex-wrap: wrap; }
+      .np-freq { font-size: 0.85rem; }
+      .np-title { font-size: 1.1rem; }
+      .wl-row-inline { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>RadioFAF</h1>
+      <p class="tagline">Don't follow. <span class="tune-in">Tune in.</span></p>
+      <p id="home-clock" style="color:var(--text-dim);font-size:0.75rem;margin-top:0.5rem;letter-spacing:0.05em;"></p>
+      <script>
+        (function(){
+          function tick(){
+            var d = new Date();
+            var s = d.toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit',second:'2-digit',hour12:true});
+            document.getElementById('home-clock').textContent = s + ' ET';
+          }
+          tick();
+          setInterval(tick, 1000);
+        })();
+      </script>
+    </section>
+
+    <!-- Now Playing -->
+    <a href="/69.0" class="now-playing">
+      <span class="np-badge">NOW PLAYING</span>
+      <span class="np-freq">69.0 FM</span>
+      <span class="np-title">"EMPATHY'S ECHO"</span>
+      <span class="np-price">$1</span>
+    </a>
+
+    <!-- Show Description -->
+    <p class="show-desc">
+      <strong>5 AI voices. 1 debate. Topic by @grok. Every show unique.</strong><br>
+      Live AI radio — never the same twice.
+    </p>
+
+    <!-- Tune In CTA -->
+    <section class="tune-in-cta">
+      <a class="tune-in-btn" href="/69.0">Tune In Now</a>
+    </section>
+
+    <!-- Share on X -->
+    <div style="text-align:center;">
+      <a href="https://twitter.com/intent/tweet?text=Don%27t%20follow.%20Tune%20in.%20%F0%9F%93%BB%0A%0AAI%20Radio%20%E2%80%94%205%20voices%20debate%20live.%20Every%20show%20unique.&url=https%3A%2F%2Fradiofaf.com" target="_blank" class="share-x">Share on <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align: -2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+    </div>
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Frequency Waitlist -->
+    <section class="waitlist">
+      <h2>Want your own frequency?</h2>
+      <p class="wl-sub">Pick a frequency. We'll let you know when it's yours.</p>
+
+      <form class="wl-form" id="waitlistForm">
+        <div class="wl-row-inline">
+          <div class="wl-row">
+            <label class="wl-label">Name</label>
+            <input class="wl-input" type="text" id="wlName" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="wl-row">
+            <label class="wl-label">Email</label>
+            <input class="wl-input" type="email" id="wlEmail" placeholder="you@example.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="wl-row-inline">
+          <div class="wl-row">
+            <label class="wl-label">1st pick</label>
+            <input class="wl-input wl-pick1" type="text" id="wlPick1" placeholder="your first choice" required>
+          </div>
+          <div class="wl-row">
+            <label class="wl-label">2nd pick</label>
+            <input class="wl-input wl-pick2" type="text" id="wlPick2" placeholder="your backup" required>
+          </div>
+        </div>
+        <div id="extraPicks"></div>
+        <div class="wl-actions">
+          <button type="button" class="wl-add-pick" id="addPickBtn">+ more</button>
+          <button type="submit" class="wl-submit" id="wlSubmit">Join Waitlist</button>
+        </div>
+        <p class="wl-note">No payment. No spam. First dibs on your frequency.</p>
+      </form>
+
+      <div class="wl-success" id="wlSuccess">
+        You're on the list. We'll be in touch when frequencies open up.<br>
+        <a href="https://mcpaas.live/claim" id="claimLink" style="color:var(--lime);text-decoration:underline;font-size:0.75rem;margin-top:0.5rem;display:inline-block;">Claim your namepoint too?</a>
+      </div>
+    </section>
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-dual">
+        <div class="footer-col">
+          <a href="/" class="fc-brand pink">RadioFAF</a>
+          <div class="fc-desc">frequencies</div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-col">
+          <a href="https://mcpaas.live/claim" class="fc-brand lime">MCPaaS</a>
+          <div class="fc-desc">namepoints</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="/69.0">69.0 FM</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/11">EP11</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/10">EP10</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/9">EP9</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/8">EP8</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/7">EP7</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/6">EP6</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/5">EP5</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/4">EP4</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/3">EP3</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/2">EP2</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0/1">EP1</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/broadcast">Broadcast</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/dial">The Dial</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://faf.one">FAF</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+  <script>
+    var pickCount = 2;
+
+    document.getElementById('addPickBtn').addEventListener('click', function() {
+      pickCount++;
+      var container = document.getElementById('extraPicks');
+      var row = document.createElement('div');
+      row.className = 'wl-row';
+      row.innerHTML =
+        '<label class="wl-label">Pick ' + pickCount + ' <span class="wl-optional">(optional)</span></label>' +
+        '<input class="wl-input" type="text" placeholder="another pick" name="pick' + pickCount + '">';
+      container.appendChild(row);
+      if (pickCount >= 6) this.style.display = 'none';
+    });
+
+    document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('wlSubmit');
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+
+      var picks = [
+        document.getElementById('wlPick1').value.trim(),
+        document.getElementById('wlPick2').value.trim()
+      ];
+      var extras = document.getElementById('extraPicks').querySelectorAll('input');
+      extras.forEach(function(inp) {
+        if (inp.value.trim()) picks.push(inp.value.trim());
+      });
+
+      var data = {
+        name: document.getElementById('wlName').value.trim(),
+        email: document.getElementById('wlEmail').value.trim(),
+        picks: picks,
+        timestamp: new Date().toISOString()
+      };
+
+      fetch('/api/waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function(res) {
+        if (!res.ok) throw new Error('Failed');
+        document.getElementById('waitlistForm').style.display = 'none';
+        document.getElementById('wlSuccess').classList.add('visible');
+        var handle = data.name.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+        if (handle) document.getElementById('claimLink').href = 'https://mcpaas.live/claim?handle=' + encodeURIComponent(handle);
+      })
+      .catch(function() {
+        // Fallback: mailto
+        var subject = 'RadioFAF Waitlist: ' + picks[0];
+        var body = 'Name: ' + data.name + '\nEmail: ' + data.email + '\nPicks: ' + picks.join(', ');
+        window.location.href = 'mailto:wolfejam@hey.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+        btn.disabled = false;
+        btn.textContent = 'Join the Waitlist';
+      });
+    });
+  </script>
+</body>
+</html>

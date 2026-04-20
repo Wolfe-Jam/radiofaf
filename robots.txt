@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# AI Search Crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://radiofaf.com/sitemap.xml

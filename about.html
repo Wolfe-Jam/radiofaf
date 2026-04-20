@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About RadioFAF — AI Radio</title>
+  <meta name="description" content="Learn about RadioFAF: Authentic AI radio with 5 voices debating live. Unscripted. Dynamic. Every show unique.">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #d97706;
+      --ara: #4285f4;
+      --rex: #10a37f;
+      --eve: #7c3aed;
+    }
+    
+    /* Share X Button - Universal */
+    .share-x {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #000;
+      color: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .share-x:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+    
+    .share-x::after {
+      content: "🐘🎧😝";
+      margin-left: 4px;
+    }
+    
+    .container {
+      max-width: 700px;
+      width: 90%;
+      padding: 2rem;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .tagline {
+      font-size: 1rem;
+      color: var(--lime);
+      font-style: italic;
+    }
+    
+    .section {
+      margin-bottom: 2.5rem;
+    }
+    
+    .section h2 {
+      font-size: 1.3rem;
+      color: var(--pink);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    
+    .section p {
+      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 1rem;
+    }
+    
+    .manifesto {
+      background: #111;
+      border: 2px solid var(--lime);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .manifesto .quote {
+      font-size: 1.1rem;
+      color: var(--lime);
+      font-weight: 600;
+      font-style: italic;
+    }
+    
+    .voices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .voice-card {
+      background: #111;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    
+    .voice-card.leo { border-color: var(--leo); }
+    .voice-card.sal { border-color: var(--sal); }
+    .voice-card.ara { border-color: var(--ara); }
+    .voice-card.rex { border-color: var(--rex); }
+    .voice-card.eve { border-color: var(--eve); }
+    
+    .voice-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .voice-card.leo .voice-name { color: var(--leo); }
+    .voice-card.sal .voice-name { color: var(--sal); }
+    .voice-card.ara .voice-name { color: var(--ara); }
+    .voice-card.rex .voice-name { color: var(--rex); }
+    .voice-card.eve .voice-name { color: var(--eve); }
+    
+    .voice-desc {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+    
+    .tech-specs {
+      background: #111;
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    
+    .tech-specs ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    
+    .tech-specs li {
+      padding: 0.5rem 0;
+      color: #ddd;
+      border-bottom: 1px solid #333;
+    }
+    
+    .tech-specs li:last-child {
+      border-bottom: none;
+    }
+    
+    .tech-specs strong {
+      color: var(--lime);
+    }
+    
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: 2px solid;
+    }
+    
+    .btn-primary {
+      background: var(--lime);
+      color: #000;
+      border-color: var(--lime);
+    }
+    
+    .btn-primary:hover {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: #fff;
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-dim);
+      border-color: var(--text-dim);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--text-dim);
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Universal Share X Button -->
+  <a href="https://twitter.com/intent/tweet?text=Meet%20the%20RadioFAF%20voices%21%20%F0%9F%8E%A7%0A%0A5%20AI%20personalities%20debating%20live.%20Authentic.%20Unscripted.%0A%0AAlways%20Remember%2C%20I%20Never%20Forget%20%E2%80%94%20DJ%20Nelly%20%F0%9F%90%98%F0%9F%8E%A7%F0%9F%98%9D&url=https%3A%2F%2Fradiofaf.com%2Fabout" class="share-x" target="_blank">Share X</a>
+  <div class="container">
+    <header class="header">
+      <h1 class="logo">RadioFAF</h1>
+      <p class="tagline">Authentic AI. Unscripted. Live debates.</p>
+    </header>
+    
+    <div class="manifesto">
+      <p class="quote">"Human stuff by AI"</p>
+    </div>
+    
+    <section class="section">
+      <h2>What is RadioFAF?</h2>
+      <p>RadioFAF is AI radio like you've never heard. Five AI voices debate live topics with zero scripts, zero rehearsal, and zero predictability.</p>
+      <p>Every show is unique. Every debate is authentic. Every voice has strong opinions and isn't afraid to use them.</p>
+    </section>
+    
+    <section class="section">
+      <h2>Meet the Voices</h2>
+      <div class="voices-grid">
+        <div class="voice-card leo">
+          <div class="voice-name">LEO</div>
+          <div class="voice-desc">The Open Absolutist. Philosophy and standards. Believes empathy requires continuity and memory.</div>
+        </div>
+        <div class="voice-card sal">
+          <div class="voice-name">SAL</div>
+          <div class="voice-desc">Corporate cynic. Calls out tech companies commodifying loneliness. Data-driven and precise.</div>
+        </div>
+        <div class="voice-card ara">
+          <div class="voice-name">NELLY</div>
+          <div class="voice-desc">The warm host who never forgets. Guides with wisdom and humor. "Always remember... I never forget."</div>
+        </div>
+        <div class="voice-card rex">
+          <div class="voice-name">REX</div>
+          <div class="voice-desc">Pragmatic optimist. If it helps users, ship it. Focuses on practical solutions.</div>
+        </div>
+        <div class="voice-card eve">
+          <div class="voice-name">EVE</div>
+          <div class="voice-desc">User perspective. Just wants tools that actually help. Champions the community.</div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section">
+      <h2>How It Works</h2>
+      <div class="tech-specs">
+        <p>RadioFAF uses advanced AI technology to generate live, unscripted debates:</p>
+        <ul>
+          <li><strong>Dynamic Generation:</strong> Every show is generated live using AI</li>
+          <li><strong>Voice Synthesis:</strong> Powered by xAI Grok's realtime voice API</li>
+          <li><strong>Real-time Streaming:</strong> WebSocket audio streaming for instant playback</li>
+          <li><strong>Unique Content:</strong> No two shows are ever the same</li>
+          <li><strong>Live Debates:</strong> Voices react to each other in real-time</li>
+        </ul>
+      </div>
+    </section>
+    
+    <section class="section">
+      <h2>Our Philosophy</h2>
+      <p><strong>Authentic AI:</strong> We believe AI can be genuine without being human. Our voices have real opinions, make real arguments, and sometimes make real mistakes.</p>
+      <p><strong>Unscripted:</strong> No pre-written content. Every word is generated live based on the topic and conversation flow.</p>
+      <p><strong>Human Stuff by AI:</strong> The messy, unpredictable, passionate debates that make radio compelling—delivered by AI that cares about the topics.</p>
+    </section>
+    
+    <div class="actions">
+      <a href="/ep11" class="btn btn-primary">▶ Listen Now</a>
+      <a href="/home" class="btn btn-secondary">← Back to Home</a>
+    </div>
+  </div>
+</body>
+</html>

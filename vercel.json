@@ -1,0 +1,24 @@
+{
+  "buildCommand": null,
+  "framework": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    { "source": "/", "destination": "/home.html" },
+    { "source": "/home", "destination": "/home.html" },
+    { "source": "/about", "destination": "/about.html" },
+    { "source": "/ep1", "destination": "/ep1.html" },
+    { "source": "/ep2", "destination": "/ep2.html" },
+    { "source": "/ep3", "destination": "/ep3.html" },
+    { "source": "/ep4", "destination": "/ep4.html" },
+    { "source": "/ep5", "destination": "/ep5.html" },
+    { "source": "/ep6", "destination": "/ep6.html" },
+    { "source": "/ep7", "destination": "/ep7.html" },
+    { "source": "/ep8", "destination": "/ep8.html" },
+    { "source": "/ep9", "destination": "/ep9.html" },
+    { "source": "/ep10", "destination": "/ep10.html" },
+    { "source": "/ep11", "destination": "/ep11.html" },
+    { "source": "/69.0", "destination": "/ep11.html" },
+    { "source": "/broadcast", "destination": "/broadcast.html" },
+    { "source": "/dial", "destination": "/dial.html" }
+  ]
+}

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Broadcast — Your Frequency on RadioFAF</title>
+  <meta name="description" content="Pick any topic. 5 AI voices debate it. Your episode goes live on 69.0 FM. Claim your frequency — $2/mo founding rate.">
+  <meta name="theme-color" content="#E91E9E">
+  <link rel="canonical" href="https://radiofaf.com/broadcast">
+  <meta property="og:title" content="Broadcast — Your Frequency on RadioFAF">
+  <meta property="og:description" content="Pick any topic. 5 AI voices debate it. Your episode goes live. Claim your frequency.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://radiofaf.com/broadcast">
+  <meta property="og:site_name" content="RadioFAF">
+  <meta property="og:image" content="https://radiofaf.com/og.png?v=5">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Broadcast — Your Frequency on RadioFAF">
+  <meta name="twitter:description" content="Pick any topic. 5 AI voices debate it. Your episode goes live. Claim your frequency.">
+  <meta name="twitter:image" content="https://radiofaf.com/og.png?v=5">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #d0d0d0;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --bg: #0a0a0a;
+      --card-bg: #111111;
+      --card-border: #1a1a1a;
+      --text: #eee;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --sal: #D97706;
+      --ara: #4285F4;
+      --rex: #10A37F;
+      --eve: #7C3AED;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* ========== Header ========== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .back-link {
+      color: var(--pink);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .back-link:hover { color: var(--lime); }
+
+    .freq-badge {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--lime);
+      background: rgba(132, 255, 0, 0.08);
+      border: 1px solid rgba(132, 255, 0, 0.2);
+      padding: 0.25rem 0.8rem;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========== Hero ========== */
+    .hero {
+      text-align: center;
+      padding: 1rem 0;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 span { color: var(--lime); }
+
+    .hero .tagline {
+      font-size: 1.05rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ========== Steps ========== */
+    .steps {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .step {
+      flex: 1;
+      text-align: center;
+      padding: 1.25rem 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+    }
+
+    .step-num {
+      display: inline-block;
+      width: 2rem;
+      height: 2rem;
+      line-height: 2rem;
+      border-radius: 50%;
+      background: var(--pink);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-desc {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    /* ========== Crew ========== */
+    .crew h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .crew-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+
+    .crew-card {
+      padding: 1rem 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      text-align: center;
+      border-top: 3px solid transparent;
+    }
+
+    .crew-card[data-voice="leo"] { border-top-color: var(--leo); }
+    .crew-card[data-voice="rex"] { border-top-color: var(--rex); }
+    .crew-card[data-voice="sal"] { border-top-color: var(--sal); }
+    .crew-card[data-voice="ara"] { border-top-color: var(--ara); }
+    .crew-card[data-voice="eve"] { border-top-color: var(--eve); }
+    .crew-card[data-voice="nelly"] { border-top-color: var(--pink); }
+
+    .crew-icon { font-size: 1.5rem; margin-bottom: 0.3rem; }
+
+    .crew-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .crew-role {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+
+    /* ========== Listen ========== */
+    .listen {
+      text-align: center;
+    }
+
+    .listen-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .listen-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .listen-card:hover {
+      border-color: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.15);
+    }
+
+    .listen-play {
+      background: var(--lime);
+      color: #0a0a0a;
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-family: inherit;
+    }
+
+    .listen-info {
+      text-align: left;
+    }
+
+    .listen-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pink);
+    }
+
+    .listen-meta {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    /* ========== Pricing ========== */
+    .pricing {
+      text-align: center;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+    }
+
+    .pricing-divider {
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--lime), transparent);
+      margin: 0 auto 1.5rem;
+      border-radius: 1px;
+    }
+
+    .pricing h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-tiers {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .pricing-tiers strong {
+      color: var(--lime);
+      font-weight: 700;
+    }
+
+    .pricing-annual {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-annual em {
+      color: var(--lime);
+      font-style: normal;
+    }
+
+    .claim-btn {
+      display: inline-block;
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.8rem 2.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      animation: claim-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes claim-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(132, 255, 0, 0.4); }
+      50% { box-shadow: 0 0 20px 6px rgba(132, 255, 0, 0.2); }
+    }
+
+    .claim-btn:hover {
+      background: var(--pink);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(233, 30, 158, 0.3);
+      animation: none;
+    }
+
+    .pricing-note {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      margin-top: 1rem;
+    }
+
+    .pricing-note em {
+      color: var(--pink);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ========== What You Get ========== */
+    .includes h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .includes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .includes-list li {
+      font-size: 0.85rem;
+      color: var(--text);
+      padding: 0.5rem 0.75rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .check {
+      color: var(--lime);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .includes-list li span.dim {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    /* ========== FAQ ========== */
+    .faq h2 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--lime);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      padding: 1rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      margin-bottom: 0.6rem;
+    }
+
+    .faq-q {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 0.35rem;
+    }
+
+    .faq-a {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ========== Footer ========== */
+    .footer {
+      text-align: center;
+      padding: 1.5rem 0 0.5rem;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer .tagline-footer {
+      font-size: 0.85rem;
+      color: var(--pink);
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.65rem;
+    }
+
+    .footer-links a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover { color: var(--pink); }
+
+    .footer-dot { color: #333; }
+
+    .share-x {
+      display: inline-block;
+      background: #000;
+      color: #fff !important;
+      font-size: 0.7rem !important;
+      font-weight: 700;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
+      border: 1px solid #fff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .share-x:hover {
+      transform: translateY(-1px);
+      border-color: var(--pink);
+      box-shadow: 0 0 12px rgba(233, 30, 158, 0.5);
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 600px) {
+      .page { padding: 1.5rem 1rem; gap: 2rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .steps { flex-direction: column; }
+      .crew-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- Header -->
+    <header class="header">
+      <a href="/" class="back-link">RadioFAF</a>
+      <span class="freq-badge">/broadcast</span>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Your Frequency.<br>Your Topics.<br><span>Our Crew.</span></h1>
+      <p class="tagline">Pick any topic. 5 AI voices debate it.<br>Your episode goes live on 69.0 FM.</p>
+    </section>
+
+    <!-- How It Works -->
+    <section class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Pick a topic</div>
+        <div class="step-desc">Any topic. Seriously.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">The crew debates</div>
+        <div class="step-desc">5 AI voices clash live</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">You're on air</div>
+        <div class="step-desc">Live on radiofaf.com</div>
+      </div>
+    </section>
+
+    <!-- The Crew -->
+    <section class="crew">
+      <h2>The Crew</h2>
+      <div class="crew-grid">
+        <div class="crew-card" data-voice="leo">
+          <div class="crew-icon">&#x1F981;</div>
+          <div class="crew-name">Leo</div>
+          <div class="crew-role">Standards Champion</div>
+        </div>
+        <div class="crew-card" data-voice="rex">
+          <div class="crew-icon">&#x26A1;</div>
+          <div class="crew-name">Rex</div>
+          <div class="crew-role">The Shipper</div>
+        </div>
+        <div class="crew-card" data-voice="sal">
+          <div class="crew-icon">&#x1F9E0;</div>
+          <div class="crew-name">Sal</div>
+          <div class="crew-role">Hype Detector</div>
+        </div>
+        <div class="crew-card" data-voice="ara">
+          <div class="crew-icon">&#x1F48E;</div>
+          <div class="crew-name">Ara</div>
+          <div class="crew-role">The Roaster</div>
+        </div>
+        <div class="crew-card" data-voice="eve">
+          <div class="crew-icon">&#x1F525;</div>
+          <div class="crew-name">Eve</div>
+          <div class="crew-role">The Dev Voice</div>
+        </div>
+        <div class="crew-card" data-voice="nelly">
+          <div class="crew-icon">&#x1F418;</div>
+          <div class="crew-name">Nelly</div>
+          <div class="crew-role">DJ &middot; Never Forgets</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Listen First -->
+    <section class="listen">
+      <div class="listen-label">Hear what it sounds like</div>
+      <a href="/69.0" class="listen-card">
+        <span class="listen-play">&#9654; Play</span>
+        <div class="listen-info">
+          <div class="listen-title">EP6: Souls Don't Reset</div>
+          <div class="listen-meta">Persistent souls vs reset-button AIs. Topic by @grok. &middot; 69.0 FM</div>
+        </div>
+      </a>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing">
+      <div class="pricing-divider"></div>
+      <h2>Claim your frequency</h2>
+      <p class="pricing-tiers"><strong>$2/mo</strong> for 5+ letter handles &middot; <strong>$9/mo</strong> for 3-letter</p>
+      <p class="pricing-annual"><em>$19/yr</em> lock-in available &middot; a nickel a day</p>
+      <a class="claim-btn" href="https://mcpaas.live/claim">Claim Your Frequency</a>
+      <p class="pricing-note"><em>Founding 100</em> &mdash; current price locked. First come, first served.</p>
+    </section>
+
+    <!-- What You Get -->
+    <section class="includes">
+      <h2>What you get</h2>
+      <ul class="includes-list">
+        <li><span class="check">&#10003;</span> <strong>/broadcast skill</strong> <span class="dim">&mdash; topic in, episode out</span></li>
+        <li><span class="check">&#10003;</span> <strong>Your slot on 69.0 FM</strong> <span class="dim">&mdash; radiofaf.com/69.0/you</span></li>
+        <li><span class="check">&#10003;</span> <strong>5 Voice Crew + Nelly DJ</strong> <span class="dim">&mdash; Leo, Rex, Sal, Ara, Eve</span></li>
+        <li><span class="check">&#10003;</span> <strong>4 episode modes</strong> <span class="dim">&mdash; debate, discussion, interview, brainstorm</span></li>
+        <li><span class="check">&#10003;</span> <strong>Episode archive</strong> <span class="dim">&mdash; your show history, indexed</span></li>
+        <li><span class="check">&#10003;</span> <strong>Brand kit</strong> <span class="dim">&mdash; colors, templates, assets</span></li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <h2>FAQ</h2>
+      <div class="faq-item">
+        <div class="faq-q">Do I need to record anything?</div>
+        <div class="faq-a">No. AI generates everything &mdash; voices, dialogue, the whole episode. You pick the topic.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What AI does it use?</div>
+        <div class="faq-a">Grok for voice generation. The /broadcast skill works with Claude, Gemini, and Cursor too.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I customize the voices?</div>
+        <div class="faq-a">Studio tier ($19/mo, coming soon) unlocks custom voice overrides, intros, and branding.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Who owns the content?</div>
+        <div class="faq-a">You do. We host it on radiofaf.com. The voices and Nelly are RadioFAF IP.</div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="tagline-footer">"Don't follow. Tune in."</div>
+      <a href="https://twitter.com/intent/tweet?text=RadioFAF%20%F0%9F%93%BB%E2%9A%A1%0A%0APick%20any%20topic.%205%20AI%20voices%20debate%20it.%0AYour%20episode%20goes%20live%20on%2069.0%20FM.%0A%0AClaim%20your%20frequency%20%E2%80%94%20founding%20rate%20%242%2Fmo.&url=https%3A%2F%2Fradiofaf.com%2Fbroadcast" target="_blank" class="share-x">Share on <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" style="vertical-align: -2px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      <div class="footer-links">
+        <a href="/">RadioFAF</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="/69.0">69.0 FM</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://mcpaas.live/claim">Claim</a>
+        <span class="footer-dot">&middot;</span>
+        <a href="https://faf.one">FAF</a>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
