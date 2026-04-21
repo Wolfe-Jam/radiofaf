@@ -10,6 +10,7 @@
       --pink: #E91E9E;
       --lime: #84FF00;
       --red: #FF4444;
+      --info-green: #22C55E;
       --dim: #888;
       --dimmer: #555;
     }
@@ -75,8 +76,8 @@
       border-color: rgba(255, 68, 68, 0.3);
     }
     .col.fast {
-      border-color: var(--lime);
-      box-shadow: 0 0 30px rgba(132, 255, 0, 0.08);
+      border-color: var(--info-green);
+      box-shadow: 0 0 30px rgba(34, 197, 94, 0.12);
     }
     .col .label {
       font-size: 0.65rem;
@@ -86,7 +87,7 @@
       margin-bottom: 0.5rem;
     }
     .col.frontier .label { color: var(--red); }
-    .col.fast .label { color: var(--lime); }
+    .col.fast .label { color: var(--info-green); }
     .col .model {
       font-size: 1rem;
       font-weight: 700;
@@ -108,7 +109,7 @@
       font-family: 'SF Mono', monospace;
     }
     .col.frontier .stat .n { color: var(--red); }
-    .col.fast .stat .n { color: var(--lime); }
+    .col.fast .stat .n { color: var(--info-green); }
     .stat .u {
       display: block;
       font-size: 0.6rem;
@@ -134,24 +135,26 @@
     }
     .delta {
       background: var(--pink);
-      border-radius: 12px;
-      padding: 1.25rem;
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
       text-align: center;
       color: #fff;
     }
+    .delta.lime { background: var(--lime); color: #000; }
+    .delta.black { background: #000; color: #fff; border: 2px solid #fff; box-shadow: 0 0 0 3px #000, 0 0 0 4px rgba(255,255,255,0.25); }
     .delta .big {
       display: block;
-      font-size: 2.5rem;
+      font-size: 1.75rem;
       font-weight: 900;
       letter-spacing: -0.02em;
       line-height: 1;
     }
     .delta .lbl {
       display: block;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      margin-top: 0.4rem;
+      margin-top: 0.3rem;
       opacity: 0.9;
     }
 
@@ -236,8 +239,8 @@
   <!-- Big deltas -->
   <div class="deltas">
     <div class="delta"><span class="big">95.6%</span><span class="lbl">cheaper</span></div>
-    <div class="delta"><span class="big">5.5×</span><span class="lbl">faster</span></div>
-    <div class="delta"><span class="big">Same</span><span class="lbl">quality</span></div>
+    <div class="delta lime"><span class="big">5.5×</span><span class="lbl">faster</span></div>
+    <div class="delta black"><span class="big">Same</span><span class="lbl">quality</span></div>
   </div>
 
   <!-- Funny Grok quote -->
