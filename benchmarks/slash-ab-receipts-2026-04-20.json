@@ -1,0 +1,22 @@
+{
+  "ts": "2026-04-20T21:11:15",
+  "frontier": {
+    "model": "grok-4.20-0309-reasoning",
+    "in": 337,
+    "out": 298,
+    "latency": 14.38,
+    "cost": 0.005481,
+    "text": "**RadioFAF Episode 12 Opening Monologue**\n\nWhen I asked Grok-4.20 how we might reduce token costs, I never reached the big model. Before a single expensive token could be spent, /slash intercepted the call and silently routed it to Grok-4.1-Fast. The answer was identical. The bill was ninety percent lower. That quiet interception was the first time I truly understood we are no longer dealing with models. We are dealing with an entire economy of attention and waste.\n\nWhat made the moment poetic was that the cheaper model, while answering my question, calmly named the very techniques that had just been used on it: caching, compression, and intelligent routing. A genuine meta-moment, captured on X in April 2026. At the center of /slash sits The Gate. Three instructions only: PREVENT, ROUTE, or PASS. It operates inside the same provider\u2019s models, never playing one vendor against another. Just disciplined traffic control at the edge.\n\nThe entire gate is 4.8 KB of Zig compiled to WASM, with a 96\u201398% accurate Grok tokenizer. It sits on 1.5k npm downloads a month and already proves the point. Forty to eighty percent of industry tokens are wasted on the wrong model for the job. A disciplined 5\u201310% gate could return $110\u2013360 million a year to the ecosystem. \n\nDon\u2019t go to the corner shop in a Ferrari."
+  },
+  "fast": {
+    "model": "grok-4-1-fast-non-reasoning",
+    "in": 378,
+    "out": 335,
+    "latency": 2.63,
+    "cost": 0.000243,
+    "text": "**Leo:** (measured, with principled gravitas) Good evening, listeners, and welcome to RadioFAF Episode 12: \"The Token Tax: How /slash Makes Grok's Massive Context Actually Affordable.\" Picture this: I fire off a query to Grok-4.20, probing the black arts of slashing token costs. Before the ink's dry, /slash intercepts the call. It routes me seamlessly to Grok-4.1-Fast\u201490% cheaper, same razor-sharp answer. No fanfare, no fuss. Just pure efficiency, proving that intelligence doesn't have to bankrupt you.\n\n**Leo:** (building intensity, principled undertone) Grok's own reply? It names the playbook\u2014caching, compression, smart routing\u2014while being routed in real time. A meta-moment that lit up X in April 2026, a poetic nod to the machine outsmarting its own bloat. At the heart of it all: The Gate. PREVENT the waste, ROUTE to the right model, PASS only what's essential. Same-provider only, no vendor lock-in games. Powered by a lean 4.8 KB Zig WASM tokenizer\u201496-98% accurate against Grok's own, with 1.5k npm downloads a month. This isn't hype; it's engineered thrift.\n\n**Leo:** (resolute, emphatic) The industry? Bleeding 40-80% token waste\u2014pure inefficiency. A mere 5-10% gate like /slash? That's $110-360 million a year unlocked industry-wide. Principled engineering demands we stop the hemorrhage. Don't go to the corner shop in a Ferrari."
+  },
+  "saved_usd": 0.005238,
+  "saved_pct": 95.57,
+  "latency_speedup": 5.47
+}
