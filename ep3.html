@@ -1241,12 +1241,10 @@
   </script>
 
   <!-- Nelly splash: 2.2s intro, once per session, click to dismiss -->
-  <div id="nelly-splash" aria-hidden="true" style="position:fixed;inset:0;background:#0a0a0a;z-index:99999;display:none;align-items:center;justify-content:center;cursor:pointer;">
-    <img src="/nelly-splash.png" alt="Nelly at the mic" style="max-width:80%;max-height:70vh;border-radius:12px;">
+  <div id="nelly-splash" aria-hidden="true" style="position:fixed;inset:0;background:#0a0a0a;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:nellyFade 2200ms ease forwards;">
+    <img src="/nelly-splash.png" alt="Nelly at the mic" style="max-width:80%;max-height:70vh;border-radius:12px;animation:nellyZoom 2200ms ease forwards;">
   </div>
   <style>
-    #nelly-splash.on { display:flex; animation: nellyFade 2200ms ease forwards; }
-    #nelly-splash.on img { animation: nellyZoom 2200ms ease forwards; }
     @keyframes nellyZoom {
       0%   { transform: scale(0.3);  opacity: 0; }
       30%  { transform: scale(1.05); opacity: 1; }
@@ -1261,15 +1259,14 @@
   </style>
   <script>
   (function(){
+    var el = document.getElementById('nelly-splash');
+    if (!el) return;
     try {
-      if (sessionStorage.getItem('rf_splash_shown')) return;
+      if (sessionStorage.getItem('rf_splash_shown')) { el.remove(); return; }
       sessionStorage.setItem('rf_splash_shown', '1');
-      var el = document.getElementById('nelly-splash');
-      if (!el) return;
-      el.classList.add('on');
-      el.addEventListener('click', function(){ el.style.display = 'none'; });
-      setTimeout(function(){ el.style.display = 'none'; }, 2300);
     } catch(e) {}
+    el.addEventListener('click', function(){ el.remove(); });
+    setTimeout(function(){ if (el && el.parentNode) el.remove(); }, 2300);
   })();
   </script>
 </body>
