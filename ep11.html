@@ -522,6 +522,7 @@
       <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
         <button type="button" onclick="restartShow()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">▶ Replay</button>
         <button type="button" onclick="openSuggestModal()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">💡 Suggest Next Topic</button>
+        <button type="button" onclick="focusEpCombo()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">📻 Browse Episodes</button>
         <a id="endShareBtn" href="#" target="_blank" rel="noopener" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s ease;">🐦 Share on X</a>
       </div>
     </div>
@@ -1191,6 +1192,13 @@
       var card = document.getElementById('endCard');
       if (card) card.style.display = 'none';
       startShow();
+    }
+    
+    function focusEpCombo() {
+      var input = document.querySelector('#ep-combo-mount .ep-combo-input');
+      if (!input) return;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function(){ input.focus(); }, 350);
     }
     
     function showEndCard() {
