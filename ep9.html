@@ -1219,19 +1219,20 @@
   </script>
 
   <!-- Nelly splash: 2.2s intro, once per session, click to dismiss -->
-  <div id="nelly-splash" aria-hidden="true" style="position:fixed;inset:0;background:#0a0a0a;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:nellyFade 3500ms ease forwards;">
-    <img src="/nelly-splash.png" alt="Nelly at the mic" style="max-width:80%;max-height:70vh;border-radius:12px;animation:nellyZoom 3500ms ease forwards;">
+  <div id="nelly-splash" aria-hidden="true" style="position:fixed;inset:0;background:#0a0a0a;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:nellyFade 4000ms ease forwards;">
+    <img src="/nelly-splash.png" alt="Nelly at the mic" style="max-width:80%;max-height:70vh;border-radius:12px;animation:nellyZoom 4000ms ease forwards;">
   </div>
   <style>
     @keyframes nellyZoom {
       0%   { transform: scale(0.3);  opacity: 0; }
-      30%  { transform: scale(1.05); opacity: 1; }
-      50%  { transform: scale(1);    opacity: 1; }
+      20%  { transform: scale(1.05); opacity: 1; }
+      28%  { transform: scale(1);    opacity: 1; }
+      80%  { transform: scale(1);    opacity: 1; }
       100% { transform: scale(1);    opacity: 0; }
     }
     @keyframes nellyFade {
       0%   { opacity: 1; }
-      70%  { opacity: 1; }
+      85%  { opacity: 1; }
       100% { opacity: 0; pointer-events: none; }
     }
   </style>
@@ -1244,7 +1245,7 @@
       sessionStorage.setItem('rf_splash_shown', '1');
     } catch(e) {}
     el.addEventListener('click', function(){ el.remove(); });
-    setTimeout(function(){ if (el && el.parentNode) el.remove(); }, 3600);
+    setTimeout(function(){ if (el && el.parentNode) el.remove(); }, 4100);
   })();
   </script>
 </body>
