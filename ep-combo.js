@@ -22,7 +22,8 @@
   ];
 
   const STYLES = `
-    .ep-combo { position: fixed; top: 0.6rem; left: 50%; transform: translateX(-50%); width: calc(100% - 2rem); max-width: 460px; font-family: 'SF Mono','Fira Code',Consolas,monospace; padding: 0; z-index: 100; }
+    .ep-combo { position: fixed; top: 20px; left: 20px; width: 320px; max-width: calc(100vw - 40px); font-family: 'SF Mono','Fira Code',Consolas,monospace; padding: 0; z-index: 100; }
+    @media (max-width: 720px) { .ep-combo { width: calc(100vw - 40px); top: 12px; left: 12px; max-width: calc(100vw - 24px); } }
     .ep-combo-input { width: 100%; padding: 0.7rem 2.2rem 0.7rem 2.2rem; background: #0f0f0f; color: #fff; border: 1px solid #2a2a2a; border-radius: 8px; font-family: inherit; font-size: 0.9rem; letter-spacing: 0.01em; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; caret-color: #E91E9E; }
     .ep-combo-input::placeholder { color: #888; }
     .ep-combo-input:focus { border-color: #E91E9E; box-shadow: 0 0 0 3px rgba(233,30,158,0.15); }
