@@ -590,9 +590,9 @@
         <div class="paywall-fade"></div>
         <div class="paywall-content">
           <div class="paywall-divider"></div>
-          <p class="paywall-text">Full debate &mdash; $1 day pass</p>
+          <p class="paywall-text">This channel costs money to run.<br>Buy a $1 credit to hear the full debate or other episodes &mdash; for as long as your $1 lasts.</p>
           <a class="paywall-btn" id="stripeBtn" href="#">Tune In &mdash; $1</a>
-          <p class="paywall-note">Produced for <em>$0.71</em>. That's the model.</p>
+          <p class="paywall-note">Produced for <em>$0.71</em>. Stripe takes <em>$0.30</em>. $1 is cost, not a markup.<br>We win only at volume. Early adopters ♥ keep us 'ON-AIR'</p>
         </div>
       </div>
     </div>
@@ -753,7 +753,8 @@
     // STATE
     // ================================================================
     const params = new URLSearchParams(window.location.search);
-    const hasPass = params.has('pass');
+    try { if (params.has('pass')) localStorage.setItem('rf_pass', '1'); } catch(e) {}
+    const hasPass = params.has('pass') || (function(){ try { return localStorage.getItem('rf_pass') === '1'; } catch(e) { return false; } })();
     const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
     const STORAGE_KEY = 'radiofaf-69fm-ep6-recording';
 

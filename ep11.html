@@ -507,9 +507,10 @@
     </div>
     
     <div class="paywall" id="paywall">
-      <h2>Want the full debate?</h2>
-      <p>Get instant access to all 58 exchanges for just $1</p>
-      <a href="#" class="pay-btn" id="payBtn">Get Full Episode — $1</a>
+      <h2>This channel costs money to run.</h2>
+      <p>Buy a $1 credit to hear the full debate or other episodes — for as long as your $1 lasts.</p>
+      <a href="#" class="pay-btn" id="payBtn">Tune In — $1</a>
+      <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 1rem; line-height: 1.5;">Produced for <em>$0.71</em>. Stripe takes <em>$0.30</em>. $1 is cost, not a markup.<br>We win only at volume. Early adopters ♥ keep us 'ON-AIR'</p>
     </div>
     
     <!-- Browse Episodes -->
@@ -822,7 +823,8 @@
     // STATE
     // ================================================================
     const params = new URLSearchParams(window.location.search);
-    const hasPass = params.has('pass');
+    try { if (params.has('pass')) localStorage.setItem('rf_pass', '1'); } catch(e) {}
+    const hasPass = params.has('pass') || (function(){ try { return localStorage.getItem('rf_pass') === '1'; } catch(e) { return false; } })();
     const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
     let playing = false;
     let currentIndex = 0;
