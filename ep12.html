@@ -762,6 +762,7 @@
     const maxTurns = hasPass ? TURNS.length : TRAILER_LENGTH;
     let playing = false;
     let currentIndex = 0;
+    let pausedAt = null;
     let wsUrl = null;     // WebSocket URL
     let ephToken = null;  // Current ephemeral token
     let audioCtx = null;
@@ -868,11 +869,15 @@
     
     function updatePlayBtn() {
       if (playing) {
-        playBtn.textContent = '⏹ Stop';
+        playBtn.textContent = '⏸ Pause';
         playBtn.classList.add('playing');
         onAirEl.classList.add('visible');
       } else {
-        playBtn.textContent = hasPass ? '▶ Play Full Episode' : '▶ Play Trailer';
+        if (pausedAt !== null) {
+          playBtn.textContent = '▶ Resume';
+        } else {
+          playBtn.textContent = hasPass ? '▶ Play Full Episode' : '▶ Play Trailer';
+        }
         playBtn.classList.remove('playing');
         onAirEl.classList.remove('visible');
       }
@@ -1038,19 +1043,29 @@
     // ================================================================
     async function startShow() {
       playing = true;
-      currentIndex = 0;
+      
+      // Where to start: resume from pause, otherwise skip trailer if paid
+      let startFrom;
+      const isResume = (pausedAt !== null);
+      if (isResume) {
+        startFrom = pausedAt;
+        pausedAt = null;
+      } else {
+        startFrom = hasPass ? TRAILER_LENGTH : 0;
+      }
+      currentIndex = startFrom;
       updatePlayBtn();
       
-      const preShow = document.getElementById('preShowMsg');
-      if (preShow) preShow.remove();
-      transcriptEl.innerHTML = '';
+      // Only clear UI on fresh start (not on resume)
+      if (!isResume) {
+        const preShow = document.getElementById('preShowMsg');
+        if (preShow) preShow.remove();
+        transcriptEl.innerHTML = '';
+      }
       
-      setStatus('Starting show...');
+      setStatus(isResume ? 'Resuming...' : 'Starting show...');
       
-      // Ready to start show (fresh tokens per exchange with 90s expiry)
-      setStatus('Starting show...');
-      
-      for (let i = 0; i < maxTurns; i++) {
+      for (let i = startFrom; i < maxTurns; i++) {
         if (!playing) {
           console.log(`Show loop stopped at exchange ${i}: playing=${playing}`);
           break;
@@ -1091,8 +1106,7 @@
     }
     
     function stopShow() {
-      console.log('stopShow() called, stack trace:');
-      console.trace();
+      pausedAt = currentIndex;
       playing = false;
       if (currentWs) {
         currentWs.close();
@@ -1100,7 +1114,7 @@
       }
       flushAudio();
       updatePlayBtn();
-      setStatus('');
+      setStatus('Paused at exchange ' + (pausedAt + 1) + ' of ' + maxTurns + '. Click Resume to continue.');
     }
     
     // ================================================================
