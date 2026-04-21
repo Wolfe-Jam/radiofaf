@@ -24,11 +24,11 @@
   const STYLES = `
     .ep-combo { position: fixed; top: 20px; left: 20px; width: 320px; max-width: calc(100vw - 40px); font-family: 'SF Mono','Fira Code',Consolas,monospace; padding: 0; z-index: 100; }
     @media (max-width: 720px) { .ep-combo { width: calc(100vw - 40px); top: 12px; left: 12px; max-width: calc(100vw - 24px); } }
-    .ep-combo-input { width: 100%; padding: 0.7rem 2.2rem 0.7rem 2.2rem; background: #0f0f0f; color: #fff; border: 1px solid #2a2a2a; border-radius: 8px; font-family: inherit; font-size: 0.9rem; letter-spacing: 0.01em; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; caret-color: #E91E9E; }
+    .ep-combo-input { width: 100%; padding: 0.7rem 2.4rem 0.7rem 2.2rem; background: #0f0f0f; color: #fff; border: 2px solid #444; border-radius: 8px; font-family: inherit; font-size: 0.9rem; letter-spacing: 0.01em; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; caret-color: #E91E9E; }
     .ep-combo-input::placeholder { color: #888; }
     .ep-combo-input:focus { border-color: #E91E9E; box-shadow: 0 0 0 3px rgba(233,30,158,0.15); }
     .ep-combo-icon { position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); color: #666; pointer-events: none; font-size: 0.85rem; }
-    .ep-combo-caret { position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); color: #666; pointer-events: none; font-size: 0.7rem; }
+    .ep-combo-caret { position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%); color: #84FF00; pointer-events: none; font-size: 1.1rem; font-weight: 900; line-height: 1; }
     .ep-combo-list { position: absolute; left: 0; right: 0; top: 100%; margin-top: 0.3rem; background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 8px; max-height: 320px; overflow-y: auto; z-index: 1000; display: none; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
     .ep-combo-list.open { display: block; }
     .ep-combo-item { display: block; padding: 0.6rem 1rem; color: #ddd; text-decoration: none; font-size: 0.85rem; border-bottom: 1px solid #1a1a1a; transition: background 0.15s ease, color 0.15s ease; }
