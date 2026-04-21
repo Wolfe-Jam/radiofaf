@@ -520,6 +520,18 @@
       <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 1rem; line-height: 1.5;">Produced for <em>$0.71</em>. Stripe takes <em>$0.30</em>. $1 is cost, not a markup.<br>We win only at volume. Early adopters ♥ keep us 'ON-AIR'</p>
     </div>
     
+    <!-- Episode End Card (shown when 27/27 reached) -->
+    <div id="endCard" style="display:none;margin-top:2rem;padding:2rem;background:#0f0f0f;border:2px solid var(--lime);border-radius:12px;text-align:center;box-shadow:0 0 30px rgba(132,255,0,0.1);">
+      <h2 style="color:var(--lime);margin-bottom:0.5rem;font-size:1.4rem;">🎧 Thanks for listening</h2>
+      <p style="color:#fff;margin-bottom:0.3rem;">That's a wrap on this episode.</p>
+      <p style="color:var(--text-dim);font-size:0.8rem;margin-bottom:1.5rem;">Early adopters keep us &lsquo;ON-AIR&rsquo; &hearts;</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
+        <button type="button" onclick="restartShow()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">▶ Replay</button>
+        <button type="button" onclick="openSuggestModal()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">💡 Suggest Next Topic</button>
+        <a id="endShareBtn" href="#" target="_blank" rel="noopener" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s ease;">🐦 Share on X</a>
+      </div>
+    </div>
+    
     <!-- Browse Episodes -->
     <div class="browse-section">
       <h3>Browse Episodes</h3>
@@ -1097,12 +1109,34 @@
         
         if (!hasPass) {
           paywallEl.style.display = 'block';
+        } else {
+          showEndCard();
         }
       }
       
       playing = false;
       updatePlayBtn();
       setStatus(playing ? '' : (hasPass ? 'Episode complete.' : 'Trailer complete. Get the full debate!'));
+    }
+    
+    function restartShow() {
+      pausedAt = null;
+      var card = document.getElementById('endCard');
+      if (card) card.style.display = 'none';
+      startShow();
+    }
+    
+    function showEndCard() {
+      var card = document.getElementById('endCard');
+      if (!card) return;
+      var shareBtn = document.getElementById('endShareBtn');
+      if (shareBtn) {
+        var title = document.title.replace(/^RadioFAF.*?Episode\s*\d+:\s*/i, '').replace(/\s*\|.*$/, '').trim() || document.title;
+        var text = 'Just heard: ' + title + ' on @grok-powered RadioFAF 📻';
+        var url = window.location.origin + window.location.pathname;
+        shareBtn.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+      }
+      card.style.display = 'block';
     }
     
     function stopShow() {
