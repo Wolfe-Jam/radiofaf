@@ -1310,5 +1310,38 @@
       }
     }
   </script>
+
+  <!-- Nelly splash: 2.2s intro, once per session, click to dismiss -->
+  <div id="nelly-splash" aria-hidden="true" style="position:fixed;inset:0;background:#0a0a0a;z-index:99999;display:none;align-items:center;justify-content:center;cursor:pointer;">
+    <img src="/nelly-splash.png" alt="Nelly at the mic" style="max-width:80%;max-height:70vh;border-radius:12px;">
+  </div>
+  <style>
+    #nelly-splash.on { display:flex; animation: nellyFade 2200ms ease forwards; }
+    #nelly-splash.on img { animation: nellyZoom 2200ms ease forwards; }
+    @keyframes nellyZoom {
+      0%   { transform: scale(0.3);  opacity: 0; }
+      30%  { transform: scale(1.05); opacity: 1; }
+      50%  { transform: scale(1);    opacity: 1; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    @keyframes nellyFade {
+      0%   { opacity: 1; }
+      70%  { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+  </style>
+  <script>
+  (function(){
+    try {
+      if (sessionStorage.getItem('rf_splash_shown')) return;
+      sessionStorage.setItem('rf_splash_shown', '1');
+      var el = document.getElementById('nelly-splash');
+      if (!el) return;
+      el.classList.add('on');
+      el.addEventListener('click', function(){ el.style.display = 'none'; });
+      setTimeout(function(){ el.style.display = 'none'; }, 2300);
+    } catch(e) {}
+  })();
+  </script>
 </body>
 </html>
