@@ -158,6 +158,51 @@
       opacity: 0.9;
     }
 
+    .story {
+      background: #0f0f0f;
+      border: 1px solid #1f1f1f;
+      border-left: 4px solid var(--pink);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .story-kicker {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 0.6rem;
+    }
+    .story-body {
+      font-size: 1.02rem;
+      color: #e0e0e0;
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
+    .story-body em { color: var(--lime); font-style: normal; }
+    .story-body .slash { color: var(--pink); font-weight: 700; }
+    .story-math {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.4rem 1rem;
+      font-family: 'SF Mono', monospace;
+      font-size: 0.9rem;
+      padding: 0.85rem 1rem;
+      background: #000;
+      border-radius: 6px;
+    }
+    .story-math .lbl { color: var(--dim); }
+    .story-math .val { font-weight: 900; text-align: right; }
+    .story-math .val.bad { color: #FF4444; }
+    .story-math .val.good { color: var(--lime); }
+    .story-foot {
+      margin-top: 0.7rem;
+      font-size: 0.78rem;
+      color: var(--dim);
+      text-align: center;
+    }
+    .story-foot em { color: var(--lime); font-style: normal; font-weight: 700; }
+
     .quote {
       background: #0f0f0f;
       border: 1px solid #1f1f1f;
@@ -205,14 +250,14 @@
   <header>
     <div class="station">📻 RadioFAF 69.0 FM · Receipts</div>
     <h1>What <span class="slash">/slash</span> actually does</h1>
-    <div class="subtitle">Same prompt. Two Grok models. Real calls on xAI's API.</div>
-    <div class="when">2026-04-20 · reproducible at github.com/Wolfe-Jam/radiofaf/benchmarks</div>
+    <div class="subtitle">We make this call every day. <span class="slash">/slash</span> makes it for you.</div>
+    <div class="when">Real receipts · xAI API · reproducible at github.com/Wolfe-Jam/radiofaf/benchmarks</div>
   </header>
 
   <!-- A/B cards -->
   <div class="grid">
     <div class="col frontier">
-      <div class="label">◉ Frontier (where users default)</div>
+      <div class="label">◉ Where most builders default</div>
       <div class="model">grok-4.20-0309-reasoning</div>
       <div class="stats">
         <div class="stat"><span class="n">$0.0055</span><span class="u">cost</span></div>
@@ -225,7 +270,7 @@
     <div class="vs">→</div>
 
     <div class="col fast">
-      <div class="label">⚡ Where /slash routes it</div>
+      <div class="label">⚡ Where /slash routes it (and where RadioFAF runs)</div>
       <div class="model">grok-4-1-fast-non-reasoning</div>
       <div class="stats">
         <div class="stat"><span class="n">$0.0002</span><span class="u">cost</span></div>
@@ -243,9 +288,25 @@
     <div class="delta black"><span class="big">Same</span><span class="lbl">quality</span></div>
   </div>
 
+  <!-- The lived-experience story -->
+  <div class="story">
+    <div class="story-kicker">This isn't a benchmark. It's daily reality.</div>
+    <div class="story-body">
+      <span class="slash">/slash</span> is the call RadioFAF makes every episode, every day.
+      We hardcoded the cheap model — because we knew to. <em>Most builders don't.</em>
+    </div>
+    <div class="story-math">
+      <span class="lbl">Without /slash thinking:</span>
+      <span class="val bad">~$19.50/episode</span>
+      <span class="lbl">With /slash (or our hardcode):</span>
+      <span class="val good">$0.71/episode</span>
+    </div>
+    <div class="story-foot">Daily cadence × 1 year = <em>~$7,100 saved.</em> Same answer. 27× cheaper. 5.5× faster.</div>
+  </div>
+
   <!-- Funny Grok quote -->
   <div class="quote">
-    <div class="kicker">What Grok-4.1-Fast said, while /slash was routing the call to it 😂</div>
+    <div class="kicker">What Grok-4.1-Fast said, mid-route — describing /slash while being /slashed 😂</div>
     <blockquote>
       "Grok's own reply? It names the playbook — caching, compression, smart routing — while being routed in real time. <em>A poetic nod to the machine outsmarting its own bloat.</em>"
     </blockquote>
