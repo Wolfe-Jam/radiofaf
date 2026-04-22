@@ -162,6 +162,9 @@ checkpoint "FE-9" "FE" "/nelly-splash.png is image/png" \
 checkpoint "FE-10" "FE" "/ep-combo.js loads + has EP13" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js' | grep 'num: 13' >/dev/null"
 
+checkpoint "FE-11" "FE" "/home features the latest ep (EP13)" \
+  "$CURL -L '$RADIOFAF_HOST/home' | grep 'Episode 13' >/dev/null"
+
 # ============================================================
 # LAYER APIR — RadioFAF API (CF Pages Function)
 # ============================================================
