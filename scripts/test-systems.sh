@@ -239,13 +239,14 @@ fi
 echo
 echo "${CYAN}LAYER E2E — End-to-end flow${NC}"
 
-checkpoint "E2E-1" "E2E" "trigger /api/voice-session → decisions count climbs" "
-  before=\$(echo '$AGG_RESPONSE' | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"decisions\", 0))' 2>/dev/null)
+checkpoint "E2E-1" "E2E" "trigger /api/voice-session → last_decision_at advances" "
+  before=\$($CURL '$MCPAAS_HOST/slash/v1/aggregates/radiofaf?nocache=before$RANDOM' | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"last_decision_at\", \"\"))' 2>/dev/null)
   $CURL '$RADIOFAF_HOST/api/voice-session' >/dev/null 2>&1
   $CURL '$RADIOFAF_HOST/api/voice-session' >/dev/null 2>&1
-  sleep 5
-  after=\$($CURL '$MCPAAS_HOST/slash/v1/aggregates/radiofaf?nocache=$RANDOM' | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"decisions\", 0))' 2>/dev/null)
-  [ \"\$after\" -gt \"\$before\" ]
+  sleep 6
+  after=\$($CURL '$MCPAAS_HOST/slash/v1/aggregates/radiofaf?nocache=after$RANDOM' | python3 -c 'import sys, json; print(json.load(sys.stdin).get(\"last_decision_at\", \"\"))' 2>/dev/null)
+  # last_decision_at must advance — proves new decisions logged + aggregates fresh
+  [ \"\$after\" '>' \"\$before\" ]
 "
 
 # ============================================================
