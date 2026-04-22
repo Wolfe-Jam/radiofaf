@@ -7,6 +7,7 @@
   'use strict';
 
   const EPISODES = [
+    { num: 13, slug: 'ep13', title: 'Nelly Wants to Sing' },
     { num: 12, slug: 'ep12', title: 'The Token Tax' },
     { num: 11, slug: 'ep11', title: "Empathy's Echo" },
     { num: 10, slug: 'ep10', title: 'Training Troubles' },
