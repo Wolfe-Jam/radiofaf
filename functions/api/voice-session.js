@@ -35,8 +35,11 @@ async function getRoutedModel(env) {
   };
 
   try {
-    const headers = { 'Content-Type': 'application/json' };
-    if (env.SLASH_KEY) headers['x-slash-key'] = env.SLASH_KEY; // optional — enables KV tracking
+    const headers = {
+      'Content-Type': 'application/json',
+      'x-slash-app': 'radiofaf', // belt-and-braces: header AND body field
+    };
+    if (env.SLASH_KEY) headers['x-slash-key'] = env.SLASH_KEY; // enables KV tracking
     const res = await fetch(SLASH_DECISION_URL, {
       method: 'POST',
       headers,
