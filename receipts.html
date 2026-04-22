@@ -203,6 +203,40 @@
     }
     .story-foot em { color: var(--lime); font-style: normal; font-weight: 700; }
 
+    .live-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      margin: 1rem auto 0;
+      padding: 0.55rem 0.9rem;
+      background: rgba(132, 255, 0, 0.06);
+      border: 1px solid rgba(132, 255, 0, 0.25);
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: var(--lime);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      max-width: 540px;
+      flex-wrap: wrap;
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--lime);
+      border-radius: 50%;
+      animation: live-pulse 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(132, 255, 0, 0.6); }
+      50%      { opacity: 0.5; box-shadow: 0 0 0 6px rgba(132, 255, 0, 0); }
+    }
+    .live-bar .num { color: #fff; }
+    .live-bar.error { background: rgba(255, 68, 68, 0.06); border-color: rgba(255, 68, 68, 0.25); color: var(--red); }
+    .live-bar.error .live-dot { background: var(--red); animation: none; }
+
     .quote {
       background: #0f0f0f;
       border: 1px solid #1f1f1f;
@@ -252,6 +286,10 @@
     <h1>What <span class="slash">/slash</span> actually does</h1>
     <div class="subtitle">We make this call every day. <span class="slash">/slash</span> makes it for you.</div>
     <div class="when">Real receipts · xAI API · reproducible at github.com/Wolfe-Jam/radiofaf/benchmarks</div>
+    <div class="live-bar" id="liveBar">
+      <span class="live-dot"></span>
+      <span id="liveText">Loading live /slash data…</span>
+    </div>
   </header>
 
   <!-- A/B cards -->
@@ -320,6 +358,36 @@
   </footer>
 
 </main>
+
+<script>
+  // Pull live /slash routing aggregates from mcpaas.live.
+  // Updates the LIVE bar at the top of the page with real production numbers.
+  (function () {
+    const bar = document.getElementById('liveBar');
+    const text = document.getElementById('liveText');
+    if (!bar || !text) return;
+
+    function fmt(n) { return Number(n).toLocaleString(); }
+
+    function render() {
+      fetch('https://mcpaas.live/slash/v1/aggregates/radiofaf', { cache: 'no-store' })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)))
+        .then(d => {
+          const decisions = fmt(d.decisions || 0);
+          const pct = (d.percent_routed != null) ? d.percent_routed : 0;
+          text.innerHTML = `LIVE · <span class="num">${decisions}</span> recent /slash decisions · <span class="num">${pct}%</span> routed`;
+        })
+        .catch(() => {
+          bar.classList.add('error');
+          text.textContent = 'Live data unavailable — check back soon';
+        });
+    }
+
+    render();
+    // Refresh every 60s while the tab is visible
+    setInterval(() => { if (document.visibilityState === 'visible') render(); }, 60000);
+  })();
+</script>
 
 </body>
 </html>
