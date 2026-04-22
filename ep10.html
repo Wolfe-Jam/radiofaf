@@ -840,6 +840,7 @@
     let pausedAt = null;
     let wsUrl = null;     // WebSocket URL
     let ephToken = null;  // Current ephemeral token
+    let routedModel = 'grok-4-1-fast-non-reasoning';  // Set by /slash via /api/voice-session
     let audioCtx = null;
     let audioQueue = [];
     let draining = false;
@@ -927,6 +928,8 @@
       const data = await res.json();
       wsUrl = data.wsUrl;
       ephToken = data.token || data.ephemeralToken; // Handle both response formats
+      if (data.model) routedModel = data.model; // /slash chose this — log it for transparency
+      if (data.slash_decision) console.log('[/slash routing]', data.slash_decision);
     }
     
     // ================================================================
@@ -1035,7 +1038,7 @@
           'DIRECTION: ' + turn.dir;
         
         // Individual WebSocket per exchange (but reuse token for cost optimization)
-        const url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        const url = wsUrl + '?model=' + encodeURIComponent(routedModel);
         console.log(`Exchange ${turnIndex}: Creating WebSocket...`);
         const sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
         currentWs = sock;
