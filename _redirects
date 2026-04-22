@@ -2,7 +2,8 @@
 # Custom paths (no matching .html) need explicit rules.
 # 200 = rewrite (URL stays same, serves target). 301 = permanent redirect.
 
-/69.0       /ep12.html    200
+/69.0       /ep13.html    200
+/69.0/12    /ep12.html    200
 /69.0/11    /ep11.html    200
 /69.0/10    /ep10.html    200
 /69.0/9     /ep9.html     200
