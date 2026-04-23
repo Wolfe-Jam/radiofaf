@@ -23,14 +23,20 @@
   ];
 
   const STYLES = `
-    .ep-combo { position: fixed; top: 20px; left: 20px; width: 320px; max-width: calc(100vw - 40px); font-family: 'SF Mono','Fira Code',Consolas,monospace; padding: 0; z-index: 100; }
-    @media (max-width: 720px) { .ep-combo { width: calc(100vw - 40px); top: 12px; left: 12px; max-width: calc(100vw - 24px); } }
-    .ep-combo-input { width: 100%; padding: 0.7rem 2.4rem 0.7rem 2.2rem; background: #0f0f0f; color: #fff; border: 2px solid #444; border-radius: 8px; font-family: inherit; font-size: 0.9rem; letter-spacing: 0.01em; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; caret-color: #E91E9E; }
+    /* Episode combo — bottom-anchored, opens UP. Frees the top of the page for title + share-x. */
+    .ep-combo { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); width: calc(100vw - 32px); max-width: 480px; font-family: 'SF Mono','Fira Code',Consolas,monospace; padding: 0; z-index: 100; }
+    @media (max-width: 720px) {
+      .ep-combo { bottom: max(12px, env(safe-area-inset-bottom, 12px)); width: calc(100vw - 16px); max-width: calc(100vw - 16px); }
+    }
+    .ep-combo-input { width: 100%; padding: 0.7rem 2.4rem 0.7rem 2.2rem; background: #0f0f0f; color: #fff; border: 2px solid #444; border-radius: 8px; font-family: inherit; font-size: 0.9rem; letter-spacing: 0.01em; outline: none; transition: border-color 0.2s ease, box-shadow 0.2s ease; caret-color: #E91E9E; cursor: pointer; }
     .ep-combo-input::placeholder { color: #888; }
-    .ep-combo-input:focus { border-color: #E91E9E; box-shadow: 0 0 0 3px rgba(233,30,158,0.15); }
+    .ep-combo-input:focus { border-color: #E91E9E; box-shadow: 0 0 0 3px rgba(233,30,158,0.15); cursor: text; }
     .ep-combo-icon { position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); color: #666; pointer-events: none; font-size: 0.85rem; }
-    .ep-combo-caret { position: absolute; right: 0.7rem; top: 50%; transform: translateY(-50%); color: #84FF00; pointer-events: none; font-size: 1.1rem; font-weight: 900; line-height: 1; }
-    .ep-combo-list { position: absolute; left: 0; right: 0; top: 100%; margin-top: 0.3rem; background: #0f0f0f; border: 1px solid #2a2a2a; border-radius: 8px; max-height: 320px; overflow-y: auto; z-index: 1000; display: none; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+    /* Caret: up-arrow when closed (▴), rotates 180° to ▾ when open. */
+    .ep-combo-caret { position: absolute; right: 0.7rem; top: 50%; color: #84FF00; pointer-events: none; font-size: 1.1rem; font-weight: 900; line-height: 1; transform: translateY(-50%) rotate(0deg); transition: transform 0.18s ease, color 0.18s ease; }
+    .ep-combo.open .ep-combo-caret { transform: translateY(-50%) rotate(180deg); color: #E91E9E; }
+    /* List opens UPWARD from the input. */
+    .ep-combo-list { position: absolute; left: 0; right: 0; bottom: 100%; margin-bottom: 0.4rem; background: #0f0f0f; border: 2px solid #444; border-radius: 8px; max-height: 56vh; overflow-y: auto; z-index: 1000; display: none; box-shadow: 0 -8px 32px rgba(0,0,0,0.5); }
     .ep-combo-list.open { display: block; }
     .ep-combo-item { display: block; padding: 0.6rem 1rem; color: #ddd; text-decoration: none; font-size: 0.85rem; border-bottom: 1px solid #1a1a1a; transition: background 0.15s ease, color 0.15s ease; }
     .ep-combo-item:last-child { border-bottom: none; }
@@ -74,10 +80,11 @@
       '<div class="ep-combo">' +
         '<span class="ep-combo-icon">🔍</span>' +
         '<input type="text" class="ep-combo-input" placeholder="' + placeholder.replace(/"/g, '&quot;') + '" autocomplete="off" aria-label="Find an episode">' +
-        '<span class="ep-combo-caret">▾</span>' +
+        '<span class="ep-combo-caret" aria-hidden="true">▴</span>' +
         '<div class="ep-combo-list" role="listbox"></div>' +
       '</div>';
 
+    const wrap = root.querySelector('.ep-combo');
     const input = root.querySelector('.ep-combo-input');
     const list = root.querySelector('.ep-combo-list');
     let highlighted = 0;
@@ -110,12 +117,15 @@
       if (el) el.scrollIntoView({ block: 'nearest' });
     }
 
+    function isOpen() { return list.classList.contains('open'); }
     function open() {
       list.classList.add('open');
+      wrap.classList.add('open'); // rotates caret via CSS
       render(input.value);
     }
     function close() {
       list.classList.remove('open');
+      wrap.classList.remove('open');
     }
 
     input.addEventListener('focus', function () {
@@ -125,6 +135,14 @@
     input.addEventListener('blur', function () {
       // Delay so clicks on items register before close.
       setTimeout(close, 150);
+    });
+    // Click on the input bar when open also closes (in addition to outside-click).
+    // Detected via mousedown so it fires before blur and we can intercept.
+    input.addEventListener('mousedown', function (e) {
+      if (isOpen()) {
+        e.preventDefault();
+        input.blur(); // triggers the blur → setTimeout close above
+      }
     });
     input.addEventListener('input', function (e) {
       render(e.target.value);
