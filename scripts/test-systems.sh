@@ -7,11 +7,12 @@
 # pinpoints WHICH LAYER is broken — easy debugging.
 #
 # Layers:
-#   FE   — Frontend (Cloudflare Pages serving radiofaf.com)
-#   APIR — RadioFAF API (CF Pages Functions: /api/voice-session)
-#   APIM — mcpaas-cf API (Cloudflare Worker: /slash/*)
-#   KV   — KV state (mcpaas SOULS namespace)
-#   E2E  — End-to-end flow (trigger → wait → verify)
+#   FE     — Frontend (Cloudflare Pages serving radiofaf.com)
+#   SCHEMA — Local schema validation (characters.js shape)
+#   APIR   — RadioFAF API (CF Pages Functions: /api/voice-session)
+#   APIM   — mcpaas-cf API (Cloudflare Worker: /slash/*)
+#   KV     — KV state (mcpaas SOULS namespace)
+#   E2E    — End-to-end flow (trigger → wait → verify)
 #
 # Usage:
 #   ./scripts/test-systems.sh             # run all
@@ -21,6 +22,10 @@
 # Exit code: 0 if all PASS, 1 if any FAIL.
 #
 set -uo pipefail
+
+# Resolve absolute paths once so checkpoint eval'd commands have stable refs.
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+REPO_ROOT="$( cd "$SCRIPT_DIR/.." && pwd )"
 
 # ---------- config (override via env) ----------
 RADIOFAF_HOST="${RADIOFAF_HOST:-https://radiofaf.com}"
@@ -171,6 +176,40 @@ checkpoint "FE-12" "FE" "ep-combo.js renders Home button (rf-home-btn)" \
 checkpoint "FE-13" "FE" "Home button uses 🐘💖 mascot (deploy is current)" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js?cb=\$RANDOM' | grep '🐘💖' >/dev/null"
 
+checkpoint "FE-14" "FE" "/characters.js loads (200)" \
+  "[ \$($CURL -Lo /dev/null -w '%{http_code}' '$RADIOFAF_HOST/characters.js') = '200' ]"
+
+checkpoint "FE-15" "FE" "characters.js defines window.RADIOFAF_CHARACTERS" \
+  "$CURL -L '$RADIOFAF_HOST/characters.js' | grep 'window.RADIOFAF_CHARACTERS' >/dev/null"
+
+checkpoint "FE-16" "FE" "characters.js has all 5 house cast IDs" \
+  "remote=\$($CURL -L '$RADIOFAF_HOST/characters.js'); for id in leo sal ara rex eve; do echo \"\$remote\" | grep \"  \$id: {\" >/dev/null || exit 1; done"
+
+checkpoint "FE-17" "FE" "rex.color is gold #FFD700 (catches green regression)" \
+  "$CURL -L '$RADIOFAF_HOST/characters.js' | grep \"color: '#FFD700'\" >/dev/null"
+
+checkpoint "FE-18" "FE" "/nelly-djing.png is image/png (about hero)" \
+  "[ \"\$($CURL -Io /dev/null -w '%{content_type}' '$RADIOFAF_HOST/nelly-djing.png')\" = 'image/png' ]"
+
+checkpoint "FE-19" "FE" "/about contains 'Hired by RadioFAF' lore" \
+  "$CURL -L '$RADIOFAF_HOST/about' | grep 'Hired by RadioFAF' >/dev/null"
+
+checkpoint "FE-20" "FE" "no file in repo references old Rex green #10a37f" \
+  "! grep -rl --include='*.html' --include='*.css' --include='*.js' '#10a37f' '$REPO_ROOT' 2>/dev/null"
+
+# ============================================================
+# LAYER SCHEMA — characters.js schema validation (local file)
+# ============================================================
+echo
+echo "${CYAN}LAYER SCHEMA — characters.js schema validation${NC}"
+
+if ! command -v node >/dev/null 2>&1; then
+  skip_checkpoint "SCHEMA-1" "SCHEMA" "characters.js schema validates" "no node in PATH"
+else
+  checkpoint "SCHEMA-1" "SCHEMA" "characters.js passes schema validation" \
+    "node '$SCRIPT_DIR/validate-characters.js'"
+fi
+
 # ============================================================
 # LAYER APIR — RadioFAF API (CF Pages Function)
 # ============================================================
@@ -278,11 +317,12 @@ else
   done
   echo "================================================================"
   echo "  Layer guide:"
-  echo "    FE   = Frontend not deploying / file content wrong → check radiofaf repo + CF Pages deploy logs"
-  echo "    APIR = /api/voice-session broken → check radiofaf/functions/api/voice-session.js + CF Pages secrets (SLASH_KEY, XAI_API_KEY)"
-  echo "    APIM = mcpaas.live worker broken → check mcpaas-cf src/routes/slash-proxy.ts + wrangler deploy logs"
-  echo "    KV   = KV state missing → check mcpaas KV namespace via wrangler"
-  echo "    E2E  = the chain works individually but doesn't connect → suspect cache or KV propagation"
+  echo "    FE     = Frontend not deploying / file content wrong → check radiofaf repo + CF Pages deploy logs"
+  echo "    SCHEMA = characters.js shape broken → run 'node scripts/validate-characters.js' for details"
+  echo "    APIR   = /api/voice-session broken → check radiofaf/functions/api/voice-session.js + CF Pages secrets (SLASH_KEY, XAI_API_KEY)"
+  echo "    APIM   = mcpaas.live worker broken → check mcpaas-cf src/routes/slash-proxy.ts + wrangler deploy logs"
+  echo "    KV     = KV state missing → check mcpaas KV namespace via wrangler"
+  echo "    E2E    = the chain works individually but doesn't connect → suspect cache or KV propagation"
   echo "================================================================"
   exit 1
 fi
