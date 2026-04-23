@@ -29,7 +29,7 @@
       --leo: #00D4D4;
       --sal: #d97706;
       --ara: #4285f4;
-      --rex: #10a37f;
+      --rex: #FFD700;
       --eve: #7c3aed;
     }
     
@@ -246,7 +246,28 @@
     </section>
     
     <section class="section">
-      <h2>Meet the Voices</h2>
+      <h2>Your Host</h2>
+      <div class="nelly-hero" style="display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:1.5rem;align-items:center;margin-top:1rem;background:#0f0f0f;border:2px solid var(--ara);border-radius:12px;padding:1.5rem;">
+        <a href="/nelly-djing.png" target="_blank" rel="noopener" style="display:block;line-height:0;border-radius:8px;overflow:hidden;">
+          <img src="/nelly-djing.png" alt="DJ Nelly at the turntables — Always Remember, Nelly Never Forgets" style="width:100%;height:auto;display:block;border-radius:8px;">
+        </a>
+        <div>
+          <div style="color:var(--ara);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;">DJ · 69.0 FM</div>
+          <h3 style="color:var(--pink);font-size:1.6rem;margin-bottom:.6rem;">Nelly</h3>
+          <p style="color:#e0e0e0;line-height:1.55;margin-bottom:.7rem;">The elephant who never forgets. <em style="color:var(--lime);font-style:normal;">"Always remember… I never forget."</em></p>
+          <p style="color:#bbb;line-height:1.55;margin-bottom:.7rem;font-size:.92rem;">Originally the canonical mascot of <strong>faf-cli</strong> — where she anchors persistent project context. <strong style="color:var(--pink);">Hired by RadioFAF</strong> to host the broadcast. She bridges segments, opens the show, and lands the wisdom.</p>
+          <p style="color:#bbb;line-height:1.55;font-size:.92rem;">Has welcomed guests on-air, including <strong style="color:var(--lime);">/slash</strong> — the Departure Gate himself, in cape and visor.</p>
+        </div>
+      </div>
+      <style>
+        @media (max-width: 640px) {
+          .nelly-hero { grid-template-columns: 1fr !important; text-align: center; }
+        }
+      </style>
+    </section>
+
+    <section class="section">
+      <h2>The Crew</h2>
       <div class="voices-grid">
         <div class="voice-card leo">
           <div class="voice-name">LEO</div>
@@ -256,10 +277,6 @@
           <div class="voice-name">SAL</div>
           <div class="voice-desc">Corporate cynic. Calls out tech companies commodifying loneliness. Data-driven and precise.</div>
         </div>
-        <div class="voice-card ara">
-          <div class="voice-name">NELLY</div>
-          <div class="voice-desc">The warm host who never forgets. Guides with wisdom and humor. "Always remember... I never forget."</div>
-        </div>
         <div class="voice-card rex">
           <div class="voice-name">REX</div>
           <div class="voice-desc">Pragmatic optimist. If it helps users, ship it. Focuses on practical solutions.</div>
@@ -267,6 +284,10 @@
         <div class="voice-card eve">
           <div class="voice-name">EVE</div>
           <div class="voice-desc">User perspective. Just wants tools that actually help. Champions the community.</div>
+        </div>
+        <div class="voice-card ara">
+          <div class="voice-name">ARA</div>
+          <div class="voice-desc">The Roaster. Optimist with teeth — laughs, then drops truth bombs. Doubles as Nelly's voice between segments.</div>
         </div>
       </div>
     </section>
