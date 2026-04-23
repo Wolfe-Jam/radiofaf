@@ -46,34 +46,32 @@
     .ep-combo-item.active .ep-num { color: #E91E9E; }
     .ep-combo-empty { padding: 0.9rem 1rem; color: #666; font-size: 0.85rem; text-align: center; font-style: italic; }
 
-    /* Home button — top-left mirror of Share-X (top-right). Universal nav back to /home. */
+    /* Home button — the RadioFAF mascot row (🐘🎧😝). Click = home.
+       Top-left mirror of Share-X (top-right). The mascots ARE the brand signature. */
     .rf-home-btn {
       position: fixed;
       top: 20px;
       left: 20px;
       z-index: 1000;
       background: #000;
-      color: #fff;
       border: 2px solid #333;
       border-radius: 8px;
-      padding: 8px 12px;
-      font-family: 'SF Mono','Fira Code',Consolas,monospace;
-      font-size: 0.8rem;
-      font-weight: 600;
+      padding: 6px 10px;
+      font-size: 1.05rem;
+      line-height: 1;
+      letter-spacing: 0.05em;
       text-decoration: none;
       transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
     }
     .rf-home-btn:hover {
       background: var(--pink, #E91E9E);
-      color: #fff;
       border-color: var(--pink, #E91E9E);
       transform: translateY(-1px);
     }
     @media (max-width: 720px) {
-      .rf-home-btn { top: 12px; left: 12px; padding: 6px 10px; font-size: 0.75rem; }
+      .rf-home-btn { top: 12px; left: 12px; padding: 5px 9px; font-size: 0.95rem; }
     }
   `;
 
@@ -116,7 +114,9 @@
       home.className = 'rf-home-btn';
       home.href = '/home';
       home.setAttribute('aria-label', 'Back to RadioFAF home');
-      home.innerHTML = '📻&nbsp;Home';
+      home.innerHTML = '🐘💖';
+      home.title = 'Home — RadioFAF';
+      home.setAttribute('aria-label', 'Home');
       document.body.appendChild(home);
     }
 
