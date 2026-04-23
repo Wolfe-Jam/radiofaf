@@ -168,6 +168,9 @@ checkpoint "FE-11" "FE" "/home features the latest ep (EP13)" \
 checkpoint "FE-12" "FE" "ep-combo.js renders Home button (rf-home-btn)" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js' | grep 'rf-home-btn' >/dev/null"
 
+checkpoint "FE-13" "FE" "Home button uses 🐘💖 mascot (deploy is current)" \
+  "$CURL -L '$RADIOFAF_HOST/ep-combo.js?cb=\$RANDOM' | grep '🐘💖' >/dev/null"
+
 # ============================================================
 # LAYER APIR — RadioFAF API (CF Pages Function)
 # ============================================================

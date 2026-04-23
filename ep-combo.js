@@ -70,9 +70,6 @@
       border-color: var(--pink, #E91E9E);
       transform: translateY(-1px);
     }
-    @media (max-width: 720px) {
-      .rf-home-btn { top: 12px; left: 12px; padding: 5px 9px; font-size: 0.95rem; }
-    }
   `;
 
   function fmtNum(n) { return 'EP' + (n < 10 ? '0' + n : n); }
