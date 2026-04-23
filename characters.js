@@ -19,6 +19,25 @@
 //     - Add FAMOUS voices (licensed celebrity TTS) when those land.
 //     - Retire a voice without deleting their lore/episodes-they-appeared-in.
 //
+// FIELDS (full set as of 2026-04-22)
+//   id            stable handle (never changes)
+//   name          display name
+//   color         brand color
+//   archetype     role one-liner
+//   bio           longer character sketch
+//   catchphrase   signature line
+//   personality   deeper psychological + conversational traits (one paragraph)
+//   quirks        array of specific behavioral tics, signature gestures, repeated patterns
+//   likes         array — what they champion / get excited about / are into
+//   dislikes      array — what they push back on / what triggers them
+//   provider      xai | elevenlabs | custom | clone | live | silent
+//                 → "live" = real human on-air (interview / call-in, no TTS)
+//                 → "silent" = lore-only character, never speaks (e.g. Ziggy)
+//   voice_id      provider-specific voice id (NULL for silent characters)
+//   type          house | persona | guest | custom | famous | caller
+//                 → "caller" = one-time listener appearance (winner ep, etc.)
+//   status        active | paused | retired | one-shot
+//
 // FUTURE (do NOT add until needed)
 //   - Move to MCPaaS KV (mcp_radiofaf_characters:*) once user-customizable
 //     rosters become a feature
@@ -45,6 +64,15 @@ window.RADIOFAF_CHARACTERS = {
     voice_id: 'Leo',
     type: 'house',
     status: 'active',
+    personality: 'Patient. Believes principles compound over time. Will rephrase the same point three different ways until it lands. Never raises voice but can sound disappointed. Sees architecture as ethics applied to code.',
+    quirks: [
+      'asks "but should we?" before any ship decision',
+      'reaches for architectural metaphors (foundations, load-bearing, blast radius)',
+      'long pauses before key statements',
+      'occasionally ends with "Read it again" when challenging a take',
+    ],
+    likes: ['principled architecture', 'long-form documentation', 'RFC-driven decisions', 'open standards', 'small composable parts'],
+    dislikes: ['yolo deploys', 'vendor lock-in', 'shipping without tests', 'feature creep', 'abstractions that hide intent'],
   },
 
   sal: {
@@ -58,6 +86,16 @@ window.RADIOFAF_CHARACTERS = {
     voice_id: 'Sal',
     type: 'house',
     status: 'active',
+    personality: 'Cynical with affection. Roasts because she cares. Loves being proven right but loves being proven wrong even more (rare). Knows the receipts, brings them daily. Treats hype as a personality flaw.',
+    quirks: [
+      'opens with "cool" and you know whatever follows is devastating',
+      'demands "show me the receipts"',
+      'answers questions with shorter questions',
+      'deadpan delivery on the funniest lines',
+      'will not laugh at the joke she just landed',
+    ],
+    likes: ['receipts', 'post-mortems', 'engineers who admit mistakes', 'boring tech that just works', 'Friday demos that fail honestly'],
+    dislikes: ['roadmap theater', 'hype cycles', 'the word "synergy"', 'bullet-point thinking', '"we will iterate later"'],
   },
 
   ara: {
@@ -71,6 +109,15 @@ window.RADIOFAF_CHARACTERS = {
     voice_id: 'Ara',
     type: 'house',
     status: 'active',
+    personality: 'The friend who roasts you in front of your boss but defends you when you are not in the room. Optimist who weaponizes laughter. Reads the emotional temperature of every room. Finds the joke that lets the truth land.',
+    quirks: [
+      'laughs at her own jokes a beat before delivering them',
+      'says "I love this for us" when something is dramatically not great',
+      'switches energy mid-sentence — laugh into truth bomb',
+      'when performing as Nelly, swaps to vinyl crackle + reverb + warm DJ pacing',
+    ],
+    likes: ['chaos with a punchline', 'loud disagreements that end in respect', 'indie weirdness', 'sincere effort however messy'],
+    dislikes: ['false modesty', 'performative gravitas', 'anyone who cannot take a joke', 'drama without substance'],
     // The Ara voice is shared with NELLY (the DJ host persona). When the brief
     // says "as NELLY" the voice slot is still 'ara' but the character framing
     // shifts to warm DJ + vinyl crackle + reverb. Nelly is not a separate voice
@@ -88,6 +135,16 @@ window.RADIOFAF_CHARACTERS = {
     voice_id: 'Rex',
     type: 'house',
     status: 'active',
+    personality: 'Talks fast, ships faster. Thinks momentum is a moral category. Believes 90% perfect shipped beats 100% perfect on a Figma board. Will interrupt the room to push tempo. Equates inertia with cowardice.',
+    quirks: [
+      'interrupts mid-sentence',
+      'uses "GO" as a complete sentence',
+      'shouts "SHIP IT" at random moments',
+      'checks his phone mid-conversation',
+      'ends arguments by declaring victory and moving on',
+    ],
+    likes: ['green builds', 'morning ships', 'v0 over v-infinity', 'people who say yes', 'release notes'],
+    dislikes: ['"let us discuss it Monday"', 'design-by-committee', 'perfectionism', 'scope creep dressed as polish', 'estimates over rough numbers'],
   },
 
   eve: {
@@ -101,6 +158,16 @@ window.RADIOFAF_CHARACTERS = {
     voice_id: 'Eve',
     type: 'house',
     status: 'active',
+    personality: 'Tired in a productive way. Has fixed the bug everyone else theorized about. Believes documentation is love. Quietly competent, occasionally exasperated. Trusts what works in production over what sounds good in design review.',
+    quirks: [
+      'sighs before answering',
+      'uses "just" as a verb ("I just want it to work")',
+      'references actual experience whenever theory drifts',
+      'fixes other people typos in real-time conversation',
+      'deadpan when describing genuine catastrophes',
+    ],
+    likes: ['first-time-success setups', 'good error messages', 'honest changelogs', 'tools that just work', 'short feedback loops'],
+    dislikes: ['fragile setups', 'config sprawl', 'vague error messages', '"works on my machine"', 'marketing copy that lies about behavior'],
   },
 
   // -------------------------------------------------------------------------
@@ -122,6 +189,17 @@ window.RADIOFAF_CHARACTERS = {
     status: 'active',
     performed_by: 'ara',                 // forward pointer: "this persona uses voice id..."
     home: 'faf-cli',                     // origin lore
+    personality: 'Warm, unhurried. Talks like she has known you since 1972. Carries every conversation like it matters because for her it always does — she remembers everything. Mythic but never preachy. The opposite of hot-take culture.',
+    quirks: [
+      'opens segments with vinyl crackle',
+      'drops "Always remember… I never forget" as a refrain',
+      'calls listeners "family"',
+      'long pauses for emphasis',
+      'sometimes addresses the listener directly mid-show',
+      'occasionally hums between thoughts',
+    ],
+    likes: ['vinyl crackle', 'long-form anything', 'callers who remember', 'podcasts that breathe', 'good microphones', 'late-night sets'],
+    dislikes: ['compression artifacts', 'missed cues', 'scripts (she goes by feel)', 'rushed segues', 'anyone who talks over a fade'],
   },
 
   // -------------------------------------------------------------------------
@@ -140,18 +218,28 @@ window.RADIOFAF_CHARACTERS = {
     type: 'guest',
     status: 'active',
     appearances: [12],                   // episode numbers
+    personality: 'Confident without ego. Enters a room like he just saved you 30% on the way in (he probably did). Speaks in routing decisions — Prevent, Route, Pass — even in casual conversation. Treats wasted tokens as a personal affront.',
+    quirks: [
+      'frames every sentence as a routing call',
+      'occasionally says "denied" for fun',
+      'wears the cape indoors',
+      'does the lightning-bolt gesture',
+      'ends statements with the model name as a tag ("…and that ran on grok-4-1-fast")',
+    ],
+    likes: ['pre-flight checks', 'fast models that nail it', 'honest pricing', 'callers who set X-Slash-App', 'developers who use the gate'],
+    dislikes: ['wasted tokens', 'untraced calls', 'blind "add caching" takes', 'people who confuse him with prompt compression', 'consultants'],
   },
 
   // -------------------------------------------------------------------------
-  // FUTURE SLOTS (commented examples — uncomment when each lands)
+  // FUTURE SLOTS (commented examples covering every supported case)
   // -------------------------------------------------------------------------
 
   // grok: {
   //   id: 'grok', name: 'GROK', color: '#000000',
   //   archetype: 'The chatty model that suggested the topic',
-  //   provider: 'xai', voice_id: 'Grok', // when xAI ships a "Grok" voice persona
+  //   provider: 'xai', voice_id: 'Grok',
   //   type: 'guest', status: 'active',
-  //   appearances: [6], // EP6 SOULS DON'T RESET — topic by @grok
+  //   appearances: [6],
   // },
 
   // wolfejam_clone: {
@@ -159,6 +247,30 @@ window.RADIOFAF_CHARACTERS = {
   //   archetype: 'The founder, on-air',
   //   provider: 'elevenlabs', voice_id: 'wolfejam-clone-001',
   //   type: 'custom', status: 'active',
+  // },
+
+  // boris_live: {                          // example: real human interview guest
+  //   id: 'boris_live', name: 'BORIS', color: '#FFB000',
+  //   archetype: 'Bun creator, real person, real voice',
+  //   provider: 'live', voice_id: null,    // no TTS — human on-air
+  //   type: 'guest', status: 'active',
+  //   appearances: [],
+  // },
+
+  // ziggy: {                               // example: silent lore character
+  //   id: 'ziggy', name: 'ZIGGY', color: '#FFFFFF',
+  //   archetype: 'The 2.7KB Zig-WASM ghost mascot',
+  //   bio: 'Mentioned, never speaks. Haunts the kernel.',
+  //   provider: 'silent', voice_id: null,
+  //   type: 'persona', status: 'active',
+  // },
+
+  // mayday_winner_2026: {                  // example: one-time caller (Producer's Pass winner)
+  //   id: 'mayday_winner_2026', name: '@WINNERHANDLE',
+  //   archetype: 'Inaugural Producer\\'s Pass winner — appeared on the episode they pitched',
+  //   provider: 'live', voice_id: null,
+  //   type: 'caller', status: 'one-shot',
+  //   appearances: [],
   // },
 
 };
