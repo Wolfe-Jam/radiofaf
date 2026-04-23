@@ -32,11 +32,32 @@
 //   dislikes      array — what they push back on / what triggers them
 //   provider      xai | elevenlabs | custom | clone | live | silent
 //                 → "live" = real human on-air (interview / call-in, no TTS)
-//                 → "silent" = lore-only character, never speaks (e.g. Ziggy)
-//   voice_id      provider-specific voice id (NULL for silent characters)
+//                 → "silent" = lore-only character, never speaks plainly (e.g. Ziggy)
+//   voice_id      provider-specific voice id (NULL for live/silent characters)
 //   type          house | persona | guest | custom | famous | caller
 //                 → "caller" = one-time listener appearance (winner ep, etc.)
 //   status        active | paused | retired | one-shot
+//   output_modes  optional array — how this character communicates
+//                 → 'voice'   full TTS speech (default for active TTS characters)
+//                 → 'whisper' low-volume / atmospheric / not fully intelligible
+//                 → 'text'    appears as on-screen text, not audio
+//                 → 'sfx'     sound effects only (gasps, ghost noises, footprints)
+//                 → 'silent'  pure lore presence, never rendered
+//                 if omitted, defaults to ['voice'] for TTS providers
+//   disclosure    optional string — for live/clone scenarios only
+//                 → 'real'    confirmed real human, this episode (provider: live)
+//                 → 'clone'   AI clone of a real person (provider: elevenlabs/clone)
+//                 → 'composite' a clone with editorial direction (e.g. Nelly persona)
+//                 omitted = no disclosure needed (fictional / synthetic character)
+//                 the production layer MUST surface this in the listener experience
+//
+// DISCLOSURE
+//   When a character is `provider: 'live'` (real human) vs `provider: 'clone'`
+//   (AI replica of a real person), the production layer MUST make this clear
+//   in the listener experience — banner, transcript label, episode notes.
+//   RadioFAF's "Authentic AI. Unscripted." claim depends on listeners knowing
+//   what they're hearing. Real Boris ≠ Boris-clone, even if both are valuable.
+//   The schema tells the architecture; the brief/UI tells the audience.
 //
 // FUTURE (do NOT add until needed)
 //   - Move to MCPaaS KV (mcp_radiofaf_characters:*) once user-customizable
@@ -249,20 +270,34 @@ window.RADIOFAF_CHARACTERS = {
   //   type: 'custom', status: 'active',
   // },
 
-  // boris_live: {                          // example: real human interview guest
+  // boris_live: {                          // example: real human guest (REAL, not cloned)
   //   id: 'boris_live', name: 'BORIS', color: '#FFB000',
   //   archetype: 'Bun creator, real person, real voice',
   //   provider: 'live', voice_id: null,    // no TTS — human on-air
   //   type: 'guest', status: 'active',
+  //   output_modes: ['voice'],             // his actual voice
+  //   disclosure: 'real',                  // production layer surfaces this
   //   appearances: [],
   // },
 
-  // ziggy: {                               // example: silent lore character
+  // boris_clone: {                         // example: SAME PERSON, but TTS clone
+  //   id: 'boris_clone', name: 'BORIS (clone)', color: '#FFB000',
+  //   archetype: 'Bun creator — AI clone speaking on his behalf',
+  //   provider: 'elevenlabs', voice_id: 'boris-clone-001',
+  //   type: 'famous', status: 'active',
+  //   output_modes: ['voice'],
+  //   disclosure: 'clone',                 // listeners deserve to know
+  //   appearances: [],
+  // },
+
+  // ziggy: {                               // silent-ish lore character — whispers + text
   //   id: 'ziggy', name: 'ZIGGY', color: '#FFFFFF',
   //   archetype: 'The 2.7KB Zig-WASM ghost mascot',
-  //   bio: 'Mentioned, never speaks. Haunts the kernel.',
-  //   provider: 'silent', voice_id: null,
+  //   bio: 'Haunts the kernel. Whispers between segments, sends on-screen text messages, occasional sfx.',
+  //   provider: 'xai', voice_id: 'Ara',    // whispers via Ara at low volume
   //   type: 'persona', status: 'active',
+  //   output_modes: ['whisper', 'text', 'sfx'],
+  //   home: 'xai-faf-zig',
   // },
 
   // mayday_winner_2026: {                  // example: one-time caller (Producer's Pass winner)
@@ -270,6 +305,8 @@ window.RADIOFAF_CHARACTERS = {
   //   archetype: 'Inaugural Producer\\'s Pass winner — appeared on the episode they pitched',
   //   provider: 'live', voice_id: null,
   //   type: 'caller', status: 'one-shot',
+  //   output_modes: ['voice'],
+  //   disclosure: 'real',
   //   appearances: [],
   // },
 
