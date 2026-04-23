@@ -45,6 +45,36 @@
     .ep-combo-item.active { background: rgba(132,255,0,0.08); }
     .ep-combo-item.active .ep-num { color: #E91E9E; }
     .ep-combo-empty { padding: 0.9rem 1rem; color: #666; font-size: 0.85rem; text-align: center; font-style: italic; }
+
+    /* Home button — top-left mirror of Share-X (top-right). Universal nav back to /home. */
+    .rf-home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: #000;
+      color: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: 'SF Mono','Fira Code',Consolas,monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .rf-home-btn:hover {
+      background: var(--pink, #E91E9E);
+      color: #fff;
+      border-color: var(--pink, #E91E9E);
+      transform: translateY(-1px);
+    }
+    @media (max-width: 720px) {
+      .rf-home-btn { top: 12px; left: 12px; padding: 6px 10px; font-size: 0.75rem; }
+    }
   `;
 
   function fmtNum(n) { return 'EP' + (n < 10 ? '0' + n : n); }
@@ -75,6 +105,20 @@
     const placeholder = current
       ? (fmtNum(current.num) + ' · ' + current.title)
       : 'Find an episode…';
+
+    // Inject the Home button into <body> unless we're already on /home, /, or /producers-pass.
+    // Render once (idempotent — guards against double-mount).
+    const path = (window.location.pathname || '').replace(/\/$/, '') || '/';
+    const onHome = path === '/' || path === '/home' || path === '/index' || path === '/producers-pass';
+    if (!onHome && !document.getElementById('rf-home-btn')) {
+      const home = document.createElement('a');
+      home.id = 'rf-home-btn';
+      home.className = 'rf-home-btn';
+      home.href = '/home';
+      home.setAttribute('aria-label', 'Back to RadioFAF home');
+      home.innerHTML = '📻&nbsp;Home';
+      document.body.appendChild(home);
+    }
 
     root.innerHTML =
       '<div class="ep-combo">' +
