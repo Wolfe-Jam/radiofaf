@@ -1,4 +1,4 @@
-// Vercel Edge Function — xAI Standalone TTS for RadioFAF v2.1
+// Cloudflare Pages Function — xAI Standalone TTS for RadioFAF v2.1
 export const config = { runtime: 'edge' };
 
 export default async function handler(req) {

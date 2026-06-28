@@ -1,4 +1,4 @@
-// Vercel Edge Function — RadioFAF frequency waitlist
+// Cloudflare Pages Function — RadioFAF frequency waitlist
 export const config = { runtime: 'edge' };
 
 export default async function handler(req) {

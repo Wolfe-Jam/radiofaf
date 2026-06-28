@@ -1,4 +1,4 @@
-// Vercel Edge Function — xAI ephemeral token for RadioFAF voice playback
+// Cloudflare Pages Function — xAI ephemeral token for RadioFAF voice playback
 export const config = { runtime: 'edge' };
 
 export default async function handler(req) {
