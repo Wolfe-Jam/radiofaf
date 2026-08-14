@@ -167,8 +167,8 @@ checkpoint "FE-9" "FE" "/nelly-splash.png is image/png" \
 checkpoint "FE-10" "FE" "/ep-combo.js loads + has EP13" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js' | grep 'num: 13' >/dev/null"
 
-checkpoint "FE-11" "FE" "/home features the latest ep (EP15)" \
-  "$CURL -L '$RADIOFAF_HOST/home' | grep 'Episode 15' >/dev/null"
+checkpoint "FE-11" "FE" "/home features the latest ep (EP16)" \
+  "$CURL -L '$RADIOFAF_HOST/home' | grep 'Episode 16' >/dev/null"
 
 checkpoint "FE-12" "FE" "ep-combo.js renders Home button (rf-home-btn)" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js' | grep 'rf-home-btn' >/dev/null"
@@ -225,8 +225,8 @@ checkpoint "APIR-2" "APIR" "response includes wsUrl" \
 checkpoint "APIR-3" "APIR" "response includes ephemeral token (>50 chars)" \
   "echo '$VOICE_RESPONSE' | python3 -c 'import sys, json; d=json.load(sys.stdin); assert len(d.get(\"token\", \"\")) > 50'"
 
-checkpoint "APIR-4" "APIR" "response model is grok-4-1-fast-non-reasoning" \
-  "echo '$VOICE_RESPONSE' | python3 -c 'import sys, json; d=json.load(sys.stdin); assert d.get(\"model\") == \"grok-4-1-fast-non-reasoning\"'"
+checkpoint "APIR-4" "APIR" "response model is grok-voice-latest" \
+  "echo '$VOICE_RESPONSE' | python3 -c 'import sys, json; d=json.load(sys.stdin); assert d.get(\"model\") == \"grok-voice-latest\"'"
 
 checkpoint "APIR-5" "APIR" "routed_via_slash is true" \
   "echo '$VOICE_RESPONSE' | python3 -c 'import sys, json; d=json.load(sys.stdin); assert d.get(\"routed_via_slash\") is True'"

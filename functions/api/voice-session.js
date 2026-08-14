@@ -3,6 +3,11 @@
 // 2026-04-22: routing decision moved from hardcoded ?model=grok-4-1-fast-non-reasoning
 // to a live call to mcpaas.live/slash/route-decision. RadioFAF is now the lived-experience
 // proof of /slash — every episode generation is a recorded routing decision.
+//
+// 2026-08-14: the websocket pin is grok-voice-latest (realtime S2S).
+// /slash still routes chat slugs to grok-4-1-fast — that is the wrong class
+// for speech-to-speech. We keep the slash call for the receipt, then map
+// any chat slug onto the voice alias.
 
 const CORS = {
   'Access-Control-Allow-Origin': '*',
@@ -12,16 +17,18 @@ const CORS = {
 
 const SLASH_DECISION_URL = 'https://mcpaas.live/slash/route-decision';
 
-// Fallback model used if /slash is unavailable. Same as the original hardcode.
-const FALLBACK_REALTIME_MODEL = 'grok-4-1-fast-non-reasoning';
+// Fallback / live pin: realtime speech-to-speech. Not a chat slug.
+// grok-4-1-fast-non-reasoning retired 2026-05-15 (redirects to grok-4.3).
+const FALLBACK_REALTIME_MODEL = 'grok-voice-latest';
 
 // Translate /slash canonical name → xAI Realtime API model name.
-// /slash registry uses short names; Realtime API uses the -non-reasoning suffix.
+// Chat slugs are the wrong class for S2S. Voice aliases pass through.
 function toRealtimeModel(canonical) {
   if (!canonical) return FALLBACK_REALTIME_MODEL;
-  if (canonical === 'grok-4-1-fast') return 'grok-4-1-fast-non-reasoning';
-  // Future: handle more grok variants as they ship
-  return canonical;
+  if (typeof canonical === 'string' && canonical.startsWith('grok-voice')) {
+    return canonical;
+  }
+  return FALLBACK_REALTIME_MODEL;
 }
 
 async function getRoutedModel(env) {
@@ -58,7 +65,7 @@ async function getRoutedModel(env) {
     return {
       model: FALLBACK_REALTIME_MODEL,
       routed_via_slash: false,
-      decision: { model: 'grok-4-1-fast', routed: true, reason: 'fallback (slash unavailable)' },
+      decision: { model: 'grok-voice-latest', routed: true, reason: 'fallback (slash unavailable)' },
     };
   }
 }
