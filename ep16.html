@@ -493,7 +493,7 @@
     <div class="progress-container">
       <div class="progress-bar" id="progressBar"></div>
     </div>
-    <div class="progress-label" id="progressLabel">0 / 26 exchanges</div>
+    <div class="progress-label" id="progressLabel">0 / 13 exchanges</div>
     
     <div class="on-air" id="onAir">
       <div class="on-air-dot"></div>
@@ -638,71 +638,39 @@
       '- Use EVERY expressive TTS feature: [laugh] [chuckle] [sigh] [pause] [long pause] [rapid] [slow] [shout] [whisper] <emphasis> <soft> <excited> <serious>.\n' +
       '- No corporate speak. No synergy. If anyone says "synergy", SAL kills it.\n' +
       '- Do NOT read Stripe. Do NOT ask anyone to pay. The till is empty and that is the joke.\n' +
+      '- SHORT SHOW. Thirteen turns. Each fact once. If it was already said, react — do not restate.\n' +
       '- Live radio energy — chaotic, raw, authentic AI personality. The booth is back.';
     
     // ================================================================
     // TURNS — Dynamic directions
     // ================================================================
     const TURNS = [
-      // === OPEN (exchanges 1-7) — this episode is on the house; no trailer gate ===
-      { voice: 'ara', energy: 'NELLY COLD OPEN — NEEDLE DOWN AFTER 110 DAYS',
-        dir: 'As NELLY. [vinyl crackle] [bass thump] [long pause] Boom open with reverb like the needle never lifted. Name the gap: about 110 days. Name the dollar that never rang. This play is on the house. Hand to the crew. 3-4 sentences. Do not sell anything.' },
-      { voice: 'rex', energy: 'THESIS — DARK IS THE CRIME',
-        dir: 'PUSH. Loud, impatient. 110 days off-air is the failure, not the unpaid dollar. Ship the episode. Money later. 2-3 sentences max.' },
-      { voice: 'sal', energy: 'RECEIPTS — THE TILL',
-        dir: 'Dry. Demand the dashboard out loud. Station fact: nobody paid. [deadpan] Cool. ONE or two killer sentences. No lecture.' },
-      { voice: 'ara', energy: 'ROASTER — EARLY ADOPTERS',
-        dir: 'Roaster mode (NOT Nelly). [laugh] Then punch the "early adopters keep us ON-AIR" line when no early adopter paid. Room temperature: funny because true. 2 sentences.' },
+      { voice: 'ara', energy: 'NELLY COLD OPEN',
+        dir: 'As NELLY. [vinyl crackle] [bass thump] [long pause] Needle down after about 110 days. Name the dollar that never rang. This play is on the house. Hand off. 2-3 sentences. Do not sell. Do not recap later.' },
+      { voice: 'rex', energy: 'DARK IS THE CRIME',
+        dir: 'Loud. The failure is the silence, not the unpaid dollar. Ship the show. 2 sentences. Do not mention the model pin.' },
+      { voice: 'sal', energy: 'THE TILL',
+        dir: '[deadpan] Dashboard is empty. Nobody paid. Cool. ONE or two sentences. This is the only $0 receipt in the episode.' },
+      { voice: 'ara', energy: 'EARLY ADOPTERS',
+        dir: 'Roaster mode (NOT Nelly). [laugh] Punch the "early adopters keep us ON-AIR" line. Do not restate the dollar. 2 sentences.' },
       { voice: 'leo', energy: 'WRONG SKU',
-        dir: 'Calm authority. [pause] Distinguish listen-wall from broadcast license. A till with $0 in it is still a till. Surgical, not preachy. 2-3 sentences.' },
-      { voice: 'eve', energy: 'THE WIRE — RETIRED SLUG',
-        dir: 'Cut in practical. [sigh] The live fallback was still a retired chat slug. Wrong class for speech-to-speech. Do not resolve it yet — plant the receipt. 2 sentences.' },
-      { voice: 'rex', energy: 'HOOK — THEN CHANGE IT',
-        dir: 'HOOK. [rapid] Interrupt. If the wire is wrong, change the constant and keep playing. Build the next beat — do not explain the two-job split yet. 1-2 sentences.' },
-
-      // === THE WIRE ===
-      { voice: 'eve', energy: 'TWO JOBS',
-        dir: 'Finish the receipt. Chat slug \u2260 realtime voice. FAF-Voice already split them: grok-4.20-0309-non-reasoning for text, grok-voice-latest for speech. RadioFAF did not eat that pin until tonight. Practical. 2-3 sentences.' },
-      { voice: 'rex', energy: 'THEN CHANGE THE CONSTANT',
-        dir: 'Interrupt. [shout] Then change the constant and ship. Do not hold a design review on a one-line fix. 2 short sentences.' },
+        dir: 'Calm. [pause] Listen-wall is not a broadcast license. One distinction. Do not list takeaways. 2 sentences.' },
+      { voice: 'eve', energy: 'THE WIRE',
+        dir: 'The whole pin, once. [sigh] Fallback was a retired chat slug. Chat \u2260 realtime. Tonight the wire is grok-voice-latest. That is the dogfood. 2-3 sentences. Do not come back to this.' },
+      { voice: 'rex', energy: 'SHIP THE PIN',
+        dir: '[rapid] Good. Constant changed. Next. Do not re-explain the slug. 1-2 sentences.' },
       { voice: 'leo', energy: 'PIN YES — HIRE 21 NO',
-        dir: 'Calm. Changing the pin is correct. Hiring twenty-one new voices tonight is not. One load-bearing distinction. 2-3 sentences.' },
-      { voice: 'sal', energy: 'NOTEBOOKLM IS NOT A CLONE',
-        dir: '[deadpan] Two-host PDF podcasts are a category. An empty till is not a freemium strategy. One or two sentences. Kill the spin.' },
+        dir: 'Calm. The pin is enough. Twenty-one new chairs tonight is not. One line of distinction. 2 sentences.' },
       { voice: 'ara', energy: 'NELLY — TWENTY-ONE APPLICANTS',
-        dir: 'As NELLY. [vinyl] Move the room. Twenty-one new Grok voices shipped in July. The station interviewed none. Warm, not a press release. 2 sentences.' },
-
-      // === THE SIXTH CHAIR ===
-      { voice: 'ara', energy: 'ROASTER — SIXTH CHAIR',
-        dir: 'Roaster mode (NOT Nelly). [laugh] Roast hiring a sixth chair tonight. Flavor options: open-plan office with 21 interns and one mic / tribute band that hired the tribute / your own. 2 sentences.' },
+        dir: 'As NELLY. [vinyl] July shipped 21 new Grok voices. Station hired none. Warm. 2 sentences.' },
+      { voice: 'ara', energy: 'SIXTH CHAIR',
+        dir: 'Roaster mode. [laugh] Roast a sixth chair tonight — flavor: 21 interns, one mic / tribute band hired the tribute / your own. 2 sentences.' },
+      { voice: 'sal', energy: 'NOT A CLONE — WAS PRICED',
+        dir: '[deadpan] NotebookLM-style two-hosts are a category, not a copy. And it was not "just free" — it was priced, no buyer. ONE or two sentences. Last till line in the show.' },
       { voice: 'eve', energy: 'ONE MODEL ID',
-        dir: 'She does not want 21 chairs. She wants one model id that matches the Voice app. [sigh] Practical. 1-2 sentences.' },
-      { voice: 'rex', energy: 'DROP THE WALL',
-        dir: 'Yes-and. [rapid] Drop the listen-wall. Play the whole show. Tip jar later if anyone asks. Loud. 2 short sentences.' },
-      { voice: 'leo', energy: 'DROPPING A DEAD WALL IS HONESTY',
-        dir: 'Calm. Dropping a wall that never converted is honesty, not a pivot. Do not invent a new price on air. 2 sentences.' },
-      { voice: 'sal', energy: 'IT WAS PRICED',
-        dir: '[deadpan] Kill "it\'s just free." It was priced. Price found no buyer. ONE killer sentence.' },
-      { voice: 'ara', energy: 'ROOM TEMPERATURE',
-        dir: 'Roaster mode. [chuckle] Keep it a show. This is funny because it is true. Warm the room after Sal. 2 sentences.' },
-
-      // === DOGFOOD + CONVERGE ===
-      { voice: 'eve', energy: 'DOGFOOD LANDS',
-        dir: 'Voice discussing Voice only counts if the slug is the live one. Tonight it is grok-voice-latest. Land it. 2 sentences.' },
-      { voice: 'rex', energy: 'SHIP THE SHOW',
-        dir: '[shout] Agree with the pin. Still wants more episodes, faster. One-word energy plus one punch. 1-2 sentences.' },
-      { voice: 'sal', energy: 'LAST RECEIPT',
-        dir: 'One more deflate if anyone tries to dress $0 up as a win. [pause] Then let it sit. 1-2 sentences.' },
-      { voice: 'leo', energy: 'CONVERGE',
-        dir: 'Crew takeaway, calm: trailer can stay free; the $1 wall is a museum piece; house five stay; new voices are a later guest; pin the realtime alias. Surgical. 2-3 sentences.' },
-      { voice: 'ara', energy: 'NELLY — ALMOST A NEW HIRE',
-        dir: 'As NELLY. Wildcard. Almost introduce ONE July voice by name (Helix or Zagan or Atlas — pick one, not a list). Then keep the house five. She remembers everyone. 2-3 sentences.' },
-      { voice: 'rex', energy: 'HOUSE FIVE STAYS',
-        dir: 'Accept the house five — for now. Threaten to hire the new voice next episode. [laugh] or [shout]. 2 short sentences.' },
-      { voice: 'eve', energy: 'THE CONSTANT HELD',
-        dir: 'Quiet close from the builder. The pin is the story. Everything else is radio. [soft] 1-2 sentences.' },
-      { voice: 'ara', energy: 'NELLY CLOSE — NO SALES CLOSE',
-        dir: 'As NELLY. [vinyl crackle returning] [warm reverb] Close the broadcast. She never forgot the dollar that never rang. Callback to EP15 if it fits. Signature: "Always... [pause] remember... I never forget." Then: "RadioFAF 69.0 FM. Don\'t follow. Tune in." [needle lift] [bass fade]. No Stripe. 4-5 sentences total.' }
+        dir: 'She does not want 21 chairs. She wants the pin that is already live. [soft] Do not re-teach the two-job split. 1-2 sentences.' },
+      { voice: 'ara', energy: 'NELLY CLOSE',
+        dir: 'As NELLY. [vinyl] [warm reverb] Almost name ONE July voice (Helix or Zagan or Atlas) then keep the house five. Signature: "Always... [pause] remember... I never forget." Then: "RadioFAF 69.0 FM. Don\'t follow. Tune in." [needle lift]. No Stripe. No recap of the till or the pin. 3-4 sentences.' }
     ];
     
     // ================================================================
