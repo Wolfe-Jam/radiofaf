@@ -55,8 +55,8 @@ export async function onRequestPost({ request, env }) {
     try {
       await fetch('https://mcpaas.live/radiofaf-waitlist/write', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entry, type: 'waitlist', token: 'wolfe-68-orange' }),
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${process.env.MCPAAS_TOKEN}` },
+        body: JSON.stringify({ entry, type: 'waitlist' }),
       });
     } catch (e) {
       console.warn('MCPaaS write failed (non-blocking):', e.message);
