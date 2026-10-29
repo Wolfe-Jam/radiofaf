@@ -1,0 +1,41 @@
+faf_version: "3.0"
+project:
+  name: radiofaf
+  goal: "Multi-voice AI radio: Grok writes each script live and five xAI voices speak it. Nothing is pre-recorded."
+  main_language: "HTML"
+  type: html  # found: index.html (vanilla, no frontend framework)
+stack:
+  frontend: slotignored
+  css_framework: slotignored
+  ui_library: slotignored
+  state_management: slotignored
+  backend: slotignored
+  api_type: slotignored
+  runtime: slotignored
+  database: slotignored
+  connection: slotignored
+  hosting: "Cloudflare Pages"
+  build: ""
+  cicd: GitHub Actions
+  monorepo_tool: slotignored
+  package_manager: slotignored
+  workspaces: slotignored
+  admin: slotignored
+  cache: slotignored
+  search: slotignored
+  storage: slotignored
+human_context:
+  who: "Listeners, and developers exploring xAI Grok Voice"
+  what: "69.0 FM: multi-voice AI radio, unscripted, every episode generated on demand"
+  why: "Authentic AI. Unscripted. Dynamic generation only."
+  where: "radiofaf.com"
+  when: "Live; 11 episodes (latest: Episode 11, Empathy's Echo)"
+  how: "Grok (grok-4-1-fast-non-reasoning) over a realtime WebSocket writes the script; the xAI Voice API speaks it in five voices"
+monorepo:
+  packages_count: slotignored
+  build_orchestrator: slotignored
+  versioning_strategy: slotignored
+  shared_configs: slotignored
+  remote_cache: slotignored
+key_files:
+  - README.md
