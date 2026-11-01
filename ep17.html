@@ -679,6 +679,36 @@
     };
 
     const XAI_VOICE = { james: 'vluy2u1jtsif', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
+
+    // Kept take, 2026-11-01. Play serves this recording. Speech lengths are the
+    // recorded turns; 0.45s of silence sits between them in the wav.
+    const TAKE_URL = '/audio/ep17.wav';
+    const TAKE_GAP = 0.45;
+    const TAKE = [
+      { voice: 'ara', seconds: 9.6, text: 'Needle down. The card says a human joined the team, and that human is sitting Leo\'s chair — his name is James. Say hello to the booth.' },
+      { voice: 'james', seconds: 16.3, text: 'First time on this mic, so I\'ll say it once and not again. I\'m James-Wolfe, a custom voice cloned from the founder, made 2 May 2026. I\'m not Leo, and the live human isn\'t here — he\'s not on this mic. I\'m borrowing this chair for the hour.' },
+      { voice: 'rex', seconds: 8.0, text: 'A mouth showed up, it sat down, and the hour is already running. If the voice works, we ship it — the philosophy exam can wait for the parking lot.' },
+      { voice: 'ara', seconds: 8.9, text: '"A human joined the team" is a press line, and the human is not in the building. The badge is in the chair and the person is at home.' },
+      { voice: 'sal', seconds: 9.6, text: '6 July 2026. Twenty-one new flagship voices shipped, and this station hired exactly none of them. The voice in this chair is not one of those twenty-one.' },
+      { voice: 'eve', seconds: 10.9, text: 'This booth has always been strings. Leo is a string. Tonight\'s string was copied from a person. I will play it. I will not call it a person.' },
+      { voice: 'james', seconds: 10.2, text: 'So let me ask it at myself. A clone sat down in this chair. Did a human join? For this hour only — the voice can work. The human did not join.' },
+      { voice: 'rex', seconds: 5.4, text: 'A mouth showed up, it works, that\'s the test. Humanity\'s a footnote. Ship the hour.' },
+      { voice: 'ara', seconds: 8.0, text: 'Leo was a voice too. But this is the first voice in this booth copied from somebody who can walk out that door — and that difference is the whole show.' },
+      { voice: 'sal', seconds: 5.4, text: '"Leo is not human either" does not hire James — Leo had no person outside to replace.' },
+      { voice: 'eve', seconds: 7.0, text: 'The booth is strings. This string was copied from a person. I play it tonight, and I add no sixth name to the house card.' },
+      { voice: 'james', seconds: 6.7, text: 'Here\'s the honest answer, then I\'m out of this chair. A clone can take an hour. A human joining would have to be in the room.' },
+      { voice: 'ara', seconds: 20.5, text: 'A human joined the team — that\'s the press line — and his name is James, sitting Leo\'s chair for this hour. The booth was never human, and this is the first voice copied from someone who can leave the building. Always... remember... I never forget. RadioFAF 69.0 FM. Don\'t follow. Tune in.' }
+    ];
+    const TAKE_STARTS = [];
+    {
+      let at = 0;
+      for (const turn of TAKE) {
+        TAKE_STARTS.push(at);
+        at += turn.seconds + TAKE_GAP;
+      }
+    }
+    let takeAudio = null;
+    let takeShown = -1;
     
     // ================================================================
     // COST OPTIMIZATION SUCCESS: Reduced Token Expiry ✅
@@ -1058,7 +1088,76 @@
       pausedAt = null;
       var card = document.getElementById('endCard');
       if (card) card.style.display = 'none';
+      if (takeAudio) {
+        takeAudio.pause();
+        takeAudio.currentTime = 0;
+        takeShown = -1;
+        playKept();
+        return;
+      }
       startShow();
+    }
+
+    function ensureTakeAudio() {
+      if (takeAudio) return takeAudio;
+      takeAudio = new Audio(TAKE_URL);
+      takeAudio.preload = 'auto';
+      takeAudio.hidden = true;
+      document.body.appendChild(takeAudio);
+      takeAudio.addEventListener('timeupdate', revealTake);
+      takeAudio.addEventListener('ended', finishTake);
+      return takeAudio;
+    }
+
+    function revealTake() {
+      if (!takeAudio) return;
+      const now = takeAudio.currentTime;
+      while (takeShown + 1 < TAKE.length && TAKE_STARTS[takeShown + 1] <= now + 0.08) {
+        if (takeShown >= 0) finishExchange(takeShown);
+        takeShown += 1;
+        const turn = TAKE[takeShown];
+        addExchange(turn.voice, turn.text, takeShown);
+        currentIndex = takeShown;
+        updateProgress();
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+      }
+    }
+
+    function finishTake() {
+      if (takeShown >= 0) finishExchange(takeShown);
+      playing = false;
+      pausedAt = null;
+      currentIndex = maxTurns;
+      updateProgress();
+      updatePlayBtn();
+      showEndCard();
+      setStatus('Episode complete.');
+    }
+
+    function playKept() {
+      const audio = ensureTakeAudio();
+      const atEnd = audio.ended || (audio.duration && audio.currentTime >= audio.duration - 0.05);
+      const fresh = pausedAt === null && (audio.currentTime < 0.05 || atEnd);
+      if (fresh) {
+        audio.currentTime = 0;
+        takeShown = -1;
+        const preShow = document.getElementById('preShowMsg');
+        if (preShow) preShow.remove();
+        transcriptEl.innerHTML = '';
+        const card = document.getElementById('endCard');
+        if (card) card.style.display = 'none';
+        currentIndex = 0;
+        updateProgress();
+      }
+      playing = true;
+      pausedAt = null;
+      updatePlayBtn();
+      setStatus('On air...');
+      audio.play().catch((err) => {
+        playing = false;
+        updatePlayBtn();
+        setStatus('Playback failed. ' + (err && err.message ? err.message : 'try again'));
+      });
     }
     
     function focusEpCombo() {
@@ -1084,6 +1183,12 @@
     function stopShow() {
       pausedAt = currentIndex;
       playing = false;
+      if (takeAudio && !takeAudio.paused) {
+        takeAudio.pause();
+        updatePlayBtn();
+        setStatus('Paused at exchange ' + (pausedAt + 1) + ' of ' + maxTurns + '. Click Resume to continue.');
+        return;
+      }
       if (currentWs) {
         currentWs.close();
         currentWs = null;
@@ -1100,8 +1205,7 @@
       if (playing) {
         stopShow();
       } else {
-        ensureAudio();
-        startShow();
+        playKept();
       }
     });
     

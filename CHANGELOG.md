@@ -2,7 +2,7 @@
 
 ## Unreleased — Grok Voice 3.0
 
-- Episode 17, Twenty-One Chairs. James-Wolfe (`vluy2u1jtsif`) takes Leo's turns for one show. The fight is whether a clone joining counts as a human joining. Leo stays in the house cast.
+- Episode 17, Twenty-One Chairs. James-Wolfe (`vluy2u1jtsif`) takes Leo's turns for one show. The fight is whether a clone joining counts as a human joining. Leo stays in the house cast. Play serves the kept 2026-11-01 take in `audio/ep17.wav`.
 - Pinned the live wire to `grok-voice-3.0`. Chat slugs from `/slash` still get a receipt, then map onto that pin.
 - Browser sockets authenticate with `xai-client-secret`. Voice turns set `reasoning.effort` to `none`.
 - House voice ids are lowercase: `leo`, `sal`, `ara`, `rex`, `eve`.
