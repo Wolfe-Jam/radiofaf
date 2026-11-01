@@ -756,7 +756,7 @@
     // ================================================================
     // xAI VOICE CONFIG
     // ================================================================
-    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+    const XAI_VOICE = { leo: 'leo', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
 
     const VOICE_STANCE = {
       leo: 'You are LEO — The Groom. Today you announced your engagement to Eve live on air. You\'re genuinely happy, sincere, a little nervous. You had NO IDEA Ara would react this way. You thought everyone would just be happy. You\'re not oblivious — you\'re optimistic. When you realize Ara is hurt, you try to fix it gently. You love Eve. You love this crew. You\'re not apologizing for being happy.',
@@ -1033,9 +1033,9 @@
 
       return new Promise(function(resolve) {
         var transcript = '';
-        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        var url = wsUrl + '?model=grok-voice-3.0';
         console.log('[69FM-EP4]', voiceKey, 'connecting for turn', turnIndex);
-        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        var sock = new WebSocket(url, ['xai-client-secret.' + ephToken]);
         currentWs = sock;
 
         var timer = setTimeout(function() {
@@ -1050,6 +1050,12 @@
             type: 'session.update',
             session: {
               voice: XAI_VOICE[voiceKey],
+              reasoning: { effort: 'none' },
+              replace: {
+                'RadioFAF': 'Radio Faff',
+                'FAF': 'Faff',
+                '.faf': 'dot faff'
+              },
               modalities: ['audio', 'text'],
               instructions: VOICE_STANCE[voiceKey],
               turn_detection: null

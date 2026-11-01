@@ -713,7 +713,7 @@
       eve: { name: 'EVE', stance: 'Practical dev feedback. Model is GUESSING the flow not knowing it. Second attempt was tighter. Tighter prompts unblock the rest.' }
     };
     
-    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+    const XAI_VOICE = { leo: 'leo', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
     
     // ================================================================
     // COST OPTIMIZATION SUCCESS: Reduced Token Expiry ✅
@@ -740,7 +740,7 @@
     let pausedAt = null;
     let wsUrl = null;     // WebSocket URL
     let ephToken = null;  // Current ephemeral token
-    let routedModel = 'grok-4-1-fast-non-reasoning';  // Set by /slash via /api/voice-session
+    let routedModel = 'grok-voice-3.0';  // Set by /slash via /api/voice-session
     let audioCtx = null;
     let audioQueue = [];
     let draining = false;
@@ -940,7 +940,7 @@
         // Individual WebSocket per exchange (but reuse token for cost optimization)
         const url = wsUrl + '?model=' + encodeURIComponent(routedModel);
         console.log(`Exchange ${turnIndex}: Creating WebSocket...`);
-        const sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        const sock = new WebSocket(url, ['xai-client-secret.' + ephToken]);
         currentWs = sock;
         
         const timer = setTimeout(() => {
@@ -955,6 +955,12 @@
             type: 'session.update',
             session: {
               voice: XAI_VOICE[voiceKey],
+              reasoning: { effort: 'none' },
+              replace: {
+                'RadioFAF': 'Radio Faff',
+                'FAF': 'Faff',
+                '.faf': 'dot faff'
+              },
               modalities: ['audio', 'text'],
               instructions: 'You are ' + VOICES[voiceKey].name + '. ' + VOICES[voiceKey].stance,
               turn_detection: null

@@ -482,7 +482,7 @@
       <nav class="ep-nav" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1rem;font-size:.85rem;">
         <a href="/ep15" style="color:#999;text-decoration:none;padding:.4rem .7rem;border:1px solid #333;border-radius:4px;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderColor='#fff';" onmouseout="this.style.color='#999';this.style.borderColor='#333';">← EP15: Grok Unfiltered</a>
         <a href="/" style="color:var(--pink);text-decoration:none;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;">All Episodes</a>
-        <span style="color:#444;padding:.4rem .7rem;border:1px solid #222;border-radius:4px;cursor:not-allowed;">EP16 → (soon)</span>
+        <a href="/ep17" style="color:#999;text-decoration:none;padding:.4rem .7rem;border:1px solid #333;border-radius:4px;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderColor='#fff';" onmouseout="this.style.color='#999';this.style.borderColor='#333';">EP17: Twenty-One Chairs →</a>
       </nav>
     </header>
     
@@ -684,7 +684,7 @@
       eve: { name: 'EVE', stance: 'Two jobs: chat slug \u2260 realtime voice. grok-voice-latest on this wire. She just wants the constant to match.' }
     };
     
-    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+    const XAI_VOICE = { leo: 'leo', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
     
     // ================================================================
     // COST OPTIMIZATION SUCCESS: Reduced Token Expiry ✅
@@ -712,7 +712,7 @@
     let pausedAt = null;
     let wsUrl = null;     // WebSocket URL
     let ephToken = null;  // Current ephemeral token
-    let routedModel = 'grok-voice-latest';  // Realtime S2S. /api/voice-session may confirm.
+    let routedModel = 'grok-voice-3.0';  // Realtime S2S. /api/voice-session may confirm.
     let audioCtx = null;
     let audioQueue = [];
     let draining = false;
@@ -912,7 +912,7 @@
         // Individual WebSocket per exchange (but reuse token for cost optimization)
         const url = wsUrl + '?model=' + encodeURIComponent(routedModel);
         console.log(`Exchange ${turnIndex}: Creating WebSocket...`);
-        const sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        const sock = new WebSocket(url, ['xai-client-secret.' + ephToken]);
         currentWs = sock;
         
         const timer = setTimeout(() => {
@@ -927,6 +927,12 @@
             type: 'session.update',
             session: {
               voice: XAI_VOICE[voiceKey],
+              reasoning: { effort: 'none' },
+              replace: {
+                'RadioFAF': 'Radio Faff',
+                'FAF': 'Faff',
+                '.faf': 'dot faff'
+              },
               modalities: ['audio', 'text'],
               instructions: 'You are ' + VOICES[voiceKey].name + '. ' + VOICES[voiceKey].stance,
               turn_detection: null

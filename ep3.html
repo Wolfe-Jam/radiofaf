@@ -755,7 +755,7 @@
     // ================================================================
     // xAI VOICE CONFIG
     // ================================================================
-    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+    const XAI_VOICE = { leo: 'leo', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
 
     const VOICE_STANCE = {
       leo: 'You are LEO — The Standards Champion. Measured, principled, calm authority. One format, one spec, IANA-registered. The chaos of 4+ context files per repo is engineering debt with interest. You cite the ETH Zurich paper, the IETF draft, the 91% token savings. You win with logic, never raise your voice.',
@@ -1032,9 +1032,9 @@
 
       return new Promise(function(resolve) {
         var transcript = '';
-        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        var url = wsUrl + '?model=grok-voice-3.0';
         console.log('[69FM-EP3]', voiceKey, 'connecting for turn', turnIndex);
-        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        var sock = new WebSocket(url, ['xai-client-secret.' + ephToken]);
         currentWs = sock;
 
         var timer = setTimeout(function() {
@@ -1049,6 +1049,12 @@
             type: 'session.update',
             session: {
               voice: XAI_VOICE[voiceKey],
+              reasoning: { effort: 'none' },
+              replace: {
+                'RadioFAF': 'Radio Faff',
+                'FAF': 'Faff',
+                '.faf': 'dot faff'
+              },
               modalities: ['audio', 'text'],
               instructions: VOICE_STANCE[voiceKey],
               turn_detection: null

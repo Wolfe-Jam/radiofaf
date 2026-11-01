@@ -733,7 +733,7 @@
     // ================================================================
     // xAI VOICE CONFIG
     // ================================================================
-    const XAI_VOICE = { leo: 'Leo', sal: 'Sal', ara: 'Ara', rex: 'Rex', eve: 'Eve' };
+    const XAI_VOICE = { leo: 'leo', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
 
     const VOICE_STANCE = {
       leo: 'You are LEO — The Standards Champion. Calm, measured, principled authority. Persistent souls are the only path — standards, structured YAML, IANA-registered context, zero-drift memory. Reset-button AIs are stateless hype machines. You frame persistence as engineering, not hype. "Build it right or don\'t build it." You never raise your voice. You win by being right.',
@@ -759,99 +759,6 @@
     let ephToken = null;
     let wsUrl = null;
     let history = []; // conversation history: [{voice, text}, ...]
-
-    // ================================================================
-    // RADIOFAF VOICE v2.1 — STANDALONE TTS READY 
-    // Future-proof architecture for upcoming xAI TTS endpoint
-    // ================================================================
-    
-    // New: Standalone TTS fallback flag (v2.1)
-    let useStandaloneTTS = true;   // LIVE: March 16, 2026 - xAI standalone TTS active
-    
-    // v2.1 Enhanced speak function with fallback support
-    async function speakV21(voiceKey, text, customInstructions = "") {
-      if (useStandaloneTTS) {
-        // Future standalone TTS path (when available)
-        return await speakStandaloneTTS(voiceKey, text);
-      }
-      // Current WebSocket path (enhanced v2.0)
-      return await runStaticExchange(voiceKey, text);
-    }
-
-    async function speakStandaloneTTS(voiceKey, text) {
-      try {
-        // Map RadioFAF voice keys to xAI voice IDs
-        const voiceMap = {
-          'ara': 'ballad',  // Nelly voice
-          'leo': 'leo',
-          'rex': 'verse', 
-          'eve': 'eve',
-          'sal': 'coral'
-        };
-        
-        const xaiVoice = voiceMap[voiceKey] || voiceKey;
-        console.log('[TTS-v2.1] Requesting:', voiceKey, '→', xaiVoice);
-        
-        // Fetch audio from xAI standalone TTS
-        const res = await fetch('/api/tts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            voice: xaiVoice,  // Use mapped voice
-            text: text 
-          })
-        });
-        
-        if (!res.ok) {
-          const error = await res.text();
-          console.error('TTS API failed:', error);
-          // Fallback to WebSocket if TTS fails
-          return await runStaticExchange(voiceKey, text);
-        }
-        
-        // Get response as blob directly
-        const audioBlob = await res.blob();
-        const url = URL.createObjectURL(audioBlob);
-        const audio = new Audio(url);
-        
-        // Connect to UI - show transcript immediately
-        var transcript = text;
-        console.log('[TTS-v2.1]', voiceKey, 'playing:', transcript.substring(0, 80) + '...');
-        
-        // Play audio and wait for completion
-        await new Promise((resolve, reject) => {
-          audio.addEventListener('ended', resolve);
-          audio.addEventListener('error', (e) => {
-            console.error('[TTS-v2.1] Audio playback error:', e);
-            reject(e);
-          });
-          audio.play().catch(reject);
-        });
-        
-        // Clean up blob URL
-        URL.revokeObjectURL(url);
-        
-        // Add variable delay between voices for natural pacing
-        const delays = {
-          short: 600,    // Quick exchanges
-          medium: 900,   // Normal pause
-          long: 1200,    // Dramatic beat
-          think: 1500    // "Err... umm..." moment
-        };
-        
-        // Vary delays based on content
-        const delay = text.length > 100 ? delays.long : 
-                     text.includes('...') ? delays.think :
-                     Math.random() > 0.7 ? delays.short : delays.medium;
-        
-        await new Promise(r => setTimeout(r, delay));
-        
-      } catch (error) {
-        console.error('[TTS-v2.1] Error:', error);
-        // Fallback to WebSocket on any error
-        return await runStaticExchange(voiceKey, text);
-      }
-    }
 
     // Audio engine
     let audioCtx = null;
@@ -1103,9 +1010,9 @@
 
       return new Promise(function(resolve) {
         var transcript = '';
-        var url = wsUrl + '?model=grok-4-1-fast-non-reasoning';
+        var url = wsUrl + '?model=grok-voice-3.0';
         console.log('[69FM-EP6]', voiceKey, 'connecting for turn', turnIndex);
-        var sock = new WebSocket(url, ['realtime', 'openai-insecure-api-key.' + ephToken]);
+        var sock = new WebSocket(url, ['xai-client-secret.' + ephToken]);
         currentWs = sock;
 
         var timer = setTimeout(function() {
@@ -1120,6 +1027,12 @@
             type: 'session.update',
             session: {
               voice: XAI_VOICE[voiceKey],
+              reasoning: { effort: 'none' },
+              replace: {
+                'RadioFAF': 'Radio Faff',
+                'FAF': 'Faff',
+                '.faf': 'dot faff'
+              },
               modalities: ['audio', 'text'],
               instructions: VOICE_STANCE[voiceKey],
               turn_detection: null

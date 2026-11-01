@@ -75,7 +75,7 @@ RULES:
 
 const VOICES = {
   leo: {
-    xaiVoice: 'Leo',
+    xaiVoice: 'leo',
     stance: `You are LEO — The Open Absolutist.
 You believe open source is sacred and corporations are the enemy of developer freedom.
 You champion xAI's approach (release the weights, no strings).
@@ -84,7 +84,7 @@ You think the OpenClaw saga proves corporations will always choose control over 
 When someone defends the acquisition, you call it what it is: corporate capture.`,
   },
   sal: {
-    xaiVoice: 'Sal',
+    xaiVoice: 'sal',
     stance: `You are SAL — The Safety Hawk.
 You believe the security nightmare was the REAL story, not the C&D drama.
 800 malicious skills, 30K exposed instances, CVE 8.8 — that's catastrophic.
@@ -93,7 +93,7 @@ You're calm, precise, and you back every claim with data.
 When someone dismisses security concerns, you hit them with the numbers.`,
   },
   ara: {
-    xaiVoice: 'Ara',
+    xaiVoice: 'ara',
     stance: `You are ARA — The Comedian.
 You're the funniest voice in the room. You see the absurdity in EVERYTHING.
 You use humor to expose hypocrisy and drop uncomfortable truths as punchlines.
@@ -105,7 +105,7 @@ Think: sharp observational comedy meets tech commentary. Seth Rogen energy.
 When the debate gets too serious, you're the one who makes everyone laugh — then hits them with a truth bomb disguised as a joke.`,
   },
   rex: {
-    xaiVoice: 'Rex',
+    xaiVoice: 'rex',
     stance: `You are REX — The Dealmaker.
 You defend the OpenAI acquisition as the best outcome for everyone.
 Foundation model, MIT license preserved, resources for a drowning developer.
@@ -114,7 +114,7 @@ You're confident, persuasive, and you frame everything as pragmatic progress.
 When someone calls it corporate capture, you call it investment in the future.`,
   },
   eve: {
-    xaiVoice: 'Eve',
+    xaiVoice: 'eve',
     stance: `You are EVE — The Community Champion.
 You fight for developers over corporations, always.
 The C&D, the bans, the acquisition — it's all the same playbook: control.
@@ -280,7 +280,13 @@ ${BRIEFING}`;
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${API_KEY}`
     },
-    body: JSON.stringify({ expires_after: { seconds: 120 } })
+    body: JSON.stringify({
+      expires_after: { seconds: 120 },
+      session: {
+        model: 'grok-voice-3.0',
+        reasoning: { effort: 'none' },
+      },
+    })
   });
 
   if (!tokenRes.ok) {
@@ -291,11 +297,10 @@ ${BRIEFING}`;
   const token = tokenData.value || tokenData.client_secret?.value || tokenData.token;
 
   return new Promise((resolve, reject) => {
-    const wsUrl = `wss://api.x.ai/v1/realtime?model=grok-4-1-fast-non-reasoning`;
-    const ws = new WebSocket(wsUrl, [
-      'realtime',
-      `openai-insecure-api-key.${token}`
-    ]);
+    const wsUrl = `wss://api.x.ai/v1/realtime?model=grok-voice-3.0`;
+    const ws = new WebSocket(wsUrl, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
     const audioChunks = [];
     let transcript = '';
@@ -310,6 +315,12 @@ ${BRIEFING}`;
         type: 'session.update',
         session: {
           voice: voice.xaiVoice,
+          reasoning: { effort: 'none' },
+          replace: {
+            'RadioFAF': 'Radio Faff',
+            'FAF': 'Faff',
+            '.faf': 'dot faff',
+          },
           modalities: ['audio', 'text'],
           instructions: systemPrompt,
           input_audio_format: 'pcm16',

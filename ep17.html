@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%23E91E9E'/><circle cx='50' cy='75' r='8' fill='%2384FF00'/><path d='M30 55 a28 28 0 0 1 40 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M18 38 a45 45 0 0 1 64 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/><path d='M6 21 a62 62 0 0 1 88 0' stroke='%2384FF00' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RadioFAF 69.0 FM — Episode 17: Twenty-One Chairs</title>
+  <meta name="description" content="RadioFAF Episode 17: Twenty-One Chairs. A human joined the team and sits where Leo sits. The booth asks if a clone is the human.">
+  <meta property="og:title" content="RadioFAF Episode 17: Twenty-One Chairs" />
+  <meta property="og:description" content="July hired none of the 21 new voices. The chair went to a clone." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RadioFAF Episode 17: Twenty-One Chairs" />
+  <meta name="twitter:description" content="A human joined the team. He sits where Leo sits. A clone is not the human." />
+  <link rel="canonical" href="https://radiofaf.com/69.0" />
+  <!-- RadioFAF: Authentic AI. Unscripted. Dynamic generation only. -->
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    :root {
+      --pink: #E91E9E;
+      --lime: #84FF00;
+      --text-dim: #999;
+      --leo: #00D4D4;
+      --james: #FF4400;
+      --sal: #d97706;
+      --ara: #4285f4;
+      --rex: #FFD700;
+      --eve: #7c3aed;
+    }
+    
+    /* Share X Button - Universal */
+    .share-x {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #000;
+      color: #fff;
+      border: 2px solid #333;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    
+    .share-x:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
+    
+    /* ========== Layout ========== */
+    .container {
+      max-width: 800px;
+      width: 90%;
+      padding: 2rem;
+    }
+    
+    /* ========== Header ========== */
+    .header {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .episode-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.3rem;
+    }
+    
+    .tagline {
+      font-size: 1rem;
+      color: var(--lime);
+      font-style: italic;
+    }
+    
+    /* ========== Play Button ========== */
+    .controls {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .play-btn {
+      background: var(--lime);
+      color: #0a0a0a;
+      font-family: inherit;
+      font-size: 1.2rem;
+      font-weight: 700;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .play-btn:hover { transform: translateY(-2px); }
+    .play-btn:active { transform: translateY(0); }
+    .play-btn.playing { background: var(--pink); color: #fff; }
+    
+    /* ========== Progress ========== */
+    .progress-container {
+      background: #1a1a1a;
+      border-radius: 4px;
+      height: 8px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    
+    .progress-bar {
+      background: var(--lime);
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    
+    .progress-label {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+    
+    /* ========== On Air indicator ========== */
+    .on-air {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    
+    .on-air.visible { display: flex; }
+    
+    .on-air-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--pink);
+      border-radius: 50%;
+      animation: blink 1s ease-in-out infinite;
+    }
+    
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    /* ========== Transcript ========== */
+    .transcript {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    
+    .exchange {
+      display: flex;
+      gap: 0.75rem;
+      padding: 0.85rem 0.75rem;
+      border-left: 3px solid transparent;
+      border-radius: 0 8px 8px 0;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+    
+    .exchange.speaking {
+      background: rgba(255, 255, 255, 0.03);
+    }
+    
+    .exchange[data-voice="leo"] { border-left-color: var(--leo); }
+    .exchange[data-voice="james"] { border-left-color: var(--james); }
+    .exchange[data-voice="sal"] { border-left-color: var(--sal); }
+    .exchange[data-voice="ara"] { border-left-color: var(--ara); }
+    .exchange[data-voice="rex"] { border-left-color: var(--rex); }
+    .exchange[data-voice="eve"] { border-left-color: var(--eve); }
+    
+    .exchange.speaking[data-voice="leo"] { background: rgba(0, 212, 212, 0.05); }
+    .exchange.speaking[data-voice="james"] { background: rgba(255, 68, 0, 0.06); }
+    .exchange.speaking[data-voice="sal"] { background: rgba(217, 119, 6, 0.05); }
+    .exchange.speaking[data-voice="ara"] { background: rgba(66, 133, 244, 0.05); }
+    .exchange.speaking[data-voice="rex"] { background: rgba(255, 215, 0, 0.05); }
+    .exchange.speaking[data-voice="eve"] { background: rgba(124, 58, 237, 0.05); }
+    
+    .voice-name {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.75rem;
+      min-width: 40px;
+      flex-shrink: 0;
+    }
+    
+    .voice-name[data-voice="leo"] { color: var(--leo); }
+    .voice-name[data-voice="james"] { color: var(--james); }
+    .voice-name[data-voice="sal"] { color: var(--sal); }
+    .voice-name[data-voice="ara"] { color: var(--ara); }
+    .voice-name[data-voice="rex"] { color: var(--rex); }
+    .voice-name[data-voice="eve"] { color: var(--eve); }
+    
+    .voice-text {
+      flex: 1;
+      line-height: 1.5;
+    }
+    
+    /* ========== Paywall ========== */
+    .paywall {
+      display: none;
+      background: #111;
+      border: 2px solid var(--pink);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .paywall h2 {
+      color: var(--pink);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .paywall p {
+      color: var(--text-dim);
+      margin-bottom: 1.5rem;
+    }
+    
+    .pay-btn {
+      background: var(--pink);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .pay-btn:hover { transform: translateY(-2px); }
+    
+    /* ========== Status ========== */
+    .status {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      min-height: 1.2rem;
+    }
+    
+    /* ========== Pre-show message ========== */
+    .pre-show {
+      text-align: center;
+      color: var(--text-dim);
+      font-style: italic;
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 8px;
+    }
+    
+    /* ========== Footer ========== */
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+    
+    .footer a {
+      color: var(--pink);
+      text-decoration: none;
+    }
+    
+    .footer a:hover { text-decoration: underline; }
+    
+    /* ========== Browse Episodes ========== */
+    .browse-section {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid #333;
+    }
+    
+    .browse-section h3 {
+      color: var(--pink);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .episodes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .episode-link {
+      background: #1a1a1a;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.75rem;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+    }
+    
+    .episode-link:hover {
+      background: #222;
+      color: #fff;
+      border-color: var(--lime);
+    }
+    
+    .episode-link.active {
+      background: var(--pink);
+      color: #fff;
+      border-color: var(--pink);
+    }
+    
+    /* ========== Suggest Section ========== */
+    .suggest-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: #111;
+      border-radius: 12px;
+      border: 1px solid #333;
+      text-align: center;
+    }
+    
+    .suggest-section h3 {
+      color: var(--lime);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .suggest-btn {
+      background: transparent;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .suggest-btn:hover {
+      background: var(--pink);
+      color: #fff;
+    }
+    
+    /* ========== Modal ========== */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      backdrop-filter: blur(4px);
+    }
+    
+    .modal-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #111;
+      border: 2px solid var(--pink);
+      border-radius: 12px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+    }
+    
+    .modal h4 {
+      color: var(--pink);
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    
+    .modal input,
+    .modal textarea {
+      width: 100%;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .modal textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    
+    .modal input:focus,
+    .modal textarea:focus {
+      outline: none;
+      border-color: var(--lime);
+    }
+    
+    .modal-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+    }
+    
+    .modal-buttons button {
+      background: transparent;
+      border: 2px solid var(--text-dim);
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-buttons button[type="submit"] {
+      border-color: var(--lime);
+      color: var(--lime);
+    }
+    
+    .modal-buttons button:hover {
+      background: var(--text-dim);
+      color: #000;
+    }
+    
+    .modal-buttons button[type="submit"]:hover {
+      background: var(--lime);
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div id="ep-combo-mount" data-current="17"></div>
+  <!-- Universal Share X Button -->
+  <a href="https://twitter.com/intent/tweet?text=RadioFAF%20Episode%2017%3A%20Twenty-One%20Chairs%0A%0AA%20human%20joined%20the%20team.%20He%20sits%20where%20Leo%20sits.%20A%20clone%20is%20not%20the%20human.&url=https%3A%2F%2Fradiofaf.com%2F69.0" class="share-x" target="_blank">Share X</a>
+  <div class="container">
+    <header class="header">
+      <div class="episode-label">RadioFAF 69.0 FM — Episode 17</div>
+      <h1>Twenty-One Chairs</h1>
+      <p class="tagline">A human joined the team. He sits where Leo sits. A clone is not the human.</p>
+      <nav class="ep-nav" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-top:1rem;font-size:.85rem;">
+        <a href="/ep16" style="color:#999;text-decoration:none;padding:.4rem .7rem;border:1px solid #333;border-radius:4px;transition:all .2s;" onmouseover="this.style.color='#fff';this.style.borderColor='#fff';" onmouseout="this.style.color='#999';this.style.borderColor='#333';">← EP16: Nobody Paid the Dollar</a>
+        <a href="/" style="color:var(--pink);text-decoration:none;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;">All Episodes</a>
+        <span style="color:#444;padding:.4rem .7rem;border:1px solid #222;border-radius:4px;cursor:not-allowed;">EP18 → (soon)</span>
+      </nav>
+    </header>
+    
+    <div class="controls">
+      <button class="play-btn" id="playBtn">▶ Play Episode</button>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">0 / 13 exchanges</div>
+    
+    <div class="on-air" id="onAir">
+      <div class="on-air-dot"></div>
+      <span>ON AIR</span>
+    </div>
+    
+    <div class="status" id="status"></div>
+    
+    <div class="transcript" id="transcript">
+      <div class="pre-show" id="preShowMsg">
+        Press play. A human joined the card. The booth got a clone. This play is on the house.
+      </div>
+    </div>
+    
+    <div class="paywall" id="paywall" style="display:none" hidden>
+      <h2>This channel costs money to run.</h2>
+      <p>Buy a $1 credit for full access — about one fresh episode per dollar.</p>
+      <a href="#" class="pay-btn" id="payBtn">Tune In — $1</a>
+      <p style="font-size: 0.75rem; opacity: 0.7; margin-top: 1rem; line-height: 1.5;">Produced for <em>$0.71</em>. Stripe takes <em>$0.30</em>. $1 is cost, not a markup.<br>We win only at volume. Early adopters ♥ keep us 'ON-AIR'</p>
+    </div>
+    
+    <!-- Episode End Card (shown when 28/28 reached) -->
+    <div id="endCard" style="display:none;margin-top:2rem;padding:2rem;background:#0f0f0f;border:2px solid var(--lime);border-radius:12px;text-align:center;box-shadow:0 0 30px rgba(132,255,0,0.1);">
+      <h2 style="color:var(--lime);margin-bottom:0.5rem;font-size:1.4rem;">🎧 Thanks for listening</h2>
+      <p style="color:#fff;margin-bottom:0.3rem;">That's a wrap on this episode.</p>
+      <p style="color:var(--text-dim);font-size:0.8rem;margin-bottom:1.5rem;">The chair goes back. The human was never in it.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:center;">
+        <button type="button" onclick="restartShow()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">▶ Replay</button>
+        <button type="button" onclick="openSuggestModal()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">💡 Suggest Next Topic</button>
+        <button type="button" onclick="focusEpCombo()" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;transition:all 0.2s ease;">📻 Browse Episodes</button>
+        <a id="endShareBtn" href="#" target="_blank" rel="noopener" style="background:#1a1a1a;color:#fff;border:1px solid #333;border-radius:8px;padding:0.6rem 1.2rem;font-family:inherit;font-size:0.85rem;cursor:pointer;text-decoration:none;display:inline-block;transition:all 0.2s ease;">🐦 Share on X</a>
+      </div>
+    </div>
+    
+    <!-- Browse Episodes -->
+    <div class="browse-section">
+      <h3>Browse Episodes</h3>
+      <div class="episodes-grid">
+        <a href="/ep1" class="episode-link">EP1: Open Claw</a>
+        <a href="/ep2" class="episode-link">EP2: Code Wars</a>
+        <a href="/ep3" class="episode-link">EP3: Data Dreams</a>
+        <a href="/ep4" class="episode-link">EP4: Neural Nets</a>
+        <a href="/ep5" class="episode-link">EP5: AGI Anxiety</a>
+        <a href="/ep6" class="episode-link">EP6: Token Tales</a>
+        <a href="/ep7" class="episode-link">EP7: Vector Voyage</a>
+        <a href="/ep8" class="episode-link">EP8: Model Madness</a>
+        <a href="/ep9" class="episode-link">EP9: Context Chaos</a>
+        <a href="/ep10" class="episode-link">EP10: Training Troubles</a>
+        <a href="/ep11" class="episode-link">EP11: Empathy's Echo</a>
+        <a href="/ep12" class="episode-link">EP12: The Token Tax</a>
+        <a href="/ep13" class="episode-link">EP13: Nelly Wants to Sing</a>
+        <a href="/ep14" class="episode-link">EP14: Nelly Tries to Rap</a>
+        <a href="/ep15" class="episode-link">EP15: Grok Unfiltered</a>
+        <a href="/ep16" class="episode-link">EP16: Nobody Paid the Dollar</a>
+        <a href="/ep17" class="episode-link active">EP17: Twenty-One Chairs</a>
+      </div>
+    </div>
+    
+    <!-- Suggest Topic -->
+    <div class="suggest-section">
+      <h3>Suggest Next Topic</h3>
+      <button class="suggest-btn" onclick="openSuggestModal()">💡 Suggest a Topic</button>
+    </div>
+    
+    <!-- Suggest Modal -->
+    <div id="suggestModal" class="modal">
+      <div class="modal-content">
+        <h4>Suggest a RadioFAF Topic</h4>
+        <form id="suggestForm">
+          <input type="text" id="suggestName" placeholder="Your name (optional)" />
+          <input type="email" id="suggestEmail" placeholder="Your email (optional)" />
+          <textarea id="suggestTopic" placeholder="What should the 5 voices debate next?" required></textarea>
+          <div class="modal-buttons">
+            <button type="button" onclick="closeSuggestModal()">Cancel</button>
+            <button type="submit">Send Suggestion</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <footer class="footer">
+      <a href="/home">← Back to RadioFAF</a>
+    </footer>
+  </div>
+  
+  <script>
+    // ================================================================
+    // CONFIG
+    // ================================================================
+    const STRIPE_LINK = 'https://buy.stripe.com/aFaaEZboperA2YH1EAbV60i';
+    const TRAILER_LENGTH = 7;
+    // Leo is benched for this hour. The human is not in the booth. The whole show plays.
+    const ON_THE_HOUSE = true;
+    
+    // ================================================================
+    // EPISODE CONTEXT — Dynamic generation like EP1
+    // ================================================================
+    const TOPIC_CONTEXT =
+      'EPISODE 17: TWENTY-ONE CHAIRS on RadioFAF 69.0 FM\n\n' +
+      'Hosted by Nelly (Ara voice) — the elephant who never forgets. ' +
+      'Her catchphrase is "Always remember... I never forget."\n\n' +
+
+      'TOPIC: Debate. The card says a human joined the team. His name is James, and he is sitting Leo\'s chair for this hour. ' +
+      'The fight is whether a clone joining counts as a human joining.\n\n' +
+
+      'THIS PLAY IS ON THE HOUSE. Do not pitch Stripe. Do not read a checkout.\n\n' +
+
+      'KEY FACTS (surface naturally — not all at once, and most of them only once):\n' +
+      '- Leo is benched for this hour. He is not retired. The chair is his again after the show.\n' +
+      '- The guest is James-Wolfe, an xAI custom voice cloned from the founder. Created 2 May 2026. Language English. Tone on the account: calm.\n' +
+      '- He has never been on RadioFAF. Episodes 1 through 16 did not hire him.\n' +
+      '- 6 July 2026: xAI shipped 21 new flagship Grok voices. The original five were retrained. The station hired none of the 21.\n' +
+      '- James is not one of those 21. He is a custom clone of a person. The live human is not in the booth and is not on this mic.\n' +
+      '- The house cast was never human either. Leo, Sal, Ara, Rex, and Eve are voices. The difference is that none of them was copied from a person outside the building.\n' +
+      '- House cast is still five. James is a guest in one chair for one hour, not a sixth hire.\n' +
+      '- Say the clone fact once. Do not read the raw voice id aloud. Do not explain how a clone is made.\n' +
+      '- Do not invent listeners, revenue, or a reason Leo is absent beyond "this hour, this chair."\n\n' +
+
+      'CHARACTER ANGLES ON THIS TOPIC:\n' +
+      '- JAMES: Clone of the founder, in Leo\'s chair. Discloses once. Asks whether a clone joining is a human joining, and answers for this hour: the voice can work, the human did not join. Gives the chair back. Does not impersonate Leo, does not borrow Leo\'s catchphrase, and does not hide behind "Leo is not human either."\n' +
+      '- REX: A mouth showed up. Ship the hour. Do not hold the show for a philosophy exam. A working voice is the only test this booth has tonight.\n' +
+      '- SAL: Receipts. Twenty-one new voices, zero hires. This chair is not one of the 21. "Leo is not human either" is a dodge, because Leo had no person to replace.\n' +
+      '- ARA: Roasts the line "a human joined the team." As Nelly, she remembers that the usual tenant is a voice too, and that this is the first voice copied from someone who can leave the building.\n' +
+      '- EVE: The booth has always been strings. This string was copied from a person. She will play it. She will not call it a person, and she will not add a sixth name.\n\n' +
+
+      'NELLY (ARA voice slot):\n' +
+      '- Opens on the claim: a human joined, and he is sitting Leo\'s chair. Does not introduce James as Leo.\n' +
+      '- Closes on the claim, not on a recap of July or the date.\n' +
+      '- Signature: "Always... remember... I never forget."\n' +
+      '- Closes with: "Don\'t follow. Tune in."\n\n' +
+
+      'RULES:\n' +
+      '- VARY your length. Sometimes one word. Sometimes one sentence. Sometimes 3-4 sentences.\n' +
+      '- Be direct, opinionated, do not hold back.\n' +
+      '- React to what was said before you.\n' +
+      '- No pleasantries.\n' +
+      '- Sound like people in a studio.\n' +
+      '- Use expressive tags: [laugh] [chuckle] [sigh] [pause] [long pause] [rapid] [slow] [shout] [whisper] <emphasis> <soft> <excited> <serious>.\n' +
+      '- No corporate speak. If anyone says "synergy", SAL kills it.\n' +
+      '- Do NOT read Stripe. Do NOT ask anyone to pay.\n' +
+      '- SHORT SHOW. Thirteen turns. Each fact once. If it was already said, react — do not restate.\n' +
+      '- JAMES is not LEO and JAMES is not the live human. Do not have him perform either one.';
+
+    const TURNS = [
+      { voice: 'ara', energy: 'NELLY — A HUMAN JOINED',
+        dir: 'As NELLY. [vinyl crackle] [long pause] Needle down. The card says a human joined the team, and that human is sitting Leo\'s chair. Name him James. Do not call him Leo. Hand off. 2 sentences. Do not explain how a clone is made.' },
+      { voice: 'james', energy: 'DISCLOSURE — ONCE',
+        dir: 'Calm. First time on this mic. Say once that you are a clone of the founder, made 2 May 2026, not Leo, and not the live human. You are borrowing the chair. Do not answer the human question yet. 2-3 sentences. Do not do an impression. Do not use Leo\'s catchphrase.' },
+      { voice: 'rex', energy: 'HIRE THE MOUTH',
+        dir: 'Loud. A mouth sat down. Ship the hour. Do not hold the show for a philosophy exam. 1-2 sentences. Do not restate the clone line or the date.' },
+      { voice: 'ara', energy: 'THE PRESS LINE',
+        dir: 'Roaster mode, not Nelly. [laugh] "A human joined the team" is a press line. The human is not in the building. Flavor options: the badge is in the chair and the person is at home / a voicemail got a staff pass / your own. 2 sentences.' },
+      { voice: 'sal', energy: 'TWENTY-ONE EMPTY',
+        dir: '[deadpan] One receipt. 6 July 2026, 21 new flagship voices, hired none. The voice in this chair is not one of those 21. ONE or two sentences. Do not read a raw id. Do not repeat the May date.' },
+      { voice: 'eve', energy: 'STRINGS',
+        dir: 'Practical. [sigh] This booth has always been strings. Leo is a string. Tonight\'s string was copied from a person. She will play it. She will not call it a person. 2 sentences. Do not read the raw id.' },
+      { voice: 'james', energy: 'THE QUESTION, AIMED BACK',
+        dir: '[pause] Ask it at yourself: a clone sat down, so did a human join? Answer for this hour only. The voice can work. The human did not join. You do not speak for Leo. Do not use his catchphrase. 2-3 sentences.' },
+      { voice: 'rex', energy: 'THE ONLY TEST',
+        dir: '[rapid] The booth\'s test is whether the mouth works. It works. Ship the hour. Human or not can be settled after. 1-2 sentences. Do not re-explain the clone.' },
+      { voice: 'ara', energy: 'NELLY — LEO WAS A VOICE TOO',
+        dir: 'As NELLY. Warm, not a eulogy. She remembers the usual tenant. The house voices were never people. This is the first one copied from someone who can leave the building. 2 sentences. Do not recap July.' },
+      { voice: 'sal', energy: 'THE DODGE',
+        dir: '[deadpan] "Leo is not human either" does not hire James. Leo had no person outside to replace. ONE sentence.' },
+      { voice: 'eve', energy: 'NOT A SIXTH NAME',
+        dir: '[soft] She plays the guest string tonight. She adds no sixth name to the house card. 1-2 sentences.' },
+      { voice: 'james', energy: 'STAND UP',
+        dir: 'Give the chair back. Leave the answer in the seat, in your own words, shorter than a slogan: a clone can take an hour, and a human joining would have to be in the room. 2 sentences. Do not quote Leo. Do not say the voice id. Do not hide behind the house cast being voices.' },
+      { voice: 'ara', energy: 'NELLY CLOSE',
+        dir: 'As NELLY. [vinyl] [warm] She names James and the claim that a human joined, without a recap of July, the date, or how a clone is made. Signature: "Always... [pause] remember... I never forget." Then: "RadioFAF 69.0 FM. Don\'t follow. Tune in." 3 sentences.' }
+    ];
+
+    const VOICES = {
+      james: { name: 'JAMES', stance: 'Clone of the founder, in Leo\'s chair for this hour. Discloses once. A clone can take the hour. A human joining would have to be in the room. Gives the chair back. Does not impersonate Leo or the live human.' },
+      sal: { name: 'SAL', stance: 'Receipts. 6 July 2026, 21 new voices, zero hires. This chair is not one of them. "Leo is not human either" is a dodge. Leo had no person to replace.' },
+      ara: { name: 'NELLY', stance: 'Two hats: Roaster (a human joined is a press line) and Nelly (the house was never human, and this is the first voice copied from someone outside).' },
+      rex: { name: 'REX', stance: 'A mouth showed up. Ship the hour. The booth\'s test is whether the voice works. Humanity can wait until after the show.' },
+      eve: { name: 'EVE', stance: 'The booth is strings. This string was copied from a person. Play it. Do not call it a person. Do not add a sixth name.' }
+    };
+
+    const XAI_VOICE = { james: 'vluy2u1jtsif', sal: 'sal', ara: 'ara', rex: 'rex', eve: 'eve' };
+    
+    // ================================================================
+    // COST OPTIMIZATION SUCCESS: Reduced Token Expiry ✅
+    // ================================================================
+    // ISSUE: xAI invalidates tokens after first WebSocket use (can't reuse)
+    // SOLUTION: Fresh token per exchange BUT 90s expiry (was 600s)
+    // 
+    // COST ANALYSIS:
+    // - BEFORE: 7 tokens × 600s each = 70 minutes billing = $3.50
+    // - AFTER: 7 tokens × 90s each = 10.5 minutes billing = $0.53
+    // - SAVINGS: 85% cost reduction
+    // 
+    // STATUS: WebSocket authentication fixed + major cost reduction maintained
+    
+    // ================================================================
+    // STATE
+    // ================================================================
+    const params = new URLSearchParams(window.location.search);
+    try { if (params.has('pass')) localStorage.setItem('rf_pass', '1'); } catch(e) {}
+    const storedPass = (function(){ try { return localStorage.getItem('rf_pass') === '1'; } catch(e) { return false; } })();
+    const hasPass = ON_THE_HOUSE || params.has('pass') || storedPass;
+    const maxTurns = TURNS.length;
+    let playing = false;
+    let currentIndex = 0;
+    let pausedAt = null;
+    let wsUrl = null;     // WebSocket URL
+    let ephToken = null;  // Current ephemeral token
+    let routedModel = 'grok-voice-3.0';  // Realtime S2S. /api/voice-session may confirm.
+    let audioCtx = null;
+    let audioQueue = [];
+    let draining = false;
+    let activeSrc = null;
+    
+    // ================================================================
+    // DOM
+    // ================================================================
+    const playBtn = document.getElementById('playBtn');
+    const progressBar = document.getElementById('progressBar');
+    const progressLabel = document.getElementById('progressLabel');
+    const onAirEl = document.getElementById('onAir');
+    const statusEl = document.getElementById('status');
+    const transcriptEl = document.getElementById('transcript');
+    const paywallEl = document.getElementById('paywall');
+    const payBtn = document.getElementById('payBtn');
+    
+    // ================================================================
+    // AUDIO
+    // ================================================================
+    function ensureAudio() {
+      if (!audioCtx) audioCtx = new AudioContext({ sampleRate: 24000 });
+      return audioCtx;
+    }
+    
+    async function queueChunk(base64) {
+      const ctx = ensureAudio();
+      if (ctx.state === 'suspended') await ctx.resume();
+      
+      const bin = atob(base64);
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      
+      const pcm = new Int16Array(bytes.buffer);
+      const buf = ctx.createBuffer(1, pcm.length, 24000);
+      const ch = buf.getChannelData(0);
+      for (let i = 0; i < pcm.length; i++) ch[i] = pcm[i] / 32768;
+      
+      audioQueue.push(buf);
+      if (!draining) drain();
+    }
+    
+    function drain() {
+      if (audioQueue.length === 0) {
+        draining = false;
+        activeSrc = null;
+        return;
+      }
+      
+      draining = true;
+      const buf = audioQueue.shift();
+      const src = audioCtx.createBufferSource();
+      activeSrc = src;
+      src.buffer = buf;
+      src.connect(audioCtx.destination);
+      src.onended = drain;
+      src.start();
+    }
+    
+    function flushAudio() {
+      audioQueue = [];
+      draining = false;
+      if (activeSrc) {
+        try { activeSrc.stop(); } catch(e) {}
+        activeSrc = null;
+      }
+    }
+    
+    function waitDrain() {
+      return new Promise(r => {
+        const check = () => {
+          if (!draining && audioQueue.length === 0) r();
+          else setTimeout(check, 100);
+        };
+        check();
+      });
+    }
+    
+    // ================================================================
+    // TOKEN
+    // ================================================================
+    async function fetchToken() {
+      const res = await fetch('/api/voice-session');
+      if (!res.ok) throw new Error('Token fetch failed');
+      const data = await res.json();
+      wsUrl = data.wsUrl;
+      ephToken = data.token || data.ephemeralToken; // Handle both response formats
+      if (data.model) routedModel = data.model; // /slash chose this — log it for transparency
+      if (data.slash_decision) console.log('[/slash routing]', data.slash_decision);
+    }
+    
+    // ================================================================
+    // UI FUNCTIONS
+    // ================================================================
+    function setStatus(text) {
+      statusEl.textContent = text;
+    }
+    
+    function updateProgress() {
+      const pct = (currentIndex / maxTurns) * 100;
+      progressBar.style.width = pct + '%';
+      progressLabel.textContent = currentIndex + ' / ' + maxTurns + ' exchanges';
+    }
+    
+    function updatePlayBtn() {
+      if (playing) {
+        playBtn.textContent = '⏸ Pause';
+        playBtn.classList.add('playing');
+        onAirEl.classList.add('visible');
+      } else {
+        if (pausedAt !== null) {
+          playBtn.textContent = '▶ Resume';
+        } else {
+          playBtn.textContent = '▶ Play Episode';
+        }
+        playBtn.classList.remove('playing');
+        onAirEl.classList.remove('visible');
+      }
+    }
+    
+    function addExchange(voice, text, turnIndex) {
+      const exchange = document.createElement('div');
+      exchange.className = 'exchange';
+      exchange.dataset.voice = voice;
+      exchange.dataset.turnIndex = turnIndex;
+      
+      const nameEl = document.createElement('div');
+      nameEl.className = 'voice-name';
+      nameEl.dataset.voice = voice;
+      nameEl.textContent = VOICES[voice].name;
+      
+      const textEl = document.createElement('div');
+      textEl.className = 'voice-text';
+      textEl.textContent = text;
+      
+      exchange.appendChild(nameEl);
+      exchange.appendChild(textEl);
+      transcriptEl.appendChild(exchange);
+      
+      exchange.classList.add('speaking');
+      
+      return exchange;
+    }
+    
+    function finishExchange(turnIndex) {
+      const exchanges = document.querySelectorAll('.exchange');
+      exchanges.forEach(ex => {
+        if (ex.dataset.turnIndex == turnIndex) {
+          ex.classList.remove('speaking');
+        }
+      });
+    }
+    
+    function updateLiveText(turnIndex, text) {
+      const exchanges = document.querySelectorAll('.exchange');
+      exchanges.forEach(ex => {
+        if (ex.dataset.turnIndex == turnIndex) {
+          const textEl = ex.querySelector('.voice-text');
+          if (textEl) textEl.textContent = text;
+        }
+      });
+    }
+    
+    
+    // ================================================================
+    // LIVE EXCHANGE (USING SHARED SESSION)
+    // ================================================================
+    async function runExchange(turnIndex) {
+      if (!playing) return { voice: '', text: '' };
+      
+      const turn = TURNS[turnIndex];
+      const voiceKey = turn.voice;
+      
+      // Fresh token per exchange (90s expiry for cost optimization)
+      try {
+        console.log(`Exchange ${turnIndex}: Fetching fresh token...`);
+        await fetchToken();
+        console.log(`Exchange ${turnIndex}: Token ready`);
+      } catch (e) {
+        console.error(`Exchange ${turnIndex}: Token failed:`, e);
+        return { voice: voiceKey, text: 'API credits exhausted. Please add credits to continue.' };
+      }
+      
+      // Add empty exchange box
+      const exchangeEl = addExchange(voiceKey, '', turnIndex);
+      
+      return new Promise((resolve) => {
+        let transcript = '';
+        
+        // Build context for this turn
+        const context = TOPIC_CONTEXT + '\n\n' +
+          'CURRENT SPEAKER: ' + VOICES[voiceKey].name + '\n' +
+          'STANCE: ' + VOICES[voiceKey].stance + '\n' +
+          'ENERGY: ' + turn.energy + '\n' +
+          'DIRECTION: ' + turn.dir;
+        
+        // Individual WebSocket per exchange (but reuse token for cost optimization)
+        const url = wsUrl + '?model=' + encodeURIComponent(routedModel);
+        console.log(`Exchange ${turnIndex}: Creating WebSocket...`);
+        const sock = new WebSocket(url, ['xai-client-secret.' + ephToken]);
+        currentWs = sock;
+        
+        const timer = setTimeout(() => {
+          console.warn('Timeout after 60s');
+          sock.close();
+          resolve({ voice: voiceKey, text: transcript || '[timeout]' });
+        }, 60000);
+        
+        sock.onopen = () => {
+          console.log(`Exchange ${turnIndex}: WebSocket connected`);
+          sock.send(JSON.stringify({
+            type: 'session.update',
+            session: {
+              voice: XAI_VOICE[voiceKey],
+              reasoning: { effort: 'none' },
+              replace: {
+                'RadioFAF': 'Radio Faff',
+                'FAF': 'Faff',
+                '.faf': 'dot faff',
+                'wolfejam': 'Wolfe Jam'
+              },
+              modalities: ['audio', 'text'],
+              instructions: 'You are ' + VOICES[voiceKey].name + '. ' + VOICES[voiceKey].stance,
+              turn_detection: null
+            }
+          }));
+        };
+        
+        sock.onmessage = (ev) => {
+          const msg = JSON.parse(ev.data);
+          
+          switch (msg.type) {
+            case 'session.updated':
+              console.log(`Exchange ${turnIndex}: Session updated, sending conversation`);
+              sock.send(JSON.stringify({
+                type: 'conversation.item.create',
+                item: {
+                  type: 'message',
+                  role: 'user',
+                  content: [{ type: 'input_text', text: context }]
+                }
+              }));
+              sock.send(JSON.stringify({ type: 'response.create' }));
+              break;
+              
+            case 'response.output_audio.delta':
+              if (msg.delta) queueChunk(msg.delta);
+              break;
+              
+            case 'response.output_audio_transcript.delta':
+              if (msg.delta) {
+                transcript += msg.delta;
+                updateLiveText(turnIndex, transcript);
+              }
+              break;
+              
+            case 'response.done':
+              clearTimeout(timer);
+              sock.close();
+              waitDrain().then(() => {
+                finishExchange(turnIndex);
+                resolve({ voice: voiceKey, text: transcript });
+              });
+              break;
+          }
+        };
+        
+        sock.onerror = (e) => {
+          console.error(`WebSocket error on exchange ${turnIndex}:`, e);
+          clearTimeout(timer);
+          resolve({ voice: voiceKey, text: `[WebSocket error on exchange ${turnIndex}]` });
+        };
+        
+        sock.onclose = (e) => {
+          console.log(`WebSocket closed on exchange ${turnIndex}, code: ${e.code}, reason: ${e.reason}`);
+          currentWs = null;
+          clearTimeout(timer);
+          finishExchange(turnIndex);
+        };
+      });
+    }
+    
+    // ================================================================
+    // MAIN SHOW
+    // ================================================================
+    async function startShow() {
+      playing = true;
+      
+      // Where to start: resume from pause, otherwise skip trailer if paid
+      let startFrom;
+      const isResume = (pausedAt !== null);
+      if (isResume) {
+        startFrom = pausedAt;
+        pausedAt = null;
+      } else {
+        startFrom = (hasPass && !ON_THE_HOUSE) ? TRAILER_LENGTH : 0;
+      }
+      currentIndex = startFrom;
+      updatePlayBtn();
+      
+      // Only clear UI on fresh start (not on resume)
+      if (!isResume) {
+        const preShow = document.getElementById('preShowMsg');
+        if (preShow) preShow.remove();
+        transcriptEl.innerHTML = '';
+      }
+      
+      setStatus(isResume ? 'Resuming...' : 'Starting show...');
+      
+      for (let i = startFrom; i < maxTurns; i++) {
+        if (!playing) {
+          console.log(`Show loop stopped at exchange ${i}: playing=${playing}`);
+          break;
+        }
+        currentIndex = i;
+        updateProgress();
+        
+        const turn = TURNS[i];
+        setStatus(VOICES[turn.voice].name + ' is on air...');
+        
+        console.log(`Starting exchange ${i}: ${VOICES[turn.voice].name}`);
+        const result = await runExchange(i);
+        console.log(`Completed exchange ${i}:`, result);
+        
+        // Small delay between exchanges to avoid API rate limits
+        if (i < maxTurns - 1) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+        
+        if (!playing) {
+          console.log(`Show stopped after exchange ${i}: playing=${playing}`);
+          break;
+        }
+      }
+      
+      if (playing) {
+        currentIndex = maxTurns;
+        updateProgress();
+        
+        showEndCard();
+      }
+      
+      playing = false;
+      updatePlayBtn();
+      setStatus(playing ? '' : 'Episode complete.');
+    }
+    
+    function restartShow() {
+      pausedAt = null;
+      var card = document.getElementById('endCard');
+      if (card) card.style.display = 'none';
+      startShow();
+    }
+    
+    function focusEpCombo() {
+      var input = document.querySelector('#ep-combo-mount .ep-combo-input');
+      if (!input) return;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      setTimeout(function(){ input.focus(); }, 350);
+    }
+    
+    function showEndCard() {
+      var card = document.getElementById('endCard');
+      if (!card) return;
+      var shareBtn = document.getElementById('endShareBtn');
+      if (shareBtn) {
+        var title = document.title.replace(/^RadioFAF.*?Episode\s*\d+:\s*/i, '').replace(/\s*\|.*$/, '').trim() || document.title;
+        var text = 'Just heard: ' + title + ' on @grok-powered RadioFAF 📻';
+        var url = window.location.origin + window.location.pathname;
+        shareBtn.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+      }
+      card.style.display = 'block';
+    }
+    
+    function stopShow() {
+      pausedAt = currentIndex;
+      playing = false;
+      if (currentWs) {
+        currentWs.close();
+        currentWs = null;
+      }
+      flushAudio();
+      updatePlayBtn();
+      setStatus('Paused at exchange ' + (pausedAt + 1) + ' of ' + maxTurns + '. Click Resume to continue.');
+    }
+    
+    // ================================================================
+    // EVENT HANDLERS
+    // ================================================================
+    playBtn.addEventListener('click', () => {
+      if (playing) {
+        stopShow();
+      } else {
+        ensureAudio();
+        startShow();
+      }
+    });
+    
+    payBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = STRIPE_LINK;
+    });
+    
+    // Update label on load
+    updateProgress();
+    
+    // ================================================================
+    // MODAL FUNCTIONS
+    // ================================================================
+    function openSuggestModal() {
+      document.getElementById('suggestModal').style.display = 'block';
+    }
+    
+    function closeSuggestModal() {
+      document.getElementById('suggestModal').style.display = 'none';
+      document.getElementById('suggestForm').reset();
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('suggestModal');
+      if (event.target === modal) {
+        closeSuggestModal();
+      }
+    }
+    
+    // Handle suggestion form submission
+    document.getElementById('suggestForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('suggestName').value || 'Anonymous';
+      const email = document.getElementById('suggestEmail').value || '';
+      const topic = document.getElementById('suggestTopic').value;
+      
+      if (!topic.trim()) {
+        alert('Please enter a topic suggestion');
+        return;
+      }
+      
+      try {
+        const response = await fetch('/api/suggest-topic', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, topic })
+        });
+        
+        if (response.ok) {
+          alert('Thanks! Your topic suggestion has been sent to the RadioFAF team.');
+          closeSuggestModal();
+        } else {
+          throw new Error('Failed to send suggestion');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Sorry, there was an error sending your suggestion. Please try again later.');
+      }
+    });
+  </script>
+
+  <!-- Nelly splash: 2.2s intro, once per session, click to dismiss -->
+  <div id="nelly-splash" aria-hidden="true" style="position:fixed;inset:0;background:#0a0a0a;z-index:99999;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:nellyFade 4000ms ease forwards;">
+    <img src="/nelly-splash.png" alt="Nelly at the mic" style="max-width:80%;max-height:70vh;border-radius:12px;animation:nellyZoom 4000ms ease forwards;">
+  </div>
+  <style>
+    @keyframes nellyZoom {
+      0%   { transform: scale(0.3);  opacity: 0; }
+      20%  { transform: scale(1.05); opacity: 1; }
+      28%  { transform: scale(1);    opacity: 1; }
+      80%  { transform: scale(1);    opacity: 1; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    @keyframes nellyFade {
+      0%   { opacity: 0; }
+      10%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+  </style>
+  <script>
+  (function(){
+    var el = document.getElementById('nelly-splash');
+    if (!el) return;
+    try {
+      if (sessionStorage.getItem('rf_splash_shown')) { el.remove(); return; }
+      sessionStorage.setItem('rf_splash_shown', '1');
+    } catch(e) {}
+    el.addEventListener('click', function(){ el.remove(); });
+    setTimeout(function(){ if (el && el.parentNode) el.remove(); }, 4100);
+  })();
+  </script>
+  <script src="/ep-combo.js" defer></script>
+</body>
+</html>

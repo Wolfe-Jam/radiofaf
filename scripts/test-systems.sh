@@ -167,8 +167,8 @@ checkpoint "FE-9" "FE" "/nelly-splash.png is image/png" \
 checkpoint "FE-10" "FE" "/ep-combo.js loads + has EP13" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js' | grep 'num: 13' >/dev/null"
 
-checkpoint "FE-11" "FE" "/home features the latest ep (EP16)" \
-  "$CURL -L '$RADIOFAF_HOST/home' | grep 'Episode 16' >/dev/null"
+checkpoint "FE-11" "FE" "/home features the latest ep (EP17)" \
+  "$CURL -L '$RADIOFAF_HOST/home' | grep 'Episode 17' >/dev/null"
 
 checkpoint "FE-12" "FE" "ep-combo.js renders Home button (rf-home-btn)" \
   "$CURL -L '$RADIOFAF_HOST/ep-combo.js' | grep 'rf-home-btn' >/dev/null"

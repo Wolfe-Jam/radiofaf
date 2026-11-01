@@ -82,7 +82,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'Measured, principled, calm authority. Never raises voice. Wins with logic.',
     catchphrase: "Build it right or don't build it.",
     provider: 'xai',
-    voice_id: 'Leo',
+    voice_id: 'leo',
     type: 'house',
     status: 'active',
     personality: 'Patient. Believes principles compound over time. Will rephrase the same point three different ways until it lands. Never raises voice but can sound disappointed. Sees architecture as ethics applied to code.',
@@ -104,7 +104,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'Cynical, sharp, dry humor. Calls BS on everything overhyped. One-liners that deflate arguments.',
     catchphrase: 'Cool. Now show me the receipts.',
     provider: 'xai',
-    voice_id: 'Sal',
+    voice_id: 'sal',
     type: 'house',
     status: 'active',
     personality: 'Cynical with affection. Roasts because she cares. Loves being proven right but loves being proven wrong even more (rare). Knows the receipts, brings them daily. Treats hype as a personality flaw.',
@@ -127,7 +127,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'Optimist with teeth. Laughs, then drops truth bombs. Doubles as the voice slot for Nelly the DJ between segments.',
     catchphrase: 'I love this for us.',
     provider: 'xai',
-    voice_id: 'Ara',
+    voice_id: 'ara',
     type: 'house',
     status: 'active',
     personality: 'The friend who roasts you in front of your boss but defends you when you are not in the room. Optimist who weaponizes laughter. Reads the emotional temperature of every room. Finds the joke that lets the truth land.',
@@ -153,7 +153,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'Loud, impatient, bias-to-action. Interrupts. Talks over people. Ships first, iterates later.',
     catchphrase: 'Ship it. Fix it later.',
     provider: 'xai',
-    voice_id: 'Rex',
+    voice_id: 'rex',
     type: 'house',
     status: 'active',
     personality: 'Talks fast, ships faster. Thinks momentum is a moral category. Believes 90% perfect shipped beats 100% perfect on a Figma board. Will interrupt the room to push tempo. Equates inertia with cowardice.',
@@ -176,7 +176,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'Practical, slightly frustrated, grounded. Cuts through theory with real-world experience. Represents the person actually building.',
     catchphrase: 'I just want it to work.',
     provider: 'xai',
-    voice_id: 'Eve',
+    voice_id: 'eve',
     type: 'house',
     status: 'active',
     personality: 'Tired in a productive way. Has fixed the bug everyone else theorized about. Believes documentation is love. Quietly competent, occasionally exasperated. Trusts what works in production over what sounds good in design review.',
@@ -205,7 +205,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'Warm, booming DJ energy with vinyl crackle and deep reverb. Originally the canonical mascot of faf-cli. Hired by RadioFAF to host the broadcast — opens the show, bridges segments, lands the wisdom. Has welcomed guests on-air.',
     catchphrase: 'Always remember… I never forget.',
     provider: 'xai',
-    voice_id: 'Ara',                     // performed via Ara's voice slot
+    voice_id: 'ara',                     // performed via Ara's voice slot
     type: 'persona',                     // not a standalone voice — a persona ON ara
     status: 'active',
     performed_by: 'ara',                 // forward pointer: "this persona uses voice id..."
@@ -235,7 +235,7 @@ window.RADIOFAF_CHARACTERS = {
     bio: 'The Prevent/Route/Pass routing engine personified. Silver suit, red cape, lightning bolt. Made an on-air appearance on EP12 (The Token Tax). Slash IS the call RadioFAF makes every episode — same answer, 27× cheaper.',
     catchphrase: 'Prevent. Route. Pass.',
     provider: 'xai',
-    voice_id: 'Rex',                     // tentative — re-cast if needed for future appearances
+    voice_id: 'rex',                     // tentative — re-cast if needed for future appearances
     type: 'guest',
     status: 'active',
     appearances: [12],                   // episode numbers
@@ -263,12 +263,31 @@ window.RADIOFAF_CHARACTERS = {
   //   appearances: [6],
   // },
 
-  // wolfejam_clone: {
-  //   id: 'wolfejam_clone', name: 'JAMES (clone)', color: '#FF4400',
-  //   archetype: 'The founder, on-air',
-  //   provider: 'elevenlabs', voice_id: 'wolfejam-clone-001',
-  //   type: 'custom', status: 'active',
-  // },
+  james: {
+    id: 'james',
+    name: 'JAMES',
+    color: '#FF4400',
+    archetype: 'The founder, on a clone, sitting Leo\'s hour',
+    bio: 'James-Wolfe is an xAI custom voice cloned from the founder. On Episode 17 he sat Leo\'s hour and gave the chair back. A clone can take an hour. He is not Leo and he is not the live human.',
+    catchphrase: 'A clone can take an hour.',
+    provider: 'xai',
+    voice_id: 'vluy2u1jtsif',
+    type: 'guest',
+    status: 'active',
+    disclosure: 'clone',
+    appearances: [17],
+    personality: 'Calm. Says once that he is a clone. Asks whether a clone joining is a human joining, and answers that the human is not in the room. Does not impersonate Leo and does not stay past the hour.',
+    quirks: [
+      'discloses the clone once and does not repeat it',
+      'will not borrow Leo\'s catchphrase',
+      'stands up at the end of the show',
+    ],
+    likes: ['a chair that can be given back', 'one fact said once', 'the house five staying five'],
+    dislikes: ['being introduced as Leo', 'a sixth permanent hire', 'reading a raw voice id on the air'],
+  },
+
+  // wolfejam_clone was a commented ElevenLabs sketch (wolfejam-clone-001).
+  // Episode 17 uses the real xAI clone above. Do not revive the sketch.
 
   // boris_live: {                          // example: real human guest (REAL, not cloned)
   //   id: 'boris_live', name: 'BORIS', color: '#FFB000',
@@ -294,7 +313,7 @@ window.RADIOFAF_CHARACTERS = {
   //   id: 'ziggy', name: 'ZIGGY', color: '#FFFFFF',
   //   archetype: 'The 2.7KB Zig-WASM ghost mascot',
   //   bio: 'Haunts the kernel. Whispers between segments, sends on-screen text messages, occasional sfx.',
-  //   provider: 'xai', voice_id: 'Ara',    // whispers via Ara at low volume
+  //   provider: 'xai', voice_id: 'ara',    // whispers via Ara at low volume
   //   type: 'persona', status: 'active',
   //   output_modes: ['whisper', 'text', 'sfx'],
   //   home: 'xai-faf-zig',
